@@ -1,0 +1,27 @@
+{
+	"name": "extrusive.md",
+	"version": "1.0.0",
+	"description": "Convert markdown file trees into documentation.",
+	"main": "index.js",
+	"bin": {
+		"extrusive": "./index.js"
+	},
+	"scripts": {},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/NotTimTam/extrusive.md.git"
+	},
+	"keywords": [
+		"obsidian"
+	],
+	"author": "NotTimTam",
+	"license": "CC0-1.0",
+	"bugs": {
+		"url": "https://github.com/NotTimTam/extrusive.md/issues"
+	},
+	"homepage": "https://github.com/NotTimTam/extrusive.md#readme",
+	"dependencies": {
+		"commander": "^10.0.1",
+		"fs-extra": "^11.1.1"
+	}
+}
