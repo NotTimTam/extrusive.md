@@ -2,6 +2,7 @@
 
 const { program } = require("commander");
 const build_cli = require("./resources/scripts/build_cli");
+const build_project = require("./resources/scripts/build_project");
 
 // Build the cli commands.
 build_cli(program, [
@@ -14,16 +15,7 @@ build_cli(program, [
 				description: "The directory to create the app in.",
 			},
 		],
-		// options: [
-		// 	{
-		// 		flags: "--project-directory <project-directory>",
-		// 		description: "The directory to create the app in.",
-		// 	},
-		// 	// { flags: "-a, --age <age>", description: "Your age" },
-		// ],
-		action: (directory) => {
-			console.log(directory);
-		},
+		action: build_project,
 	},
 	{
 		name: "build",
@@ -41,5 +33,13 @@ build_cli(program, [
 		},
 	},
 ]);
+
+// options: [
+// 	{
+// 		flags: "--project-directory <project-directory>",
+// 		description: "The directory to create the app in.",
+// 	},
+// 	// { flags: "-a, --age <age>", description: "Your age" },
+// ],
 
 program.parse(process.argv);
