@@ -84,12 +84,10 @@ function updateNavButton() {
  * @returns
  */
 function createFileButton(name, path, nestLevel) {
-	const displayPath = path.split("\\").join("/");
-
 	return `
-<button class="file" onclick="handleCloseNav(); handleRequestFile('${displayPath}');" style="padding-left: ${
-		nestLevel * 16 + 16
-	}px;" id="${displayPath}">
+<button class="file" onclick="handleCloseNav(); handleRequestFile('${path}');" style="padding-left: ${
+		nestLevel * 16
+	}px;" id="${path.split("/").join("_").split(".")[0]}">
 	<ion-icon name="document-outline"></ion-icon>
 	${name.split(".")[0]}
 </button>
@@ -134,7 +132,9 @@ function recurseDisplayFolderTree(data, html = "", nestLevel = 0) {
 			${
 				nestLevel === 0
 					? ""
-					: `<h1 style="padding-left: ${
+					: `<h1 id="${
+							path.split("/").join("_").split(".")[0]
+					  }" style="padding-left: ${
 							16 * nestLevel
 					  }px" onclick="toggleNavDropdown('${name}-${nestLevel}')">
 					<div class="title">
@@ -194,7 +194,6 @@ function triggerRescroll(hash, location) {
 			window.location.hash = hash;
 
 			const hashSrc = document.querySelector(hash);
-			console.log(hash, hashSrc);
 			if (hashSrc) hashSrc.scrollIntoView({ behavior: "smooth" });
 		}, 250);
 	}
@@ -255,6 +254,40 @@ function repositionSides() {
 	}
 }
 
+/**
+ * indicate which nav elements are active.
+ * @param {string} path - The path to the file that is being requested.
+ */
+function indicateSelectedNav(path) {
+	try {
+		const pathElements = path.split("/");
+
+		const folders = document.querySelectorAll("aside.nav h1");
+		const navElements = [
+			...document.querySelectorAll("aside.nav button"),
+			...folders,
+		];
+
+		for (const elem of navElements) {
+			elem.classList.remove("active");
+		}
+
+		for (const folder of folders)
+			if (path.includes(folder.id.split("_").join("/")))
+				folder.classList.add("active");
+
+		const activeButton = document.querySelector(
+			`aside.nav button.file#${path.split("/").join("_").split(".")[0]}`
+		);
+
+		if (activeButton) {
+			activeButton.classList.add("active");
+		}
+	} catch (err) {
+		console.error(err);
+	}
+}
+
 // Handlers
 
 /**
@@ -271,6 +304,7 @@ const handleRequestFile = async (path) => {
 		});
 
 		renderArticle(data, path);
+		indicateSelectedNav(path);
 	} catch (err) {
 		console.error(err);
 

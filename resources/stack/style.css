@@ -331,6 +331,15 @@ body main.page aside.nav section.folder > h1 {
 body main.page aside.nav section.folder > h1:hover {
   background-color: var(--background-3);
 }
+body main.page aside.nav section.folder > h1.active {
+  background-color: var(--background-3);
+}
+body main.page aside.nav section.folder > h1.active div.title {
+  color: var(--info);
+}
+body main.page aside.nav section.folder > h1.active ion-icon {
+  color: var(--info);
+}
 body main.page aside.nav section.folder:not([depth="0"]):not(.open) button,
 body main.page aside.nav section.folder:not([depth="0"]):not(.open) section {
   display: none;
@@ -350,6 +359,9 @@ body main.page aside.nav section.folder button:last-of-type {
 }
 body main.page aside.nav section.folder button.active {
   background-color: var(--background-3);
+  color: var(--info);
+}
+body main.page aside.nav section.folder button.active ion-icon {
   color: var(--info);
 }
 body main.page aside.nav section.folder button:active {
