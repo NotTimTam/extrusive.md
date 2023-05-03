@@ -110,6 +110,17 @@ const handleToggleNav = () => {
 	}
 };
 
+/**
+ * Close the navbar.
+ */
+const handleCloseNav = () => {
+	try {
+		document.querySelector("aside.nav").setAttribute("open", "false");
+	} catch (err) {
+		console.error(err);
+	}
+};
+
 // Set up app.
 updateColorThemeButton();
 updateNavbarButton();
