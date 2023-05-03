@@ -19,13 +19,17 @@ const markdownRoutes = require("./server/routes/markdownRoutes.js");
 app.use("/api/v1/markdown", markdownRoutes);
 
 // Serve HTML pages
-app.get("/", (req, res) => {
-	res.status(200).sendFile(`${appDir}/index.html`);
-});
+// app.get("/", (req, res) => {
+// 	res.status(200).sendFile(`${appDir}/index.html`);
+// });
 
 // Handling everything else.
 app.get("*", (req, res) => {
-	res.status(404).sendFile(`${appDir}/404.html`);
+	try {
+		res.status(200).sendFile(`${appDir}/index.html`);
+	} catch (err) {
+		res.status(404).sendFile(`${appDir}/404.html`);
+	}
 });
 
 // Start the server

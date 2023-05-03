@@ -88,7 +88,7 @@ function createFileButton(name, path, nestLevel) {
 <button class="file" onclick="handleCloseNav(); handleRequestFile('${path
 		.split("\\")
 		.join("/")}');" style="padding-left: ${nestLevel * 16 + 16}px;">
-	${name}
+	${name.split(".")[0]}
 </button>
 `;
 }
@@ -156,7 +156,12 @@ function createFolderStructureDisplay(data) {
 	nav.innerHTML = htmlData;
 }
 
-function renderPage(data) {
+function renderPage(data, path) {
+	path = path.replace("/content", "");
+	const title = path.split("/")[path.split("/").length - 1].split(".")[0];
+
+	document.title = title;
+
 	const page = document.querySelector("div.article-inner");
 
 	page.innerHTML = data;
@@ -174,7 +179,7 @@ const handleRequestFile = async (path) => {
 			params: { path },
 		});
 
-		renderPage(data);
+		renderPage(data, path);
 	} catch (err) {
 		console.error(err);
 	}
