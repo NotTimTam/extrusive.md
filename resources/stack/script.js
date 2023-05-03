@@ -1,0 +1,77 @@
+// Functions
+
+/**
+ * Get the current color theme setting.
+ * @returns {string} the current color theme.
+ */
+function getColorTheme() {
+	try {
+		let themeCookie = localStorage.getItem("theme");
+
+		if (!themeCookie) {
+			themeCookie = localStorage.setItem(
+				"theme",
+				window.matchMedia("(prefers-color-scheme: dark)").matches
+					? "dark"
+					: "light"
+			);
+		}
+
+		updateColorThemeSettings(themeCookie); // Update the styling to match the theme.
+
+		return themeCookie;
+	} catch (err) {
+		console.error(err);
+	}
+}
+
+/**
+ * Set the color theme.
+ * @param {string} theme - The new theme value to set.
+ */
+function setColorTheme(theme) {
+	const themeCookie = theme
+		? theme
+		: window.matchMedia("(prefers-color-scheme: dark)").matches
+		? "dark"
+		: "light";
+	localStorage.setItem("theme", themeCookie);
+
+	updateColorThemeSettings(themeCookie); // Update the styling to match the theme.
+}
+
+/**
+ * Update the styling of the app to match the current theme.
+ * @param {string} themeCookie the color theme to set.
+ */
+function updateColorThemeSettings(themeCookie) {
+	document.body.className = themeCookie;
+}
+
+function updateColorThemeButton() {
+	const button = document.querySelector("button#theme");
+	const currentTheme = getColorTheme();
+
+	button.innerHTML =
+		currentTheme === "dark"
+			? `<ion-icon name="sunny-outline" size="large"></ion-icon>`
+			: `<ion-icon name="moon-outline" size="large"></ion-icon>`;
+}
+
+// Handlers
+
+/**
+ * Toggle the color theme and update the theme button element.
+ * @param {Element} e - The theme button.
+ */
+const handleToggleTheme = (e) => {
+	const currentTheme = getColorTheme();
+	const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+	setColorTheme(newTheme);
+
+	updateColorThemeButton();
+};
+
+// Set up app.
+updateColorThemeButton();

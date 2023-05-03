@@ -6,6 +6,6 @@
 	"styles": ["./styles/custom.css"],
 	"logo": {
 		"type": "text",
-		"data": "<img src=\"./public/favicon.svg\"/> <b>MY EXTRUSIVE APP</b>"
+		"data": "<ion-icon name=\"code-slash-outline\" size=\"large\"></ion-icon> <b>MY EXTRUSIVE APP</b>"
 	}
 }

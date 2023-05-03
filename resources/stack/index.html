@@ -18,12 +18,19 @@
 			<section>
 				<div class="logo">{{LOGO}}</div>
 				<br />
-				<div class="search-bar">
-					<ion-icon name="search-outline"></ion-icon>
+				<button class="search-bar">
+					<div class="button-inner">
+						<ion-icon name="search-outline" size="16"></ion-icon>
+						Search
+						<div class="shortcut">
+							<code>Ctrl</code>
+							<code>K</code>
+						</div>
+					</div>
 				</div>
 			</section>
 			<section>
-				<button>LIGHT/DARK</button>
+				<button class="svg" onclick="handleToggleTheme(this)" id="theme"><ion-icon name="sunny-outline" size="large"></ion-icon></button>
 			</section>
 		</header>
 		<main>
