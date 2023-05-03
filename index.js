@@ -21,7 +21,7 @@ build_cli(program, [
 			{
 				flags: "--force",
 				description:
-					"Force the directory to be created, even if it overrides files. (WARNING: This is destructive!)",
+					"Force the directory to be created, even if it overrides existing files. (WARNING: This is destructive!)",
 			},
 		],
 		action: build_project,
@@ -31,8 +31,14 @@ build_cli(program, [
 		description: "Build and compile your extrusive app.",
 		options: [
 			{
-				flags: "--dev",
-				description: "Build in developer mode.",
+				flags: "--output-directory <output-directory>",
+				description:
+					'Pick an output location. Otherwise defaults to a "build" folder within the current directory.',
+			},
+			{
+				flags: "--force",
+				description:
+					"Force the directory to be created, even if it overrides existing files. (WARNING: This is destructive!)",
 			},
 		],
 		action: build_app,

@@ -1,6 +1,7 @@
 const path = require("path");
 const packageJson = require("../../package.json");
 const fs = require("fs-extra");
+const { execSync } = require("child_process");
 
 /**
  * Configure and copy the HTML file from the stack directory.
@@ -62,93 +63,94 @@ const copyHTML = (stackDir, target, config) => {
 
 /**
  * Build the client-side portion of the app.
- * @param {boolean} dev - Whether to build in dev mode or not.
  * @param {string} target - The target build directory.
  * @param {*} config - The user's configuration object.
  * @param {string} cwd - The current working directory.
  */
-const build_client = (dev, target, config, cwd) => {
-	try {
-		// Add sub-directory to target.
-		target = target + "/client";
+const build_client = (target, config, cwd) => {
+	// Add sub-directory to target.
+	target = target + "/client";
 
-		// Create the build directories.
-		console.log("Copying necessary client directories.");
-		const directories = ["content", "public"];
-		for (const dir of directories)
-			if (!fs.existsSync(dir)) fs.mkdirSync(`${target}/${dir}`);
+	// Create the build directories.
+	console.log("Copying necessary client directories.");
+	const directories = ["content", "public"];
+	for (const dir of directories)
+		if (!fs.existsSync(dir)) fs.mkdirSync(`${target}/${dir}`);
 
-		// Copy the build files.
-		console.log("Copying necessary client files.");
-		const stackDir = `${path.dirname(
-			require.main.filename
-		)}/resources/stack`;
-		const files = [
-			[`${cwd}/styles`, "styles"],
-			[`${cwd}/public`, "public"],
-			[`${cwd}/content`, "content"],
-			[`${stackDir}/style.css`, "style.css"],
-			[`${stackDir}/style.css.map`, "style.css.map"],
-			[`${stackDir}/client.js`, "client.js"],
-		];
-		for (const [src, dest] of files) {
-			fs.copySync(src, `${target}/${dest}`);
-		}
-
-		// Configure and copy html.
-		copyHTML(stackDir, `${target}/index.html`, config);
-	} catch (err) {
-		console.error("\nERROR:", err);
+	// Copy the build files.
+	console.log("Copying necessary client files.");
+	const stackDir = `${path.dirname(require.main.filename)}/resources/stack`;
+	const files = [
+		[`${cwd}/styles`, "styles", "directory"],
+		[`${cwd}/public`, "public", "directory"],
+		[`${stackDir}/style.css`, "style.css", "file"],
+		[`${stackDir}/style.css.map`, "style.css.map", "file"],
+		[`${stackDir}/client.js`, "client.js", "file"],
+	];
+	for (const [src, dest, type] of files) {
+		if (!fs.existsSync(src))
+			throw `"${src.split("/")[1]}" ${type} does not exist.`;
+		fs.copySync(src, `${target}/${dest}`);
 	}
+
+	// Configure and copy html.
+	copyHTML(stackDir, `${target}/index.html`, config);
 };
 
 /**
  * Build the server-side portion of the app.
- * @param {boolean} dev - Whether to build in dev mode or not.
  * @param {string} target - The target build directory.
  * @param {*} config - The user's configuration object.
  * @param {string} cwd - The current working directory.
  */
-const build_server = (dev, target, config, cwd) => {
-	try {
-		// Copy the build structure.
-		console.log("Copying server.");
-		const stackDir = `${path.dirname(
-			require.main.filename
-		)}/resources/stack`;
-		const structure = [
-			[`${stackDir}/server.js`, "server.js"],
-			[`${stackDir}/server`, "server"],
-		];
-		for (const [src, dest] of structure) {
-			fs.copySync(src, `${target}/${dest}`);
-		}
-
-		console.log("Finished copying server.");
-	} catch (err) {
-		console.error("\nERROR:", err);
+const build_server = (target, config, cwd) => {
+	// Copy the build structure.
+	console.log("Copying server.");
+	const stackDir = `${path.dirname(require.main.filename)}/resources/stack`;
+	const structure = [
+		[`${stackDir}/server.js`, "server.js", "file"],
+		[`${stackDir}/server`, "server", "directory"],
+		[`${cwd}/content`, "server/content", "directory"],
+		[`${stackDir}/gitignore.txt`, ".gitignore", "file"],
+	];
+	for (const [src, dest, type] of structure) {
+		if (!fs.existsSync(src))
+			throw `"${src.split("/")[1]}" ${type} does not exist.`;
+		fs.copySync(src, `${target}/${dest}`);
 	}
+
+	console.log("Finished copying server.");
 };
 
 /**
  * Build an extrusive app.
- * @param {string} target - The target directory to build to.
  */
-const build_app = ({ dev }, commands, target) => {
+const build_app = ({ outputDirectory, force }, commands) => {
 	try {
 		const logInitializer = `extrusive.md v${packageJson.version}`;
 		console.log(
 			`\n${logInitializer}\n${"-".repeat(logInitializer.length)}\n`
 		);
 
+		// Handle a user provided output directory.
+		let target;
+		if (outputDirectory) {
+			if (fs.existsSync(outputDirectory)) {
+				if (force) {
+					fs.emptyDirSync(outputDirectory);
+					target = outputDirectory;
+				} else
+					throw "The provided output directory contains files. Use the \"--force\" option to overwrite its contents.";
+			} else {
+				fs.mkdirSync(outputDirectory, { recursive: true });
+				target = outputDirectory;
+			}
+		}
+
 		// Get the current working directory.
 		const cwd = process.cwd();
 		target = target || `${cwd}\\build`;
-		console.log(
-			`Building in ${
-				dev ? "developer" : "production"
-			} mode from "${cwd}".`
-		);
+		console.log(`Building from "${cwd}".`);
 
 		// Load configuration from user.
 		console.log("Loading user configuration.");
@@ -165,8 +167,13 @@ const build_app = ({ dev }, commands, target) => {
 			fs.mkdirSync(target, { recursive: true });
 		}
 
-		build_server(dev, target, config, cwd); // Build the server-side.
-		build_client(dev, target, config, cwd); // Build the client-side.
+		build_server(target, config, cwd); // Build the server-side.
+		build_client(target, config, cwd); // Build the client-side.
+
+		// Install necessary packages.
+		console.log("Installing necessary packages...");
+		process.chdir(target);
+		execSync("npm install express");
 
 		console.log(
 			"\nBuild complete. Your markdown is now ready to shine! ✨\n"

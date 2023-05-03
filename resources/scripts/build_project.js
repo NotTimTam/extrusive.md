@@ -19,7 +19,7 @@ const build_project = (directory, { force }) => {
 			const dir = fs.readdirSync(directory);
 
 			if (dir && dir.length && !force)
-				throw 'That directory already contains files. Include the "--force" keyword in your command to ignore this.';
+				throw 'The provided build directory contains files. Use the "--force" option to overwrite its contents.';
 		} else {
 			fs.mkdirSync(directory); // Create the directory.
 		}

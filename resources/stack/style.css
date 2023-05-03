@@ -346,6 +346,9 @@ body > main > article > footer section {
 body > main > article > footer section p.credit a {
   color: var(--info);
 }
+body > main > article > footer section p.copyright b {
+  color: var(--info);
+}
 body > main aside.inner-nav {
   padding: 1rem;
 }
