@@ -360,6 +360,8 @@ const handleToggleNav = () => {
 const handleCloseNav = () => {
 	try {
 		document.querySelector("aside.nav").setAttribute("open", "false");
+
+		updateNavButton();
 	} catch (err) {
 		console.error(err);
 	}
