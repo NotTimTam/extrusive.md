@@ -58,6 +58,18 @@ function updateColorThemeButton() {
 			: `<ion-icon name="moon-outline" size="large"></ion-icon>`;
 }
 
+function updateNavbarButton() {
+	const navOpen =
+		document.querySelector("aside.nav").getAttribute("open") === "true";
+	const button = document.querySelector("button#nav");
+
+	button.setAttribute("open", navOpen.toString());
+
+	button.innerHTML = navOpen
+		? `<ion-icon name="close-outline" size="large"></ion-icon>`
+		: `<ion-icon name="menu-outline" size="large"></ion-icon>`;
+}
+
 // Handlers
 
 /**
@@ -65,13 +77,39 @@ function updateColorThemeButton() {
  * @param {Element} e - The theme button.
  */
 const handleToggleTheme = (e) => {
-	const currentTheme = getColorTheme();
-	const newTheme = currentTheme === "dark" ? "light" : "dark";
+	try {
+		const currentTheme = getColorTheme();
+		const newTheme = currentTheme === "dark" ? "light" : "dark";
 
-	setColorTheme(newTheme);
+		setColorTheme(newTheme);
 
-	updateColorThemeButton();
+		updateColorThemeButton();
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+/**
+ * Toggle the navbar open and closed.
+ */
+const handleToggleNav = () => {
+	try {
+		document
+			.querySelector("aside.nav")
+			.setAttribute(
+				"open",
+				!(
+					document.querySelector("aside.nav").getAttribute("open") ===
+					"true"
+				)
+			);
+
+		updateNavbarButton();
+	} catch (err) {
+		console.error(err);
+	}
 };
 
 // Set up app.
 updateColorThemeButton();
+updateNavbarButton();

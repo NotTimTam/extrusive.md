@@ -15,7 +15,10 @@
 	</head>
 	<body>
 		<header>
-			<section>
+			<section class="toggle-nav-parent">
+				<button class="svg toggle-nav" onclick="handleToggleNav(this)" id="nav"><ion-icon name="menu-outline" size="large"></ion-icon></button>
+			</section>
+			<section class="main">
 				<div class="logo">{{LOGO}}</div>
 				<br />
 				<button class="search-bar">
@@ -34,7 +37,19 @@
 			</section>
 		</header>
 		<main>
-			<aside class="nav"></aside>
+			<aside class="nav">
+				<section>
+					<h1>Get Started</h1>
+					<button class="active">Quick Start</button>
+					<button>Installation</button>
+				</section>
+
+				<section>
+					<h1>Learn Extrusive.md</h1>
+					<button>Describing the UI</button>
+					<button>Adding Interactivity</button>
+				</section>
+			</aside>
 			<article>
 				<h1>Hello, world!</h1>
 				<footer>
@@ -62,7 +77,9 @@
 					</section>
 				</footer>
 			</article>
-			<aside class="inner-nav"></aside>
+			<aside class="inner-nav">
+				<h1>Inner Nav</h1>
+			</aside>
 		</main>
 
 		<script

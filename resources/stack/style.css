@@ -42,6 +42,10 @@ body {
   background-color: var(--background);
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+}
 body.light {
   --background: #ffffff;
   --background-2: #dadada;
@@ -57,6 +61,10 @@ body.dark {
   --background-3: hsl(220, 15%, 33%);
   --text: white;
   --border: 1px solid var(--background-3);
+}
+body ion-icon {
+  transition: all 0.15s ease-in-out;
+  transition-property: color;
 }
 body svg,
 body img {
@@ -109,8 +117,16 @@ body header section {
   align-items: stretch;
   gap: 0.25rem;
 }
-body header section:first-of-type {
+body header section.main {
   flex-grow: 2;
+}
+@media (min-width: 1026px) {
+  body header section.toggle-nav-parent {
+    display: none;
+  }
+}
+body header section.toggle-nav-parent button.toggle-nav[open=true] ion-icon {
+  color: #2891be;
 }
 body header section div.logo {
   display: flex;
@@ -173,4 +189,75 @@ body header section button.search-bar div.button-inner div.shortcut code {
   background-color: var(--background-0);
   font-size: 11px;
   display: block;
+}
+body main {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  position: relative;
+}
+body main aside.nav {
+  min-width: 300px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+body main aside.nav section {
+  padding: 1rem 0;
+  border-bottom: var(--border);
+}
+body main aside.nav section:last-of-type {
+  border-bottom: none;
+}
+body main aside.nav section h1 {
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+body main aside.nav section button {
+  justify-content: flex-start;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  padding: 0.5rem 1rem;
+  width: 100%;
+}
+body main aside.nav section button.active {
+  background-color: var(--background-3);
+  color: #2891be;
+}
+body main aside.nav section button:active {
+  transform: unset;
+}
+@media (max-width: 1025px) {
+  body main aside.nav {
+    background-color: var(--background);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+  }
+  body main aside.nav[open=true] {
+    display: flex;
+  }
+  body main aside.nav section button {
+    border-radius: 0;
+  }
+}
+body main > article {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+}
+body main aside.inner-nav {
+  padding: 1rem;
+}
+@media (max-width: 1535px) {
+  body main aside.inner-nav {
+    display: none;
+  }
 }/*# sourceMappingURL=style.css.map */
