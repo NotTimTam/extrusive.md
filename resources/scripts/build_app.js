@@ -59,7 +59,7 @@ const build_app = ({ dev }, commands, target) => {
 
 		// Get the current working directory.
 		const cwd = process.cwd();
-		target = target || `${cwd}\\build`;
+		target = target || `${cwd}\\build\\client`;
 		console.log(
 			`Building in ${
 				dev ? "developer" : "production"
@@ -78,14 +78,14 @@ const build_app = ({ dev }, commands, target) => {
 			console.log("Build folder exists.");
 		} else {
 			// Create the build folder if it doesn't exist.
-			fs.mkdirSync(target);
+			fs.mkdirSync(target, { recursive: true });
 		}
 
 		// Create the build directories.
 		console.log("Copying necessary directories.");
 		const directories = ["content", "public"];
 		for (const dir of directories)
-			if (!fs.existsSync(dir)) fs.mkdirSync(`${directory}/${dir}`);
+			if (!fs.existsSync(dir)) fs.mkdirSync(`${target}/${dir}`);
 
 		// Copy the build files.
 		console.log("Copying necessary files.");
