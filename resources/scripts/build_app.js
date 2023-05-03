@@ -86,6 +86,7 @@ const build_client = (target, config, cwd) => {
 		[`${stackDir}/style.css`, "style.css", "file"],
 		[`${stackDir}/style.css.map`, "style.css.map", "file"],
 		[`${stackDir}/client.js`, "client.js", "file"],
+		[`${stackDir}/404.html`, "404.html", "file"],
 	];
 	for (const [src, dest, type] of files) {
 		if (!fs.existsSync(src))

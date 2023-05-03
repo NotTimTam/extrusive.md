@@ -14,7 +14,7 @@ app.use(express.static(__dirname + "/client", { recursive: true }));
 
 // Serve HTML pages
 app.get("/", (req, res) => {
-	res.sendFile(`${appDir}/index.html`);
+	res.status(200).sendFile(`${appDir}/index.html`);
 });
 
 // API endpoint that returns JSON data
@@ -25,7 +25,7 @@ app.get("/api/data", (req, res) => {
 
 // Handling everything else.
 app.get("*", (req, res) => {
-	res.status(404).send("Sorry can't find that!");
+	res.status(404).sendFile(`${appDir}/404.html`);
 });
 
 // Start the server

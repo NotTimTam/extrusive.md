@@ -52,6 +52,10 @@ $transition: all 0.15s ease-in-out;
 	color: var(--text);
 }
 
+.error {
+	color: var(--error);
+}
+
 html,
 body {
 	width: 100vw;
@@ -138,6 +142,10 @@ body {
 
 		&.svg {
 			border-radius: 50%;
+		}
+
+		&.light {
+			background-color: var(--background-3);
 		}
 
 		&:hover {
