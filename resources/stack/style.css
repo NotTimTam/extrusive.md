@@ -193,35 +193,38 @@ body code {
   display: inline-block;
   font-family: "Courier New", Courier, monospace;
 }
-body > header {
+body header.page-header {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+  transition: all 0.15s ease-in-out;
   background-color: var(--background);
   position: sticky;
   top: 0;
   left: 0;
   z-index: 100;
   padding: 0 0.5rem;
+}
+body header.page-header.scrolled {
   border-bottom: var(--border);
 }
-body > header section {
+body header.page-header section {
   display: flex;
   flex-direction: row;
   align-items: stretch;
   gap: 0.25rem;
 }
-body > header section.main {
+body header.page-header section.main {
   flex-grow: 2;
 }
-body > header section.main button.search-bar {
+body header.page-header section.main button.search-bar {
   max-width: 896px;
   margin: 1rem auto 1rem 0;
 }
 @media (max-width: 768px) {
-  body > header section.main button.search-bar {
+  body header.page-header section.main button.search-bar {
     width: -moz-max-content;
     width: max-content;
     flex-grow: 0;
@@ -231,13 +234,13 @@ body > header section.main button.search-bar {
     margin: 1rem 0;
     margin-left: auto;
   }
-  body > header section.main button.search-bar:hover {
+  body header.page-header section.main button.search-bar:hover {
     background-color: var(--background-2);
   }
-  body > header section.main button.search-bar:active {
+  body header.page-header section.main button.search-bar:active {
     transform: scale(0.9);
   }
-  body > header section.main button.search-bar div.button-inner {
+  body header.page-header section.main button.search-bar div.button-inner {
     font-size: 0;
     background-color: transparent;
     margin: 0;
@@ -245,22 +248,22 @@ body > header section.main button.search-bar {
     gap: 0;
     justify-content: center;
   }
-  body > header section.main button.search-bar div.button-inner ion-icon {
+  body header.page-header section.main button.search-bar div.button-inner ion-icon {
     font-size: 2rem;
   }
-  body > header section.main button.search-bar div.button-inner div.shortcut {
+  body header.page-header section.main button.search-bar div.button-inner div.shortcut {
     display: none;
   }
 }
 @media (min-width: 1026px) {
-  body > header section.toggle-nav-parent {
+  body header.page-header section.toggle-nav-parent {
     display: none;
   }
 }
-body > header section.toggle-nav-parent button.toggle-nav[open=true] ion-icon {
+body header.page-header section.toggle-nav-parent button.toggle-nav[open=true] ion-icon {
   color: var(--info);
 }
-body > header section div.logo {
+body header.page-header section div.logo {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -272,16 +275,16 @@ body > header section div.logo {
   cursor: pointer;
   transition: all 0.15s ease-in-out;
 }
-body > header section div.logo h1.no-title {
+body header.page-header section div.logo h1.no-title {
   color: var(--info);
 }
-body > header section div.logo:hover {
+body header.page-header section div.logo:hover {
   opacity: 0.75;
 }
-body > header section div.logo:active {
+body header.page-header section div.logo:active {
   opacity: 0.5;
 }
-body > main {
+body main.page {
   flex-grow: 2;
   display: flex;
   flex-direction: row;
@@ -289,12 +292,12 @@ body > main {
   width: 100%;
 }
 @media (max-width: 1025px) {
-  body > main {
+  body main.page {
     position: relative;
   }
 }
-body > main aside.nav {
-  position: sticky;
+body main.page aside.nav {
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 50;
@@ -302,48 +305,48 @@ body > main aside.nav {
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: var(--background);
 }
-body > main aside.nav section {
+body main.page aside.nav section {
   padding: 1rem 0;
 }
-body > main aside.nav section h1 {
+body main.page aside.nav section h1 {
   padding-left: 1rem;
   padding-bottom: 1rem;
   text-transform: uppercase;
   font-size: 1rem;
 }
-body > main aside.nav section button {
+body main.page aside.nav section button {
   justify-content: flex-start;
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
   padding: 0.5rem 1rem;
   width: 100%;
 }
-body > main aside.nav section button.active {
+body main.page aside.nav section button.active {
   background-color: var(--background-3);
   color: var(--info);
 }
-body > main aside.nav section button:active {
+body main.page aside.nav section button:active {
   transform: unset;
 }
 @media (max-width: 1025px) {
-  body > main aside.nav {
-    background-color: var(--background);
-    position: absolute;
-    top: 0;
-    left: 0;
+  body main.page aside.nav {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
     display: none;
     width: 100%;
     height: 100%;
   }
-  body > main aside.nav[open=true] {
+  body main.page aside.nav[open=true] {
     display: flex;
   }
-  body > main aside.nav section button {
+  body main.page aside.nav section button {
     border-radius: 0;
   }
 }
-body > main > article {
+body main.page article.content {
   flex-grow: 2;
   display: flex;
   flex-direction: column;
@@ -351,7 +354,7 @@ body > main > article {
   width: 896px;
   max-width: 896px;
 }
-body > main > article div.article-inner {
+body main.page article.content div.article-inner {
   flex-grow: 2;
   display: flex;
   flex-direction: column;
@@ -359,8 +362,8 @@ body > main > article div.article-inner {
   padding-bottom: 1rem;
   font-size: var(--content-font-size);
 }
-body > main > article div.article-inner p.loading,
-body > main > article div.article-inner p.error {
+body main.page article.content div.article-inner p.loading,
+body main.page article.content div.article-inner p.error {
   align-self: center;
   display: flex;
   flex-direction: row;
@@ -369,138 +372,138 @@ body > main > article div.article-inner p.error {
   gap: 0.25rem;
   flex-wrap: wrap;
 }
-body > main > article div.article-inner p.error {
+body main.page article.content div.article-inner p.error {
   color: var(--error);
 }
-body > main > article div.article-inner p.error ion-icon {
+body main.page article.content div.article-inner p.error ion-icon {
   color: var(--error);
 }
-body > main > article div.article-inner h1,
-body > main > article div.article-inner h2,
-body > main > article div.article-inner h3,
-body > main > article div.article-inner h4,
-body > main > article div.article-inner h5,
-body > main > article div.article-inner h6 {
+body main.page article.content div.article-inner h1,
+body main.page article.content div.article-inner h2,
+body main.page article.content div.article-inner h3,
+body main.page article.content div.article-inner h4,
+body main.page article.content div.article-inner h5,
+body main.page article.content div.article-inner h6 {
   margin-top: 24px;
   margin-bottom: 16px;
   font-weight: 600;
   line-height: 1.25;
 }
-body > main > article div.article-inner h1 tt,
-body > main > article div.article-inner h1 code,
-body > main > article div.article-inner h2 tt,
-body > main > article div.article-inner h2 code,
-body > main > article div.article-inner h3 tt,
-body > main > article div.article-inner h3 code,
-body > main > article div.article-inner h4 tt,
-body > main > article div.article-inner h4 code,
-body > main > article div.article-inner h5 tt,
-body > main > article div.article-inner h5 code,
-body > main > article div.article-inner h6 tt,
-body > main > article div.article-inner h6 code {
+body main.page article.content div.article-inner h1 tt,
+body main.page article.content div.article-inner h1 code,
+body main.page article.content div.article-inner h2 tt,
+body main.page article.content div.article-inner h2 code,
+body main.page article.content div.article-inner h3 tt,
+body main.page article.content div.article-inner h3 code,
+body main.page article.content div.article-inner h4 tt,
+body main.page article.content div.article-inner h4 code,
+body main.page article.content div.article-inner h5 tt,
+body main.page article.content div.article-inner h5 code,
+body main.page article.content div.article-inner h6 tt,
+body main.page article.content div.article-inner h6 code {
   padding: 0 0.2em;
   font-size: inherit;
 }
-body > main > article div.article-inner h1 {
+body main.page article.content div.article-inner h1 {
   font-weight: 700;
   font-size: 40px;
 }
-body > main > article div.article-inner h2 {
+body main.page article.content div.article-inner h2 {
   font-weight: 600;
   padding-bottom: 0.3em;
   font-size: 1.5em;
   border-bottom: var(--border);
 }
-body > main > article div.article-inner h3 {
+body main.page article.content div.article-inner h3 {
   font-weight: 600;
   font-size: 1.25em;
 }
-body > main > article div.article-inner h4 {
+body main.page article.content div.article-inner h4 {
   font-weight: 600;
   font-size: 1em;
 }
-body > main > article div.article-inner h5 {
+body main.page article.content div.article-inner h5 {
   font-weight: 600;
   font-size: 0.875em;
 }
-body > main > article div.article-inner h6 {
+body main.page article.content div.article-inner h6 {
   font-weight: 600;
   font-size: 0.85em;
   color: var(--background-3);
 }
-body > main > article div.article-inner blockquote {
+body main.page article.content div.article-inner blockquote {
   margin: 0;
   padding: 0 1em;
   color: var(--background-3);
   border-left: var(--border);
   border-width: 4px;
 }
-body > main > article div.article-inner blockquote > :first-child {
+body main.page article.content div.article-inner blockquote > :first-child {
   margin-top: 0;
 }
-body > main > article div.article-inner blockquote > :last-child {
+body main.page article.content div.article-inner blockquote > :last-child {
   margin-bottom: 0;
 }
-body > main > article div.article-inner ol[type=a] {
+body main.page article.content div.article-inner ol[type=a] {
   list-style-type: lower-alpha;
 }
-body > main > article div.article-inner ol[type=A] {
+body main.page article.content div.article-inner ol[type=A] {
   list-style-type: upper-alpha;
 }
-body > main > article div.article-inner ol[type=i] {
+body main.page article.content div.article-inner ol[type=i] {
   list-style-type: lower-roman;
 }
-body > main > article div.article-inner ol[type=I] {
+body main.page article.content div.article-inner ol[type=I] {
   list-style-type: upper-roman;
 }
-body > main > article div.article-inner ol[type="1"] {
+body main.page article.content div.article-inner ol[type="1"] {
   list-style-type: decimal;
 }
-body > main > article div.article-inner ol:not([type]) {
+body main.page article.content div.article-inner ol:not([type]) {
   list-style-type: decimal;
 }
-body > main > article div.article-inner ul,
-body > main > article div.article-inner ol {
+body main.page article.content div.article-inner ul,
+body main.page article.content div.article-inner ol {
   margin-top: 0;
   margin-bottom: 0;
   padding-left: 2rem;
 }
-body > main > article div.article-inner ol ol,
-body > main > article div.article-inner ul ol {
+body main.page article.content div.article-inner ol ol,
+body main.page article.content div.article-inner ul ol {
   list-style-type: lower-roman;
 }
-body > main > article div.article-inner ul ul,
-body > main > article div.article-inner ul ol,
-body > main > article div.article-inner ol ol,
-body > main > article div.article-inner ol ul {
+body main.page article.content div.article-inner ul ul,
+body main.page article.content div.article-inner ul ol,
+body main.page article.content div.article-inner ol ol,
+body main.page article.content div.article-inner ol ul {
   margin-top: 0;
   margin-bottom: 0;
 }
-body > main > article div.article-inner ul ul ol,
-body > main > article div.article-inner ul ol ol,
-body > main > article div.article-inner ol ul ol,
-body > main > article div.article-inner ol ol ol {
+body main.page article.content div.article-inner ul ul ol,
+body main.page article.content div.article-inner ul ol ol,
+body main.page article.content div.article-inner ol ul ol,
+body main.page article.content div.article-inner ol ol ol {
   list-style-type: lower-alpha;
 }
-body > main > article div.article-inner li + li {
+body main.page article.content div.article-inner li + li {
   margin-top: 0.25em;
 }
-body > main > article div.article-inner li {
+body main.page article.content div.article-inner li {
   padding-left: 0.25rem;
 }
-body > main > article div.article-inner li > p {
+body main.page article.content div.article-inner li > p {
   margin-top: 16px;
 }
-body > main > article div.article-inner * {
+body main.page article.content div.article-inner * {
   max-width: 100%;
 }
-body > main > article div.article-inner *:first-child {
+body main.page article.content div.article-inner *:first-child {
   margin-top: 0 !important;
 }
-body > main > article div.article-inner *:last-child {
+body main.page article.content div.article-inner *:last-child {
   margin-bottom: 0 !important;
 }
-body > main > article div.article-inner img {
+body main.page article.content div.article-inner img {
   max-width: 100%;
   height: auto;
   box-sizing: content-box;
@@ -508,34 +511,34 @@ body > main > article div.article-inner img {
   border: var(--border);
   margin: 1rem auto;
 }
-body > main > article div.article-inner code,
-body > main > article div.article-inner kbd,
-body > main > article div.article-inner pre,
-body > main > article div.article-inner samp {
+body main.page article.content div.article-inner code,
+body main.page article.content div.article-inner kbd,
+body main.page article.content div.article-inner pre,
+body main.page article.content div.article-inner samp {
   font-family: monospace;
   font-size: 1em;
 }
-body > main > article div.article-inner tt,
-body > main > article div.article-inner code,
-body > main > article div.article-inner samp {
+body main.page article.content div.article-inner tt,
+body main.page article.content div.article-inner code,
+body main.page article.content div.article-inner samp {
   font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   font-size: 12px;
 }
-body > main > article div.article-inner samp {
+body main.page article.content div.article-inner samp {
   font-size: 85%;
 }
-body > main > article div.article-inner pre {
+body main.page article.content div.article-inner pre {
   margin-top: 0;
   margin-bottom: 0;
   font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   font-size: 12px;
   word-wrap: normal;
 }
-body > main > article div.article-inner pre code {
+body main.page article.content div.article-inner pre code {
   font-size: 100%;
 }
-body > main > article div.article-inner pre code,
-body > main > article div.article-inner pre tt {
+body main.page article.content div.article-inner pre code,
+body main.page article.content div.article-inner pre tt {
   display: inline;
   max-width: auto;
   padding: 0;
@@ -546,7 +549,7 @@ body > main > article div.article-inner pre tt {
   background-color: transparent;
   border: 0;
 }
-body > main > article div.article-inner pre > code {
+body main.page article.content div.article-inner pre > code {
   padding: 0;
   margin: 0;
   word-break: normal;
@@ -554,11 +557,11 @@ body > main > article div.article-inner pre > code {
   background: transparent;
   border: 0;
 }
-body > main > article div.article-inner del code {
+body main.page article.content div.article-inner del code {
   text-decoration: inherit;
 }
-body > main > article div.article-inner code,
-body > main > article div.article-inner tt {
+body main.page article.content div.article-inner code,
+body main.page article.content div.article-inner tt {
   padding: 0.2em 0.4em;
   margin: 0;
   font-size: 85%;
@@ -566,14 +569,14 @@ body > main > article div.article-inner tt {
   background-color: var(--background-2);
   border-radius: 6px;
 }
-body > main > article div.article-inner code br,
-body > main > article div.article-inner tt br {
+body main.page article.content div.article-inner code br,
+body main.page article.content div.article-inner tt br {
   display: none;
 }
-body > main > article div.article-inner figure {
+body main.page article.content div.article-inner figure {
   margin: 1em 40px;
 }
-body > main > article div.article-inner hr {
+body main.page article.content div.article-inner hr {
   box-sizing: content-box;
   overflow: hidden;
   background: var(--background-3);
@@ -582,18 +585,18 @@ body > main > article div.article-inner hr {
   margin: 24px 0;
   border: 0;
 }
-body > main > article div.article-inner a {
+body main.page article.content div.article-inner a {
   color: var(--info);
   text-decoration: none;
 }
-body > main > article div.article-inner a:hover {
+body main.page article.content div.article-inner a:hover {
   text-decoration: underline;
 }
-body > main > article div.article-inner a:not([href]) {
+body main.page article.content div.article-inner a:not([href]) {
   color: inherit;
   text-decoration: none;
 }
-body > main > article div.article-inner table {
+body main.page article.content div.article-inner table {
   border-spacing: 0;
   border-collapse: collapse;
   display: block;
@@ -602,61 +605,61 @@ body > main > article div.article-inner table {
   max-width: 100%;
   overflow: auto;
 }
-body > main > article div.article-inner table img {
+body main.page article.content div.article-inner table img {
   background-color: transparent;
 }
-body > main > article div.article-inner table img[align=right] {
+body main.page article.content div.article-inner table img[align=right] {
   padding-left: 20px;
 }
-body > main > article div.article-inner table img[align=left] {
+body main.page article.content div.article-inner table img[align=left] {
   padding-right: 20px;
 }
-body > main > article div.article-inner table th {
+body main.page article.content div.article-inner table th {
   font-weight: 600;
 }
-body > main > article div.article-inner table th,
-body > main > article div.article-inner table td {
+body main.page article.content div.article-inner table th,
+body main.page article.content div.article-inner table td {
   padding: 6px 13px;
   border: var(--border);
 }
-body > main > article div.article-inner table thead tr,
-body > main > article div.article-inner table tr:nth-child(2n) {
+body main.page article.content div.article-inner table thead tr,
+body main.page article.content div.article-inner table tr:nth-child(2n) {
   background-color: var(--background-2);
 }
-body > main > article div.article-inner table tr {
+body main.page article.content div.article-inner table tr {
   border-top: var(--border);
 }
-body > main > article div.article-inner dl {
+body main.page article.content div.article-inner dl {
   padding: 0;
 }
-body > main > article div.article-inner dl dt {
+body main.page article.content div.article-inner dl dt {
   padding: 0;
   margin-top: 16px;
   font-size: 1em;
   font-style: italic;
   font-weight: 600;
 }
-body > main > article div.article-inner dl dd {
+body main.page article.content div.article-inner dl dd {
   padding: 0 16px;
   margin-bottom: 16px;
 }
-body > main > article div.article-inner details summary {
+body main.page article.content div.article-inner details summary {
   cursor: pointer;
 }
-body > main > article div.article-inner summary h1,
-body > main > article div.article-inner summary h2,
-body > main > article div.article-inner summary h3,
-body > main > article div.article-inner summary h4,
-body > main > article div.article-inner summary h5,
-body > main > article div.article-inner summary h6 {
+body main.page article.content div.article-inner summary h1,
+body main.page article.content div.article-inner summary h2,
+body main.page article.content div.article-inner summary h3,
+body main.page article.content div.article-inner summary h4,
+body main.page article.content div.article-inner summary h5,
+body main.page article.content div.article-inner summary h6 {
   display: inline-block;
 }
-body > main > article div.article-inner summary h1,
-body > main > article div.article-inner summary h2 {
+body main.page article.content div.article-inner summary h1,
+body main.page article.content div.article-inner summary h2 {
   padding-bottom: 0;
   border-bottom: 0;
 }
-body > main > article div.article-inner kbd {
+body main.page article.content div.article-inner kbd {
   display: inline-block;
   padding: 3px 5px;
   font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
@@ -669,21 +672,22 @@ body > main > article div.article-inner kbd {
   border-radius: 6px;
   box-shadow: inset 0 -1px 0 var(--color-neutral-muted);
 }
-body > main > article div.article-inner p:has(> img) {
+body main.page article.content div.article-inner p:has(> img) {
   display: flex;
 }
-body > main > article div.article-inner p,
-body > main > article div.article-inner blockquote,
-body > main > article div.article-inner ul,
-body > main > article div.article-inner ol,
-body > main > article div.article-inner dl,
-body > main > article div.article-inner table,
-body > main > article div.article-inner pre,
-body > main > article div.article-inner details {
+body main.page article.content div.article-inner p,
+body main.page article.content div.article-inner blockquote,
+body main.page article.content div.article-inner ul,
+body main.page article.content div.article-inner ol,
+body main.page article.content div.article-inner dl,
+body main.page article.content div.article-inner table,
+body main.page article.content div.article-inner pre,
+body main.page article.content div.article-inner details {
   margin-top: 0;
   margin-bottom: 16px;
 }
-body > main > article > footer {
+body main.page article.content > footer {
+  transition: all 0.15s ease-in-out;
   border-top: var(--border);
   padding-top: 1rem;
   display: flex;
@@ -691,23 +695,26 @@ body > main > article > footer {
   justify-content: space-between;
   gap: 0.25rem;
 }
-body > main > article > footer section {
+body main.page article.content > footer section {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.25rem;
 }
-body > main > article > footer section p.credit a {
+body main.page article.content > footer section p.credit a {
   color: var(--info);
 }
-body > main > article > footer section p.copyright b {
+body main.page article.content > footer section p.copyright b {
   color: var(--info);
 }
-body > main aside.inner-nav {
+body main.page aside.inner-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
   padding: 1rem;
 }
 @media (max-width: 1535px) {
-  body > main aside.inner-nav {
+  body main.page aside.inner-nav {
     display: none;
   }
 }

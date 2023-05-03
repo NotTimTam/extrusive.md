@@ -222,6 +222,28 @@ function triggerLoading() {
 	);
 }
 
+/**
+ * Reposition content element sides so they line up.
+ */
+function repositionSides() {
+	console.log("repositioning");
+	try {
+		const nav = document.querySelector("aside.nav");
+		const article = document.querySelector("article.content");
+		const innerNav = document.querySelector("aside.inner-nav");
+		const header = document
+			.querySelector("header.page-header")
+			.getBoundingClientRect();
+
+		nav.style.top = `${header.bottom}px`;
+		innerNav.style.top = `${header.bottom}px`;
+
+		article.style.marginLeft = `${nav.getBoundingClientRect().right}px`;
+	} catch (err) {
+		console.error("Could not reposition elements.", err);
+	}
+}
+
 // Handlers
 
 /**
@@ -328,6 +350,7 @@ const handlePreventDefault = (e) => e.preventDefault();
 updateColorThemeButton();
 updateNavButton();
 getFolderTree();
+repositionSides();
 
 // Add event listeners.
 window.addEventListener("keydown", (e) => {
@@ -344,7 +367,16 @@ window.addEventListener("keydown", (e) => {
 });
 
 window.onload = () => {
+	repositionSides();
+
 	if (window.location.pathname === "/")
 		handleRequestFile("/content/README.html");
 	else handleRequestFile(window.location.pathname);
 };
+
+window.addEventListener("resize", repositionSides);
+document.body.addEventListener("scroll", () =>
+	document
+		.querySelector("header.page-header")
+		.classList.toggle("scrolled", document.body.scrollTop > 0)
+);
