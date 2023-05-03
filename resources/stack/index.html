@@ -81,7 +81,12 @@
 				</button>
 			</section>
 			<section class="main">
-				<div class="logo">{{LOGO}}</div>
+				<div
+					class="logo"
+					onclick="handleCloseNav(); handleRequestFile('/content/README.html');"
+				>
+					{{LOGO}}
+				</div>
 				<br />
 				<button class="search-bar" onclick="handleOpenSearch()">
 					<div class="button-inner">

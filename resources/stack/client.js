@@ -142,6 +142,9 @@ function recurseDisplayFolderTree(data, html = "", nestLevel = 0) {
 				</section>
 			`;
 	} else {
+		// Don't include the root README.md.
+		if (nestLevel === 1 && name === "README.html") return html;
+
 		// Handle files.
 		return html + createFileButton(name, path, nestLevel);
 	}
@@ -341,5 +344,7 @@ window.addEventListener("keydown", (e) => {
 });
 
 window.onload = () => {
-	handleRequestFile(window.location.pathname);
+	if (window.location.pathname === "/")
+		handleRequestFile("/content/README.html");
+	else handleRequestFile(window.location.pathname);
 };
