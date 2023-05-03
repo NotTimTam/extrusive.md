@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { getMarkdownTree } = require("../controllers/markdown");
+const { getFile } = require("../controllers/markdown");
 
-router.route("/").get(getMarkdownTree);
+router.route("/").get(getFile);
 
 module.exports = router;

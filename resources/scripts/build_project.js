@@ -54,6 +54,7 @@ const build_project = (directory, { force }) => {
 		console.log("\nAll set. Your adventure starts here! 🚀\n");
 	} catch (err) {
 		console.error("\nERROR:", err);
+		process.exit(1);
 	}
 };
 

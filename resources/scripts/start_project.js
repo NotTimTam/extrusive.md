@@ -17,6 +17,7 @@ const start_project = (dir) => {
 		});
 	} catch (err) {
 		console.error("\nERROR:", err);
+		process.exit(1);
 	}
 };
 

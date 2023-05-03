@@ -1,18 +1,31 @@
-const dirTree = require("directory-tree");
+const fs = require("fs-extra");
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-GET MARKDOWN TREE
-.get('/') 
+GET FILE
+.get('/')
+req.query {
+	path
+} 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-const getMarkdownTree = async (req, res) => {
-	try {
-		const tree = dirTree(__dirname.replace("\\controllers", "\\content"));
+const getFile = async (req, res) => {
+	const { path } = req.query;
 
-		res.status(200).json(tree);
+	try {
+		if (!path)
+			return res.status(403).send("The path request must be provided.");
+
+		const absolutePath = __dirname.replace("\\controllers", path);
+		const fileExists = await fs.exists(absolutePath);
+
+		if (!fileExists) return res.status(404).send("File not found.");
+
+		const fileData = await fs.readFile(absolutePath, "utf-8");
+
+		res.status(200).json(fileData);
 	} catch (err) {
 		console.error(err);
 		return res.status(500).send("Unknown server-side error occured.");
 	}
 };
 
-module.exports = { getMarkdownTree };
+module.exports = { getFile };

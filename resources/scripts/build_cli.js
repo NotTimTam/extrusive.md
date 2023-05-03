@@ -37,6 +37,7 @@ const build_cli = (program, commands) => {
 		}
 	} catch (err) {
 		console.error("ERROR:", err);
+		process.exit(1);
 	}
 };
 

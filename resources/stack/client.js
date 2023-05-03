@@ -48,6 +48,9 @@ function updateColorThemeSettings(themeCookie) {
 	document.body.className = themeCookie;
 }
 
+/**
+ * Update color theme button to match the current theme.
+ */
 function updateColorThemeButton() {
 	const button = document.querySelector("button#theme");
 	const currentTheme = getColorTheme();
@@ -58,7 +61,10 @@ function updateColorThemeButton() {
 			: `<ion-icon name="moon-outline" size="large"></ion-icon>`;
 }
 
-function updateNavbarButton() {
+/**
+ * Update the navbar drawer button (on mobile) to match the current navbar state.
+ */
+function updateNavButton() {
 	const navOpen =
 		document.querySelector("aside.nav").getAttribute("open") === "true";
 	const button = document.querySelector("button#nav");
@@ -70,16 +76,6 @@ function updateNavbarButton() {
 		: `<ion-icon name="menu-outline" size="large"></ion-icon>`;
 }
 
-// Handlers
-
-/**
- * Request a file by path.
- * @param {string} path - The path to the file that is being requested.
- */
-const requestFile = (path) => {
-	console.log(path);
-};
-
 /**
  * Create a button linking to a file.
  * @param {string} name - The name of the file.
@@ -87,19 +83,32 @@ const requestFile = (path) => {
  * @param {number} nestLevel - The number of folders deep this file is.
  * @returns
  */
-const createFileButton = (name, path, nestLevel) => `
-<button class="file" onclick="handleCloseNav(); requestFile('${path
-	.split("\\")
-	.join("/")}');" style="padding-left: ${nestLevel * 16 + 16}px;">
+function createFileButton(name, path, nestLevel) {
+	return `
+<button class="file" onclick="handleCloseNav(); handleRequestFile('${path
+		.split("\\")
+		.join("/")}');" style="padding-left: ${nestLevel * 16 + 16}px;">
 	${name}
 </button>
 `;
+}
+
+/**
+ * Get the folder tree.
+ */
+function getFolderTree() {
+	try {
+		createFolderStructureDisplay(fileTree);
+	} catch (err) {
+		console.error(err);
+	}
+}
 
 /**
  * Recursively build an html structure for the nav.
  * @param {*} data - The data returned from the server.
  */
-const recurseDisplayFolderTree = (data, html = "", nestLevel = 0) => {
+function recurseDisplayFolderTree(data, html = "", nestLevel = 0) {
 	const { children, name, path } = data;
 
 	// <section>
@@ -134,25 +143,38 @@ const recurseDisplayFolderTree = (data, html = "", nestLevel = 0) => {
 		// Handle files.
 		return html + createFileButton(name, path, nestLevel);
 	}
-};
+}
 
-const createFolderStructureDisplay = (data) => {
+/**
+ * Create the folder structure display recursively.
+ * @param {*} data - The folder structure data compiled with the app.
+ */
+function createFolderStructureDisplay(data) {
 	const nav = document.querySelector("aside.nav");
 
 	const htmlData = recurseDisplayFolderTree(data);
 	nav.innerHTML = htmlData;
+}
 
-	console.log(htmlData);
-};
+function renderPage(data) {
+	const page = document.querySelector("div.article-inner");
+
+	page.innerHTML = data;
+}
+
+// Handlers
 
 /**
- * Get the folder tree.
+ * Request a file by path.
+ * @param {string} path - The path to the file that is being requested.
  */
-const getFolderTree = async () => {
+const handleRequestFile = async (path) => {
 	try {
-		const { data } = await axios.get("/api/v1/markdown");
+		const { data } = await axios.get("/api/v1/markdown", {
+			params: { path },
+		});
 
-		createFolderStructureDisplay(data);
+		renderPage(data);
 	} catch (err) {
 		console.error(err);
 	}
@@ -190,7 +212,7 @@ const handleToggleNav = () => {
 				)
 			);
 
-		updateNavbarButton();
+		updateNavButton();
 	} catch (err) {
 		console.error(err);
 	}
@@ -237,7 +259,7 @@ const handlePreventDefault = (e) => e.preventDefault();
 
 // Set up app.
 updateColorThemeButton();
-updateNavbarButton();
+updateNavButton();
 getFolderTree();
 
 // Add event listeners.
