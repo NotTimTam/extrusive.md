@@ -273,8 +273,10 @@ function indicateSelectedNav(path) {
 		}
 
 		for (const folder of folders)
-			if (path.includes(folder.id.split("_").join("/")))
+			if (path.includes(folder.id.split("_").join("/"))) {
 				folder.classList.add("active");
+				folder.parentElement.classList.add("open");
+			}
 
 		const activeButton = document.querySelector(
 			`aside.nav button.file#${path.split("/").join("_").split(".")[0]}`
