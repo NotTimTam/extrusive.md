@@ -8,7 +8,6 @@ $success: #70c1b3;
 $info: #2891be;
 
 $border-width: 1px;
-$border: $border-width solid #a1a1a1;
 $border-radius: 1rem;
 
 $transition: all 0.15s ease-in-out;
@@ -19,6 +18,7 @@ $transition: all 0.15s ease-in-out;
 	--background-3: #c4c4c4;
 	--background-0: #c4c4c4;
 	--text: black;
+	--border: 1px solid var(--background-3);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -28,6 +28,7 @@ $transition: all 0.15s ease-in-out;
 		--background-2: hsl(220, 15%, 23%);
 		--background-3: hsl(220, 15%, 33%);
 		--text: white;
+		--border: 1px solid var(--background-3);
 	}
 }
 
@@ -70,6 +71,7 @@ body {
 		--background-3: #c4c4c4;
 		--background-0: #c4c4c4;
 		--text: black;
+		--border: 1px solid var(--background-3);
 	}
 
 	&.dark {
@@ -78,6 +80,7 @@ body {
 		--background-2: hsl(220, 15%, 23%);
 		--background-3: hsl(220, 15%, 33%);
 		--text: white;
+		--border: 1px solid var(--background-3);
 	}
 
 	svg,
@@ -236,7 +239,7 @@ body {
 			}
 		}
 
-		border-bottom: $border;
+		border-bottom: var(--border);
 	}
 
 	main {

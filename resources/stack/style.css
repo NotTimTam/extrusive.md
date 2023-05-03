@@ -4,6 +4,7 @@
   --background-3: #c4c4c4;
   --background-0: #c4c4c4;
   --text: black;
+  --border: 1px solid var(--background-3);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,6 +14,7 @@
     --background-2: hsl(220, 15%, 23%);
     --background-3: hsl(220, 15%, 33%);
     --text: white;
+    --border: 1px solid var(--background-3);
   }
 }
 *,
@@ -46,6 +48,7 @@ body.light {
   --background-3: #c4c4c4;
   --background-0: #c4c4c4;
   --text: black;
+  --border: 1px solid var(--background-3);
 }
 body.dark {
   --background-0: hsl(220, 15%, 10%);
@@ -53,6 +56,7 @@ body.dark {
   --background-2: hsl(220, 15%, 23%);
   --background-3: hsl(220, 15%, 33%);
   --text: white;
+  --border: 1px solid var(--background-3);
 }
 body svg,
 body img {
@@ -97,7 +101,7 @@ body header {
   justify-content: space-between;
   gap: 0.5rem;
   padding: 0 0.5rem;
-  border-bottom: 1px solid #a1a1a1;
+  border-bottom: var(--border);
 }
 body header section {
   display: flex;
