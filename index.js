@@ -15,6 +15,13 @@ build_cli(program, [
 				description: "The directory to create the app in.",
 			},
 		],
+		options: [
+			{
+				flags: "--force",
+				description:
+					"Force the directory to be created, even if it overrides files. (WARNING: This is destructive!)",
+			},
+		],
 		action: build_project,
 	},
 	{
@@ -30,6 +37,13 @@ build_cli(program, [
 			console.log(
 				`Building in ${dev ? "developer" : "production"} mode.`
 			);
+		},
+	},
+	{
+		name: "start",
+		description: "Run your app in developer mode.",
+		action: () => {
+			console.log("Start!");
 		},
 	},
 ]);
