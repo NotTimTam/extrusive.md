@@ -1,5 +1,7 @@
 {
 	"title": "my extrusive app",
-	"description": "Cupidatat veniam excepteur Lorem aliqua quis quis ad.",
-	"favicon": "./public/favicon.svg"
+	"author": "Anonymous",
+	"description": "Website built with extrusive.md! https://github.com/NotTimTam/extrusive.md",
+	"favicon": "./public/favicon.svg",
+	"styles": ["./styles/custom.css"]
 }

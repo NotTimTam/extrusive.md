@@ -24,7 +24,7 @@ const build_project = (directory, { force }) => {
 
 		// Create the project directories.
 		console.log("Creating necessary directories.");
-		const directories = ["content", "public"];
+		const directories = ["content", "public", "styles"];
 		for (const dir of directories)
 			if (!fs.existsSync(dir)) fs.mkdirSync(`${directory}/${dir}`);
 
@@ -35,6 +35,7 @@ const build_project = (directory, { force }) => {
 			["resources/stack/config.json", "extrusive.config.json"],
 			["resources/stack/favicon.svg", "public/favicon.svg"],
 			["resources/stack/gitignore.txt", ".gitignore"],
+			[null, "styles/custom.css"],
 		];
 		for (const [src, dest] of files) {
 			const srcPath = `${path.dirname(require.main.filename)}/${src}`; // Determine location to source data.
@@ -50,7 +51,7 @@ const build_project = (directory, { force }) => {
 
 		console.log("\nAll set. Your adventure starts here! 🚀\n");
 	} catch (err) {
-		console.error(err);
+		console.error("\nERROR:", err);
 	}
 };
 

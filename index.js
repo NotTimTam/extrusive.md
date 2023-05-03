@@ -3,6 +3,8 @@
 const { program } = require("commander");
 const build_cli = require("./resources/scripts/build_cli");
 const build_project = require("./resources/scripts/build_project");
+const build_app = require("./resources/scripts/build_app");
+const start_project = require("./resources/scripts/start_project");
 
 // Build the cli commands.
 build_cli(program, [
@@ -33,18 +35,12 @@ build_cli(program, [
 				description: "Build in developer mode.",
 			},
 		],
-		action: ({ dev }) => {
-			console.log(
-				`Building in ${dev ? "developer" : "production"} mode.`
-			);
-		},
+		action: build_app,
 	},
 	{
 		name: "start",
 		description: "Run your app in developer mode.",
-		action: () => {
-			console.log("Start!");
-		},
+		action: start_project,
 	},
 ]);
 
