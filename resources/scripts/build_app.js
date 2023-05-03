@@ -7,18 +7,23 @@ const fs = require("fs-extra");
  * @param {string} stackDir - The stack directory to get the file from.
  */
 const copyHTML = (stackDir, target, config) => {
-	const { logo, title, author, description, favicon, styles } = config;
+	try {
+		const { logo, title, author, description, favicon, styles, copyright } =
+			config;
 
-	// Load the html data.
-	let HTMLData = fs.readFileSync(`${stackDir}/index.html`, "utf-8");
+		// Load the html data.
+		let HTMLData = fs.readFileSync(`${stackDir}/index.html`, "utf-8");
 
-	// Configure title.
-	HTMLData = HTMLData.replace("{{TITLE}}", title || "my extrusive.md app");
+		// Configure title.
+		HTMLData = HTMLData.replace(
+			"{{TITLE}}",
+			title || "my extrusive.md app"
+		);
 
-	// Configure metadata.
-	HTMLData = HTMLData.replace(
-		"{{META}}",
-		`
+		// Configure metadata.
+		HTMLData = HTMLData.replace(
+			"{{META}}",
+			`
 	<meta name="author" content="${author || "Anonymous"}">
     <meta name="description" content="${
 		description ||
@@ -26,24 +31,33 @@ const copyHTML = (stackDir, target, config) => {
 	}">
 	<link rel="shortcut icon" href="${favicon}" type="image/x-icon">
 	`
-	);
+		);
 
-	// Configure logo.
-	HTMLData = HTMLData.replace(
-		"{{LOGO}}",
-		logo ? logo.data : `<h1 class="no-title">my extrusive app</h1>`
-	);
+		// Configure logo.
+		HTMLData = HTMLData.replace(
+			"{{LOGO}}",
+			logo ? logo.data : `<h1 class="no-title">my extrusive app</h1>`
+		);
 
-	// Configure custom user styles.
-	HTMLData = HTMLData.replace(
-		"{{STYLE}}",
-		`
+		// Configure copyright.
+		HTMLData = HTMLData.replace(
+			"{{COPYRIGHT}}",
+			copyright ? copyright : ""
+		);
+
+		// Configure custom user styles.
+		HTMLData = HTMLData.replace(
+			"{{STYLE}}",
+			`
 			${styles ? styles.map((src) => `<link rel="stylesheet" href="${src}" />`) : ""}
 		`
-	);
+		);
 
-	// Write the HTML file.
-	fs.writeFileSync(target, HTMLData);
+		// Write the HTML file.
+		fs.writeFileSync(target, HTMLData);
+	} catch (err) {
+		console.error("\nERROR:", err);
+	}
 };
 
 /**
@@ -54,32 +68,38 @@ const copyHTML = (stackDir, target, config) => {
  * @param {string} cwd - The current working directory.
  */
 const build_client = (dev, target, config, cwd) => {
-	// Add sub-directory to target.
-	target = target + "/client";
+	try {
+		// Add sub-directory to target.
+		target = target + "/client";
 
-	// Create the build directories.
-	console.log("Copying necessary client directories.");
-	const directories = ["content", "public"];
-	for (const dir of directories)
-		if (!fs.existsSync(dir)) fs.mkdirSync(`${target}/${dir}`);
+		// Create the build directories.
+		console.log("Copying necessary client directories.");
+		const directories = ["content", "public"];
+		for (const dir of directories)
+			if (!fs.existsSync(dir)) fs.mkdirSync(`${target}/${dir}`);
 
-	// Copy the build files.
-	console.log("Copying necessary client files.");
-	const stackDir = `${path.dirname(require.main.filename)}/resources/stack`;
-	const files = [
-		[`${cwd}/styles`, "styles"],
-		[`${cwd}/public`, "public"],
-		[`${cwd}/content`, "content"],
-		[`${stackDir}/style.css`, "style.css"],
-		[`${stackDir}/style.css.map`, "style.css.map"],
-		[`${stackDir}/client.js`, "client.js"],
-	];
-	for (const [src, dest] of files) {
-		fs.copySync(src, `${target}/${dest}`);
+		// Copy the build files.
+		console.log("Copying necessary client files.");
+		const stackDir = `${path.dirname(
+			require.main.filename
+		)}/resources/stack`;
+		const files = [
+			[`${cwd}/styles`, "styles"],
+			[`${cwd}/public`, "public"],
+			[`${cwd}/content`, "content"],
+			[`${stackDir}/style.css`, "style.css"],
+			[`${stackDir}/style.css.map`, "style.css.map"],
+			[`${stackDir}/client.js`, "client.js"],
+		];
+		for (const [src, dest] of files) {
+			fs.copySync(src, `${target}/${dest}`);
+		}
+
+		// Configure and copy html.
+		copyHTML(stackDir, `${target}/index.html`, config);
+	} catch (err) {
+		console.error("\nERROR:", err);
 	}
-
-	// Configure and copy html.
-	copyHTML(stackDir, `${target}/index.html`, config);
 };
 
 /**
@@ -90,18 +110,24 @@ const build_client = (dev, target, config, cwd) => {
  * @param {string} cwd - The current working directory.
  */
 const build_server = (dev, target, config, cwd) => {
-	// Copy the build structure.
-	console.log("Copying server.");
-	const stackDir = `${path.dirname(require.main.filename)}/resources/stack`;
-	const structure = [
-		[`${stackDir}/server.js`, "server.js"],
-		[`${stackDir}/server`, "server"],
-	];
-	for (const [src, dest] of structure) {
-		fs.copySync(src, `${target}/${dest}`);
-	}
+	try {
+		// Copy the build structure.
+		console.log("Copying server.");
+		const stackDir = `${path.dirname(
+			require.main.filename
+		)}/resources/stack`;
+		const structure = [
+			[`${stackDir}/server.js`, "server.js"],
+			[`${stackDir}/server`, "server"],
+		];
+		for (const [src, dest] of structure) {
+			fs.copySync(src, `${target}/${dest}`);
+		}
 
-	console.log("Finished copying server.");
+		console.log("Finished copying server.");
+	} catch (err) {
+		console.error("\nERROR:", err);
+	}
 };
 
 /**

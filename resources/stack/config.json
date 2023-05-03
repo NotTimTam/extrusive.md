@@ -4,6 +4,7 @@
 	"description": "Website built with extrusive.md! https://github.com/NotTimTam/extrusive.md",
 	"favicon": "./public/favicon.svg",
 	"styles": ["./styles/custom.css"],
+	"copyright": "© 2023 Anonymous",
 	"logo": {
 		"type": "text",
 		"data": "<ion-icon name=\"code-slash-outline\" size=\"large\"></ion-icon> <b>MY EXTRUSIVE APP</b>"
