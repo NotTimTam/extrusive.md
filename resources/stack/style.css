@@ -206,9 +206,11 @@ body header.page-header {
   left: 0;
   z-index: 100;
   padding: 0 0.5rem;
+  border-bottom: var(--border);
+  border-color: transparent;
 }
 body header.page-header.scrolled {
-  border-bottom: var(--border);
+  border-color: var(--background-3);
 }
 body header.page-header section {
   display: flex;

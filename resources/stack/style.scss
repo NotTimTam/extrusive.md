@@ -664,8 +664,11 @@ body {
 
 		padding: 0 $padding;
 
+		border-bottom: var(--border);
+		border-color: transparent;
+
 		&.scrolled {
-			border-bottom: var(--border);
+			border-color: var(--background-3);
 		}
 
 		section {
