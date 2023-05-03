@@ -14,9 +14,42 @@
 		{{STYLE}}
 	</head>
 	<body>
+		<div class="search-modal-container" open="false">
+			<div class="search-modal">
+				<div class="search-bar">
+					<div class="button-inner">
+						<ion-icon name="search-outline" size="16"></ion-icon>
+						<input
+							type="text"
+							name="search"
+							id="search"
+							placeholder="Search"
+						/>
+					</div>
+				</div>
+
+				<div class="recent-searches">
+					<h1>Recent</h1>
+				</div>
+
+				<footer>
+					<p>
+						<span class="key"> esc </span>
+						to close
+					</p>
+				</footer>
+			</div>
+		</div>
+
 		<header>
 			<section class="toggle-nav-parent">
-				<button class="svg toggle-nav" onclick="handleToggleNav(this)" id="nav"><ion-icon name="menu-outline" size="large"></ion-icon></button>
+				<button
+					class="svg toggle-nav"
+					onclick="handleToggleNav(this)"
+					id="nav"
+				>
+					<ion-icon name="menu-outline" size="large"></ion-icon>
+				</button>
 			</section>
 			<section class="main">
 				<div class="logo">{{LOGO}}</div>
@@ -30,24 +63,36 @@
 							<code>K</code>
 						</div>
 					</div>
-				</div>
+				</button>
 			</section>
 			<section>
-				<button class="svg" onclick="handleToggleTheme(this)" id="theme"><ion-icon name="sunny-outline" size="large"></ion-icon></button>
+				<button
+					class="svg"
+					onclick="handleToggleTheme(this)"
+					id="theme"
+				>
+					<ion-icon name="sunny-outline" size="large"></ion-icon>
+				</button>
 			</section>
 		</header>
 		<main>
 			<aside class="nav">
 				<section>
 					<h1>Get Started</h1>
-					<button onclick="handleCloseNav()" class="active">Quick Start</button>
+					<button onclick="handleCloseNav()" class="active">
+						Quick Start
+					</button>
 					<button onclick="handleCloseNav()">Installation</button>
 				</section>
 
 				<section>
 					<h1>Learn Extrusive.md</h1>
-					<button onclick="handleCloseNav()">Describing the UI</button>
-					<button onclick="handleCloseNav()">Adding Interactivity</button>
+					<button onclick="handleCloseNav()">
+						Describing the UI
+					</button>
+					<button onclick="handleCloseNav()">
+						Adding Interactivity
+					</button>
 				</section>
 			</aside>
 			<article>

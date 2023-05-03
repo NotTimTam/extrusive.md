@@ -70,6 +70,19 @@ body svg,
 body img {
   color: var(--text);
 }
+body span.key {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-radius: 2px;
+  padding: 0.25rem;
+  padding-top: 0;
+  display: inline-block;
+  background-color: var(--text);
+  color: var(--background);
+  font-weight: 600;
+}
 body input,
 body button {
   transition: all 0.15s ease-in-out;
@@ -93,6 +106,56 @@ body button:hover {
 }
 body button:active {
   transform: scale(0.9);
+}
+body button.search-bar:active {
+  transform: unset;
+  border-color: #2891be;
+}
+body button.search-bar,
+body div.search-bar {
+  overflow: hidden;
+  transition: none;
+  flex-grow: 2;
+  border-radius: 2rem;
+  padding: 0;
+  margin: 1rem 0;
+  border: 2px solid transparent;
+}
+body button.search-bar:hover,
+body div.search-bar:hover {
+  background-color: transparent;
+}
+body button.search-bar input,
+body div.search-bar input {
+  flex-grow: 2;
+}
+body button.search-bar div.button-inner,
+body div.search-bar div.button-inner {
+  transition: all 0.15s ease-in-out;
+  margin: 0.25rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+  border-radius: 2rem;
+  flex-grow: 2;
+  padding: 0.5rem 1rem;
+  background-color: var(--background-2);
+}
+body button.search-bar div.button-inner div.shortcut,
+body div.search-bar div.button-inner div.shortcut {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
+  margin-left: auto;
+}
+body button.search-bar div.button-inner div.shortcut code,
+body div.search-bar div.button-inner div.shortcut code {
+  background-color: var(--background-0);
+  font-size: 11px;
+  display: block;
 }
 body code {
   transition: all 0.15s ease-in-out;
@@ -148,47 +211,6 @@ body header section div.logo:hover {
 }
 body header section div.logo:active {
   opacity: 0.5;
-}
-body header section button.search-bar {
-  overflow: hidden;
-  transition: none;
-  flex-grow: 2;
-  border-radius: 2rem;
-  padding: 0;
-  margin: 1rem 0;
-  border: 2px solid transparent;
-}
-body header section button.search-bar:hover {
-  background-color: transparent;
-}
-body header section button.search-bar:active {
-  transform: unset;
-  border-color: #2891be;
-}
-body header section button.search-bar div.button-inner {
-  transition: all 0.15s ease-in-out;
-  margin: 0.25rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.25rem;
-  border-radius: 2rem;
-  flex-grow: 2;
-  padding: 0.5rem 1rem;
-  background-color: var(--background-2);
-}
-body header section button.search-bar div.button-inner div.shortcut {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.25rem;
-  margin-left: auto;
-}
-body header section button.search-bar div.button-inner div.shortcut code {
-  background-color: var(--background-0);
-  font-size: 11px;
-  display: block;
 }
 body main {
   flex-grow: 2;
@@ -260,4 +282,57 @@ body main aside.inner-nav {
   body main aside.inner-nav {
     display: none;
   }
+}
+body div.search-modal-container {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(52, 58, 70, 0.8);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+body div.search-modal-container[open=true] {
+  display: flex;
+}
+body div.search-modal-container div.search-modal {
+  flex-direction: column;
+  background-color: var(--background);
+  border-radius: 1rem;
+  height: 100%;
+  width: 100%;
+  max-width: 768px;
+}
+body div.search-modal-container div.search-modal div.search-bar {
+  flex-grow: 0;
+  margin: 0.5rem 1rem;
+}
+body div.search-modal-container div.search-modal div.recent-searches {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+}
+body div.search-modal-container div.search-modal div.recent-searches h1 {
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+body div.search-modal-container div.search-modal footer {
+  margin: 1rem;
+  padding-top: 1rem;
+  border-top: var(--border);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+body div.search-modal-container div.search-modal footer p {
+  color: var(--background-3);
 }/*# sourceMappingURL=style.css.map */

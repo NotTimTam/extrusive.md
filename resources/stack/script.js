@@ -121,6 +121,14 @@ const handleCloseNav = () => {
 	}
 };
 
+const handleOpenSearch = () => {
+	document
+		.querySelector("div.search-modal-container")
+		.setAttribute("open", "true");
+};
+
 // Set up app.
 updateColorThemeButton();
 updateNavbarButton();
+
+// Add event listeners.

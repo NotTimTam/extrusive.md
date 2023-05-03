@@ -47,29 +47,24 @@ const copyHTML = (stackDir, target, config) => {
 };
 
 /**
- * Build the clientside portion of the app.
+ * Build the client-side portion of the app.
  * @param {boolean} dev - Whether to build in dev mode or not.
  * @param {string} target - The target build directory.
  * @param {*} config - The user's configuration object.
  * @param {string} cwd - The current working directory.
  */
 const build_client = (dev, target, config, cwd) => {
-	// If a build folder exists, clear it.
-	if (fs.existsSync(target)) {
-		console.log("Build folder exists.");
-	} else {
-		// Create the build folder if it doesn't exist.
-		fs.mkdirSync(target, { recursive: true });
-	}
+	// Add sub-directory to target.
+	target = target + "/client";
 
 	// Create the build directories.
-	console.log("Copying necessary directories.");
+	console.log("Copying necessary client directories.");
 	const directories = ["content", "public"];
 	for (const dir of directories)
 		if (!fs.existsSync(dir)) fs.mkdirSync(`${target}/${dir}`);
 
 	// Copy the build files.
-	console.log("Copying necessary files.");
+	console.log("Copying necessary client files.");
 	const stackDir = `${path.dirname(require.main.filename)}/resources/stack`;
 	const files = [
 		[`${cwd}/styles`, "styles"],
@@ -85,8 +80,28 @@ const build_client = (dev, target, config, cwd) => {
 
 	// Configure and copy html.
 	copyHTML(stackDir, `${target}/index.html`, config);
+};
 
-	console.log("\nBuild complete. Your markdown is now ready to shine! ✨\n");
+/**
+ * Build the server-side portion of the app.
+ * @param {boolean} dev - Whether to build in dev mode or not.
+ * @param {string} target - The target build directory.
+ * @param {*} config - The user's configuration object.
+ * @param {string} cwd - The current working directory.
+ */
+const build_server = (dev, target, config, cwd) => {
+	// Copy the build structure.
+	console.log("Copying server.");
+	const stackDir = `${path.dirname(require.main.filename)}/resources/stack`;
+	const structure = [
+		[`${stackDir}/server.js`, "server.js"],
+		[`${stackDir}/server`, "server"],
+	];
+	for (const [src, dest] of structure) {
+		fs.copySync(src, `${target}/${dest}`);
+	}
+
+	console.log("Finished copying server.");
 };
 
 /**
@@ -102,7 +117,7 @@ const build_app = ({ dev }, commands, target) => {
 
 		// Get the current working directory.
 		const cwd = process.cwd();
-		target = target || `${cwd}\\build\\client`;
+		target = target || `${cwd}\\build`;
 		console.log(
 			`Building in ${
 				dev ? "developer" : "production"
@@ -116,7 +131,20 @@ const build_app = ({ dev }, commands, target) => {
 			throw 'An "extrusive.config.js" file does not exist in the root of your project directory.';
 		const config = JSON.parse(fs.readFileSync(configSrc, "utf-8") || "{}");
 
-		build_client(dev, target, config, cwd);
+		// If a build folder exists, clear it.
+		if (fs.existsSync(target)) {
+			fs.emptydirSync(target);
+		} else {
+			// Create the build folder if it doesn't exist.
+			fs.mkdirSync(target, { recursive: true });
+		}
+
+		build_server(dev, target, config, cwd); // Build the server-side.
+		build_client(dev, target, config, cwd); // Build the client-side.
+
+		console.log(
+			"\nBuild complete. Your markdown is now ready to shine! ✨\n"
+		);
 	} catch (err) {
 		console.error("\nERROR:", err);
 	}

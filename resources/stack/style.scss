@@ -96,6 +96,21 @@ body {
 		color: var(--text);
 	}
 
+	span.key {
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		border-radius: 2px;
+		padding: $gap;
+		padding-top: 0;
+		display: inline-block;
+		background-color: var(--text);
+		color: var(--background);
+
+		font-weight: 600;
+	}
+
 	input,
 	button {
 		transition: $transition;
@@ -126,6 +141,73 @@ body {
 		border-radius: $border-radius;
 
 		cursor: pointer;
+
+		&.search-bar {
+			&:active {
+				transform: unset;
+				border-color: $info;
+			}
+		}
+	}
+
+	button.search-bar,
+	div.search-bar {
+		overflow: hidden;
+		transition: none;
+
+		flex-grow: 2;
+
+		border-radius: $border-radius * 2;
+		padding: 0;
+
+		margin: $margin 0;
+
+		border: $border-width * 2 solid transparent;
+
+		&:hover {
+			background-color: transparent;
+		}
+
+		input {
+			flex-grow: 2;
+		}
+
+		div.button-inner {
+			transition: $transition;
+
+			margin: $gap;
+
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			gap: $gap;
+
+			border-radius: $border-radius * 2;
+
+			flex-grow: 2;
+
+			padding: $padding $margin;
+
+			background-color: var(--background-2);
+
+			div.shortcut {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				gap: $gap;
+
+				margin-left: auto;
+
+				code {
+					background-color: var(--background-0);
+
+					font-size: 11px;
+
+					display: block;
+				}
+			}
+		}
 	}
 
 	code {
@@ -197,66 +279,6 @@ body {
 
 				&:active {
 					opacity: 0.5;
-				}
-			}
-
-			button.search-bar {
-				overflow: hidden;
-				transition: none;
-
-				flex-grow: 2;
-
-				border-radius: $border-radius * 2;
-				padding: 0;
-
-				margin: $margin 0;
-
-				border: $border-width * 2 solid transparent;
-
-				&:hover {
-					background-color: transparent;
-				}
-
-				&:active {
-					transform: unset;
-					border-color: $info;
-				}
-
-				div.button-inner {
-					transition: $transition;
-
-					margin: $gap;
-
-					display: flex;
-					flex-direction: row;
-					align-items: center;
-					justify-content: space-between;
-					gap: $gap;
-
-					border-radius: $border-radius * 2;
-
-					flex-grow: 2;
-
-					padding: $padding $margin;
-
-					background-color: var(--background-2);
-
-					div.shortcut {
-						display: flex;
-						flex-direction: row;
-						align-items: center;
-						gap: $gap;
-
-						margin-left: auto;
-
-						code {
-							background-color: var(--background-0);
-
-							font-size: 11px;
-
-							display: block;
-						}
-					}
 				}
 			}
 		}
@@ -355,6 +377,80 @@ body {
 
 			@media (max-width: 1535px) {
 				display: none;
+			}
+		}
+	}
+
+	div.search-modal-container {
+		display: none;
+
+		&[open="true"] {
+			display: flex;
+		}
+
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		z-index: 1000;
+
+		width: 100vw;
+		height: 100vh;
+
+		background-color: #343a46cc;
+
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		padding: $margin;
+
+		div.search-modal {
+			flex-direction: column;
+
+			background-color: var(--background);
+			border-radius: $border-radius;
+
+			height: 100%;
+			width: 100%;
+
+			max-width: 768px;
+
+			div.search-bar {
+				flex-grow: 0;
+				margin: $padding $margin;
+			}
+
+			div.recent-searches {
+				flex-grow: 2;
+				display: flex;
+				flex-direction: column;
+
+				h1 {
+					padding-left: $margin;
+					padding-bottom: $margin;
+
+					text-transform: uppercase;
+
+					font-size: 1rem;
+				}
+			}
+
+			footer {
+				margin: $margin;
+				padding-top: $margin;
+
+				border-top: var(--border);
+
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
+				gap: $gap;
+
+				p {
+					color: var(--background-3);
+				}
 			}
 		}
 	}
