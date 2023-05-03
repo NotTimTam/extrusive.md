@@ -13,12 +13,14 @@ $transition: all 0.15s ease-in-out;
 	--background-2: #dadada;
 	--background-3: #c4c4c4;
 	--background-0: #c4c4c4;
-	--text: black;
+	--text: #232724;
 	--border: 1px solid var(--background-3);
 	--info: #2891be;
 	--error: #f25f5c;
 	--warning: #ffe066;
 	--success: #70c1b3;
+
+	--content-font-size: 17px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -74,7 +76,7 @@ body {
 		--background-2: #dadada;
 		--background-3: #c4c4c4;
 		--background-0: #c4c4c4;
-		--text: black;
+		--text: #232724;
 		--border: 1px solid var(--background-3);
 		color-scheme: light;
 	}
@@ -96,7 +98,26 @@ body {
 		align-items: stretch;
 		padding-bottom: $margin;
 
-		font-size: 17px;
+		font-size: var(--content-font-size);
+
+		p.loading,
+		p.error {
+			align-self: center;
+
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			gap: $gap;
+			flex-wrap: wrap;
+		}
+
+		p.error {
+			ion-icon {
+				color: var(--error);
+			}
+			color: var(--error);
+		}
 
 		h1,
 		h2,
@@ -446,6 +467,12 @@ body {
 			border-bottom-color: var(--color-neutral-muted);
 			border-radius: 6px;
 			box-shadow: inset 0 -1px 0 var(--color-neutral-muted);
+		}
+
+		p {
+			&:has(> img) {
+				display: flex;
+			}
 		}
 
 		p,

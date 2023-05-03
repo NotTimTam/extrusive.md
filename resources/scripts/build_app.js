@@ -56,7 +56,7 @@ const copy_html = (stackDir, target, config, imports) => {
 		description ||
 		"Website built with extrusive.md! https://github.com/NotTimTam/extrusive.md"
 	}">
-	<link rel="shortcut icon" href="${favicon}" type="image/x-icon">
+	<link rel="shortcut icon" href="/${favicon}" type="image/x-icon">
 	`
 		);
 
@@ -76,7 +76,7 @@ const copy_html = (stackDir, target, config, imports) => {
 		HTMLData = HTMLData.replace(
 			"{{STYLE}}",
 			`
-			${styles ? styles.map((src) => `<link rel="stylesheet" href="${src}" />`) : ""}
+			${styles ? styles.map((src) => `<link rel="stylesheet" href="/${src}" />`) : ""}
 		`
 		);
 
@@ -87,7 +87,7 @@ const copy_html = (stackDir, target, config, imports) => {
 				? imports
 						.map(({ path, type }) => {
 							if (type === "script")
-								return `<script src="${path}"></script>`;
+								return `<script src="/${path}"></script>`;
 						})
 						.join("\n")
 				: ""

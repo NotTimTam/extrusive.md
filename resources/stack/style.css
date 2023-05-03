@@ -3,12 +3,13 @@
   --background-2: #dadada;
   --background-3: #c4c4c4;
   --background-0: #c4c4c4;
-  --text: black;
+  --text: #232724;
   --border: 1px solid var(--background-3);
   --info: #2891be;
   --error: #f25f5c;
   --warning: #ffe066;
   --success: #70c1b3;
+  --content-font-size: 17px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -60,7 +61,7 @@ body.light {
   --background-2: #dadada;
   --background-3: #c4c4c4;
   --background-0: #c4c4c4;
-  --text: black;
+  --text: #232724;
   --border: 1px solid var(--background-3);
   color-scheme: light;
 }
@@ -356,7 +357,23 @@ body > main > article div.article-inner {
   flex-direction: column;
   align-items: stretch;
   padding-bottom: 1rem;
-  font-size: 17px;
+  font-size: var(--content-font-size);
+}
+body > main > article div.article-inner p.loading,
+body > main > article div.article-inner p.error {
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+body > main > article div.article-inner p.error {
+  color: var(--error);
+}
+body > main > article div.article-inner p.error ion-icon {
+  color: var(--error);
 }
 body > main > article div.article-inner h1,
 body > main > article div.article-inner h2,
@@ -651,6 +668,9 @@ body > main > article div.article-inner kbd {
   border-bottom-color: var(--color-neutral-muted);
   border-radius: 6px;
   box-shadow: inset 0 -1px 0 var(--color-neutral-muted);
+}
+body > main > article div.article-inner p:has(> img) {
+  display: flex;
 }
 body > main > article div.article-inner p,
 body > main > article div.article-inner blockquote,

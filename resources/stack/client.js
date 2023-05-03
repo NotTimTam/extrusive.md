@@ -84,10 +84,12 @@ function updateNavButton() {
  * @returns
  */
 function createFileButton(name, path, nestLevel) {
+	const displayPath = path.split("\\").join("/");
+
 	return `
-<button class="file" onclick="handleCloseNav(); handleRequestFile('${path
-		.split("\\")
-		.join("/")}');" style="padding-left: ${nestLevel * 16 + 16}px;">
+<button class="file" onclick="handleCloseNav(); handleRequestFile('${displayPath}');" style="padding-left: ${
+		nestLevel * 16 + 16
+	}px;" id="${displayPath}">
 	${name.split(".")[0]}
 </button>
 `;
@@ -156,15 +158,65 @@ function createFolderStructureDisplay(data) {
 	nav.innerHTML = htmlData;
 }
 
-function renderPage(data, path) {
-	path = path.replace("/content", "");
-	const title = path.split("/")[path.split("/").length - 1].split(".")[0];
-
-	document.title = title;
-
+/**
+ * Update the content of the html page.
+ * @param {string} data - The new page content.
+ */
+function updatePageContent(data) {
 	const page = document.querySelector("div.article-inner");
 
-	page.innerHTML = data;
+	page.innerHTML = data.length > 0 ? data : "<p>Nothing to display.</p>";
+}
+
+/**
+ * Trigger the page to scroll back to where it was.
+ * @param {string} hash - The portion of the page to scroll to.
+ * @param {string} location - The last location of the page before the route change.
+ */
+function triggerRescroll(hash, location) {
+	if (hash && location === window.location.pathname) {
+		setTimeout(() => {
+			window.location.hash = hash;
+
+			const hashSrc = document.querySelector(hash);
+			console.log(hash, hashSrc);
+			if (hashSrc) hashSrc.scrollIntoView({ behavior: "smooth" });
+		}, 250);
+	}
+}
+
+/**
+ * Render a new article.
+ * @param {string} data - The article content.
+ * @param {string} path - The original path to the content on the server.
+ */
+function renderArticle(data, path) {
+	const title = path.split("/")[path.split("/").length - 1].split(".")[0];
+
+	// Update the document title.
+	document.title = title;
+
+	// Update the url.
+	const hash = window.location.hash;
+	const location = window.location.pathname;
+	history.pushState(null, null, window.location.origin + path);
+
+	// Update the page content.
+	updatePageContent(data);
+
+	// If there was an inter-page link, route to it.
+	triggerRescroll(hash, location);
+}
+
+/**
+ * Display that the content is loading.
+ */
+function triggerLoading() {
+	document.title = "Loading...";
+
+	updatePageContent(
+		`<p class="loading"><ion-icon name="cloud-download-outline"></ion-icon> Loading...</p>`
+	);
 }
 
 // Handlers
@@ -174,14 +226,21 @@ function renderPage(data, path) {
  * @param {string} path - The path to the file that is being requested.
  */
 const handleRequestFile = async (path) => {
+	// Trigger loading element.
+	triggerLoading();
+
 	try {
 		const { data } = await axios.get("/api/v1/markdown", {
 			params: { path },
 		});
 
-		renderPage(data, path);
+		renderArticle(data, path);
 	} catch (err) {
 		console.error(err);
+
+		updatePageContent(
+			`<p class="error"><ion-icon name="warning-outline"></ion-icon> ${err.response.data}</p>`
+		);
 	}
 };
 
@@ -280,3 +339,7 @@ window.addEventListener("keydown", (e) => {
 		}
 	}
 });
+
+window.onload = () => {
+	handleRequestFile(window.location.pathname);
+};
