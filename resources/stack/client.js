@@ -87,10 +87,13 @@ const requestFile = (path) => {
  * @param {number} nestLevel - The number of folders deep this file is.
  * @returns
  */
-const createFileButton = (name, path, nestLevel) =>
-	`<button class="file" style="padding-left: ${
-		nestLevel * 16 + 16
-	}px" onclick="handleCloseNav() requestFile('${path}')">${name}</button>`;
+const createFileButton = (name, path, nestLevel) => `
+<button class="file" onclick="handleCloseNav(); requestFile('${path
+	.split("\\")
+	.join("/")}');" style="padding-left: ${nestLevel * 16 + 16}px;">
+	${name}
+</button>
+`;
 
 /**
  * Recursively build an html structure for the nav.
@@ -99,7 +102,6 @@ const createFileButton = (name, path, nestLevel) =>
 const recurseDisplayFolderTree = (data, html = "", nestLevel = 0) => {
 	const { children, name, path } = data;
 
-	console.log(nestLevel, name);
 	// <section>
 	// 	<h1>Get Started</h1>
 	// 	<button onclick="handleCloseNav()" class="active">
