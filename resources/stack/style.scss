@@ -495,7 +495,7 @@ body {
 
 	ion-icon {
 		transition: $transition;
-		transition-property: color;
+		transition-property: color, transform;
 	}
 
 	svg,
@@ -787,6 +787,8 @@ body {
 			left: 0;
 			z-index: 50;
 
+			overflow-y: auto;
+
 			min-width: 300px;
 
 			height: 100%;
@@ -798,15 +800,49 @@ body {
 
 			background-color: var(--background);
 
-			section {
-				padding: $margin 0;
+			user-select: none;
 
-				h1 {
-					padding-left: $margin;
-					padding-bottom: $margin;
+			section.folder {
+				> h1 {
+					padding: $padding $margin;
+					margin-bottom: $padding;
 
 					text-transform: uppercase;
 					font-size: 1rem;
+
+					cursor: pointer;
+
+					transition: $transition;
+
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					justify-content: space-between;
+					gap: $gap;
+
+					border-top-right-radius: $border-radius;
+					border-bottom-right-radius: $border-radius;
+
+					&:hover {
+						background-color: var(--background-3);
+					}
+				}
+
+				&:not([depth="0"]) {
+					&:not(.open) {
+						button,
+						section {
+							display: none;
+						}
+					}
+				}
+
+				&.open {
+					> h1 {
+						ion-icon#arrow {
+							transform: rotate(-180deg);
+						}
+					}
 				}
 
 				button {
@@ -815,6 +851,10 @@ body {
 					border-top-left-radius: 0;
 
 					padding: $padding $margin;
+
+					&:last-of-type {
+						margin-bottom: $padding;
+					}
 
 					&.active {
 						background-color: var(--background-3);
@@ -897,11 +937,17 @@ body {
 		}
 
 		aside.inner-nav {
+			user-select: none;
+
 			position: fixed;
 			top: 0;
-			right: 0;
+			right: $margin;
 
 			padding: $margin;
+
+			display: flex;
+			flex-direction: column;
+			gap: $gap;
 
 			@media (max-width: 1535px) {
 				display: none;

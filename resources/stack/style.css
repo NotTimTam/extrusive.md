@@ -76,7 +76,7 @@ body.dark {
 }
 body ion-icon {
   transition: all 0.15s ease-in-out;
-  transition-property: color;
+  transition-property: color, transform;
 }
 body svg,
 body img {
@@ -303,33 +303,56 @@ body main.page aside.nav {
   top: 0;
   left: 0;
   z-index: 50;
+  overflow-y: auto;
   min-width: 300px;
   height: 100%;
   display: flex;
   flex-direction: column;
   background-color: var(--background);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
-body main.page aside.nav section {
-  padding: 1rem 0;
-}
-body main.page aside.nav section h1 {
-  padding-left: 1rem;
-  padding-bottom: 1rem;
+body main.page aside.nav section.folder > h1 {
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
   text-transform: uppercase;
   font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 }
-body main.page aside.nav section button {
+body main.page aside.nav section.folder > h1:hover {
+  background-color: var(--background-3);
+}
+body main.page aside.nav section.folder:not([depth="0"]):not(.open) button,
+body main.page aside.nav section.folder:not([depth="0"]):not(.open) section {
+  display: none;
+}
+body main.page aside.nav section.folder.open > h1 ion-icon#arrow {
+  transform: rotate(-180deg);
+}
+body main.page aside.nav section.folder button {
   justify-content: flex-start;
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
   padding: 0.5rem 1rem;
   width: 100%;
 }
-body main.page aside.nav section button.active {
+body main.page aside.nav section.folder button:last-of-type {
+  margin-bottom: 0.5rem;
+}
+body main.page aside.nav section.folder button.active {
   background-color: var(--background-3);
   color: var(--info);
 }
-body main.page aside.nav section button:active {
+body main.page aside.nav section.folder button:active {
   transform: unset;
 }
 @media (max-width: 1025px) {
@@ -710,10 +733,16 @@ body main.page article.content > footer section p.copyright b {
   color: var(--info);
 }
 body main.page aside.inner-nav {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   position: fixed;
   top: 0;
-  right: 0;
+  right: 1rem;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 @media (max-width: 1535px) {
   body main.page aside.inner-nav {

@@ -90,9 +90,22 @@ function createFileButton(name, path, nestLevel) {
 <button class="file" onclick="handleCloseNav(); handleRequestFile('${displayPath}');" style="padding-left: ${
 		nestLevel * 16 + 16
 	}px;" id="${displayPath}">
+	<ion-icon name="document-outline"></ion-icon>
 	${name.split(".")[0]}
 </button>
 `;
+}
+
+/**
+ * Toggle the dropdown of a folder menu.
+ * @param {string} folder - The identifier of the folder to toggle.
+ */
+function toggleNavDropdown(folder) {
+	try {
+		document.querySelector(`section#${folder}`).classList.toggle("open");
+	} catch (err) {
+		console.error(err);
+	}
 }
 
 /**
@@ -113,24 +126,23 @@ function getFolderTree() {
 function recurseDisplayFolderTree(data, html = "", nestLevel = 0) {
 	const { children, name, path } = data;
 
-	// <section>
-	// 	<h1>Get Started</h1>
-	// 	<button onclick="handleCloseNav()" class="active">
-	// 		Quick Start
-	// 	</button>
-	// 	<button onclick="handleCloseNav()">Installation</button>
-	// </section>
-
 	if (children) {
 		// Handle folders.
 
 		return `${html} 
-			<section>
+			<section depth="${nestLevel}" class="folder" id="${name}-${nestLevel}">
 			${
 				nestLevel === 0
 					? ""
-					: `<h1 style="margin-left: ${16 * nestLevel}px">
-					${name}
+					: `<h1 style="padding-left: ${
+							16 * nestLevel
+					  }px" onclick="toggleNavDropdown('${name}-${nestLevel}')">
+					<div class="title">
+						<ion-icon name="folder-outline"></ion-icon>
+						${name}
+					</div>
+
+					<ion-icon id="arrow" name="chevron-down-outline"></ion-icon>
 				</h1>`
 			}
 
@@ -226,7 +238,6 @@ function triggerLoading() {
  * Reposition content element sides so they line up.
  */
 function repositionSides() {
-	console.log("repositioning");
 	try {
 		const nav = document.querySelector("aside.nav");
 		const article = document.querySelector("article.content");
