@@ -7,7 +7,7 @@ const fs = require("fs-extra");
  * @param {string} stackDir - The stack directory to get the file from.
  */
 const copyHTML = (stackDir, target, config) => {
-	const { title, author, description, favicon, styles } = config;
+	const { logo, title, author, description, favicon, styles } = config;
 
 	// Load the html data.
 	let HTMLData = fs.readFileSync(`${stackDir}/index.html`, "utf-8");
@@ -28,15 +28,19 @@ const copyHTML = (stackDir, target, config) => {
 	`
 	);
 
+	// Configure logo.
+	HTMLData = HTMLData.replace(
+		"{{LOGO}}",
+		logo ? logo.data : `<h1 class="no-title">my extrusive app</h1>`
+	);
+
 	// Configure custom user styles.
-	if (styles) {
-		HTMLData = HTMLData.replace(
-			"{{STYLE}}",
-			`
-			${styles.map((src) => `<link rel="stylesheet" href="${src}" />`)}
+	HTMLData = HTMLData.replace(
+		"{{STYLE}}",
 		`
-		);
-	}
+			${styles ? styles.map((src) => `<link rel="stylesheet" href="${src}" />`) : ""}
+		`
+	);
 
 	// Write the HTML file.
 	fs.writeFileSync(target, HTMLData);
@@ -44,6 +48,7 @@ const copyHTML = (stackDir, target, config) => {
 
 /**
  * Build an extrusive app.
+ * @param {string} target - The target directory to build to.
  */
 const build_app = ({ dev }, commands, target) => {
 	try {
@@ -66,7 +71,7 @@ const build_app = ({ dev }, commands, target) => {
 		const configSrc = `${cwd}/extrusive.config.json`;
 		if (!fs.existsSync(configSrc))
 			throw 'An "extrusive.config.js" file does not exist in the root of your project directory.';
-		const config = JSON.parse(fs.readFileSync(configSrc, "utf-8"));
+		const config = JSON.parse(fs.readFileSync(configSrc, "utf-8") || "{}");
 
 		// If a build folder exists, clear it.
 		if (fs.existsSync(target)) {
@@ -92,6 +97,8 @@ const build_app = ({ dev }, commands, target) => {
 			[`${cwd}/public`, "public"],
 			[`${cwd}/content`, "content"],
 			[`${stackDir}/style.css`, "style.css"],
+			[`${stackDir}/style.css.map`, "style.css.map"],
+			[`${stackDir}/script.js`, "script.js"],
 		];
 		for (const [src, dest] of files) {
 			fs.copySync(src, `${target}/${dest}`);

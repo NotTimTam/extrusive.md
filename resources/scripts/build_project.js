@@ -9,7 +9,9 @@ const build_project = (directory, { force }) => {
 	try {
 		const logInitializer = `extrusive.md v${packageJson.version}`;
 		console.log(
-			`\n${logInitializer}\n${"-".repeat(logInitializer.length)}\n`
+			`\n${logInitializer}\n${"-".repeat(
+				logInitializer.length
+			)}\n\nStarting project build process.`
 		);
 
 		// If the directory exists, we check whether it is empty or not.

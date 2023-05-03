@@ -3,5 +3,9 @@
 	"author": "Anonymous",
 	"description": "Website built with extrusive.md! https://github.com/NotTimTam/extrusive.md",
 	"favicon": "./public/favicon.svg",
-	"styles": ["./styles/custom.css"]
+	"styles": ["./styles/custom.css"],
+	"logo": {
+		"type": "text",
+		"data": "<img src=\"./public/favicon.svg\"/> <b>MY EXTRUSIVE APP</b>"
+	}
 }
