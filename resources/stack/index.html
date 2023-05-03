@@ -14,19 +14,31 @@
 		{{STYLE}}
 	</head>
 	<body>
-		<div class="search-modal-container" open="false">
-			<div class="search-modal">
-				<div class="search-bar">
-					<div class="button-inner">
-						<ion-icon name="search-outline" size="16"></ion-icon>
-						<input
-							type="text"
-							name="search"
-							id="search"
-							placeholder="Search"
-						/>
+		<div
+			class="search-modal-container"
+			open="false"
+			onclick="handleCloseSearch()"
+		>
+			<div class="search-modal" onclick="handleStopPropagation(event)">
+				<header>
+					<div class="search-bar">
+						<div class="button-inner">
+							<ion-icon
+								name="search-outline"
+								size="16"
+							></ion-icon>
+							<input
+								type="text"
+								name="search"
+								id="search"
+								placeholder="Search"
+							/>
+						</div>
 					</div>
-				</div>
+					<button class="cancel-search" onclick="handleCloseSearch()">
+						Cancel
+					</button>
+				</header>
 
 				<div class="recent-searches">
 					<h1>Recent</h1>
@@ -54,7 +66,7 @@
 			<section class="main">
 				<div class="logo">{{LOGO}}</div>
 				<br />
-				<button class="search-bar">
+				<button class="search-bar" onclick="handleOpenSearch()">
 					<div class="button-inner">
 						<ion-icon name="search-outline" size="16"></ion-icon>
 						Search
@@ -96,11 +108,13 @@
 				</section>
 			</aside>
 			<article>
-				<h1>Hello, world!</h1>
+				<div class="article-inner">
+					<h1>Hello, world!</h1>
+				</div>
 				<footer>
-					<section>FOOTER HERE ©2023</section>
-
 					<section>
+						<h4>Info</h4>
+						<p>FOOTER HERE ©2023</p>
 						<p>
 							Icons from
 							<a
@@ -120,6 +134,16 @@
 							>
 						</p>
 					</section>
+
+					<section>
+						<h4>API Reference</h4>
+						<p>(more coming soon)</p>
+					</section>
+
+					<section>
+						<h4>More</h4>
+						<p>(more coming soon)</p>
+					</section>
 				</footer>
 			</article>
 			<aside class="inner-nav">
@@ -136,6 +160,6 @@
 			src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
 		></script>
 
-		<script src="script.js"></script>
+		<script src="client.js"></script>
 	</body>
 </html>

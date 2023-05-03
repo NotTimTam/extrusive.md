@@ -121,14 +121,42 @@ const handleCloseNav = () => {
 	}
 };
 
-const handleOpenSearch = () => {
+/**
+ * Open the search bar.
+ */
+const handleOpenSearch = () =>
 	document
 		.querySelector("div.search-modal-container")
 		.setAttribute("open", "true");
-};
+
+/**
+ * Close the search bar.
+ */
+const handleCloseSearch = () =>
+	document
+		.querySelector("div.search-modal-container")
+		.setAttribute("open", "false");
+
+/**
+ * Stop propagation of a click.
+ */
+const handleStopPropagation = (e) => e.stopPropagation();
 
 // Set up app.
 updateColorThemeButton();
 updateNavbarButton();
 
 // Add event listeners.
+window.addEventListener("keydown", (e) => {
+	if (e.key === "Escape") handleCloseSearch();
+	if (e.ctrlKey) {
+		e.preventDefault();
+
+		switch (e.key) {
+			case "k":
+				return handleOpenSearch();
+			default:
+				return;
+		}
+	}
+});

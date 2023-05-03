@@ -72,7 +72,7 @@ const build_client = (dev, target, config, cwd) => {
 		[`${cwd}/content`, "content"],
 		[`${stackDir}/style.css`, "style.css"],
 		[`${stackDir}/style.css.map`, "style.css.map"],
-		[`${stackDir}/script.js`, "script.js"],
+		[`${stackDir}/client.js`, "client.js"],
 	];
 	for (const [src, dest] of files) {
 		fs.copySync(src, `${target}/${dest}`);
