@@ -112,6 +112,7 @@ const build_server = (target, config, cwd) => {
 		[`${stackDir}/server`, "server", "directory"],
 		[`${cwd}/content`, "server/content", "directory"],
 		[`${stackDir}/gitignore.txt`, ".gitignore", "file"],
+		[`${stackDir}/env.txt`, ".env", "file"],
 	];
 	for (const [src, dest, type] of structure) {
 		if (!fs.existsSync(src))
@@ -140,7 +141,7 @@ const build_app = ({ outputDirectory, force }, commands) => {
 					fs.emptyDirSync(outputDirectory);
 					target = outputDirectory;
 				} else
-					throw "The provided output directory contains files. Use the \"--force\" option to overwrite its contents.";
+					throw 'The provided output directory contains files. Use the "--force" option to overwrite its contents.';
 			} else {
 				fs.mkdirSync(outputDirectory, { recursive: true });
 				target = outputDirectory;
@@ -173,7 +174,7 @@ const build_app = ({ outputDirectory, force }, commands) => {
 		// Install necessary packages.
 		console.log("Installing necessary packages...");
 		process.chdir(target);
-		execSync("npm install express");
+		execSync("npm install express dotenv cors");
 
 		console.log(
 			"\nBuild complete. Your markdown is now ready to shine! ✨\n"

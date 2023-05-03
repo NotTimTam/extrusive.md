@@ -1,14 +1,21 @@
+const app = require("express")();
 const express = require("express");
-const app = express();
-const port = 3000;
+const cors = require("cors");
+const path = require("path");
+require("dotenv").config();
+
+const PORT = process.env.PORT || 3000;
+const appDir = __dirname + "/client";
+
+//middlewares
+app.use(express.json());
+app.use(cors());
+app.use(express.static(__dirname + "/client", { recursive: true }));
 
 // Serve HTML pages
 app.get("/", (req, res) => {
-	res.sendFile(__dirname + "/index.html");
+	res.sendFile(`${appDir}/index.html`);
 });
-
-// Serve static files (e.g. CSS, JS, images)
-app.use(express.static("public"));
 
 // API endpoint that returns JSON data
 app.get("/api/data", (req, res) => {
@@ -16,7 +23,12 @@ app.get("/api/data", (req, res) => {
 	res.json(data);
 });
 
+// Handling everything else.
+app.get("*", (req, res) => {
+	res.status(404).send("Sorry can't find that!");
+});
+
 // Start the server
-app.listen(port, () => {
-	console.log(`Server listening on port ${port}`);
+app.listen(PORT, () => {
+	console.log(`extrusive.md server listening on port ${PORT}`);
 });
