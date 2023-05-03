@@ -7,20 +7,20 @@ require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 const appDir = __dirname + "/client";
 
-//middlewares
+// Middlewares.
 app.use(express.json());
 app.use(cors());
 app.use(express.static(__dirname + "/client", { recursive: true }));
 
+// Routers.
+const markdownRoutes = require("./server/routes/markdownRoutes.js");
+
+// Routes.
+app.use("/api/v1/markdown", markdownRoutes);
+
 // Serve HTML pages
 app.get("/", (req, res) => {
 	res.status(200).sendFile(`${appDir}/index.html`);
-});
-
-// API endpoint that returns JSON data
-app.get("/api/data", (req, res) => {
-	const data = { name: "John Doe", age: 30, email: "johndoe@example.com" };
-	res.json(data);
 });
 
 // Handling everything else.

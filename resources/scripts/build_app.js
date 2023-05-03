@@ -175,7 +175,7 @@ const build_app = ({ outputDirectory, force }, commands) => {
 		// Install necessary packages.
 		console.log("Installing necessary packages...");
 		process.chdir(target);
-		execSync("npm install express dotenv cors");
+		execSync("npm install express dotenv cors directory-tree fs-extra");
 
 		console.log(
 			"\nBuild complete. Your markdown is now ready to shine! ✨\n"

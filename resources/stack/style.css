@@ -284,9 +284,6 @@ body > main aside.nav section {
   padding: 1rem 0;
   border-bottom: var(--border);
 }
-body > main aside.nav section:last-of-type {
-  border-bottom: none;
-}
 body > main aside.nav section h1 {
   padding-left: 1rem;
   padding-bottom: 1rem;

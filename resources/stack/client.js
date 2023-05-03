@@ -73,6 +73,90 @@ function updateNavbarButton() {
 // Handlers
 
 /**
+ * Request a file by path.
+ * @param {string} path - The path to the file that is being requested.
+ */
+const requestFile = (path) => {
+	console.log(path);
+};
+
+/**
+ * Create a button linking to a file.
+ * @param {string} name - The name of the file.
+ * @param {string} path - The path to the file the button is linking.
+ * @param {number} nestLevel - The number of folders deep this file is.
+ * @returns
+ */
+const createFileButton = (name, path, nestLevel) =>
+	`<button class="file" style="padding-left: ${
+		nestLevel * 16 + 16
+	}px" onclick="handleCloseNav() requestFile('${path}')">${name}</button>`;
+
+/**
+ * Recursively build an html structure for the nav.
+ * @param {*} data - The data returned from the server.
+ */
+const recurseDisplayFolderTree = (data, html = "", nestLevel = 0) => {
+	const { children, name, path } = data;
+
+	console.log(nestLevel, name);
+	// <section>
+	// 	<h1>Get Started</h1>
+	// 	<button onclick="handleCloseNav()" class="active">
+	// 		Quick Start
+	// 	</button>
+	// 	<button onclick="handleCloseNav()">Installation</button>
+	// </section>
+
+	if (children) {
+		// Handle folders.
+
+		return `${html} 
+			<section>
+			${
+				nestLevel === 0
+					? ""
+					: `<h1 style="margin-left: ${16 * nestLevel}px">
+					${name}
+				</h1>`
+			}
+
+			${children
+				.map((child) =>
+					recurseDisplayFolderTree(child, html, nestLevel + 1)
+				)
+				.join(" ")}
+				</section>
+			`;
+	} else {
+		// Handle files.
+		return html + createFileButton(name, path, nestLevel);
+	}
+};
+
+const createFolderStructureDisplay = (data) => {
+	const nav = document.querySelector("aside.nav");
+
+	const htmlData = recurseDisplayFolderTree(data);
+	nav.innerHTML = htmlData;
+
+	console.log(htmlData);
+};
+
+/**
+ * Get the folder tree.
+ */
+const getFolderTree = async () => {
+	try {
+		const { data } = await axios.get("/api/v1/markdown");
+
+		createFolderStructureDisplay(data);
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+/**
  * Toggle the color theme and update the theme button element.
  * @param {Element} e - The theme button.
  */
@@ -152,6 +236,7 @@ const handlePreventDefault = (e) => e.preventDefault();
 // Set up app.
 updateColorThemeButton();
 updateNavbarButton();
+getFolderTree();
 
 // Add event listeners.
 window.addEventListener("keydown", (e) => {

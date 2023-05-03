@@ -368,10 +368,6 @@ body {
 				padding: $margin 0;
 				border-bottom: var(--border);
 
-				&:last-of-type {
-					border-bottom: none;
-				}
-
 				h1 {
 					padding-left: $margin;
 					padding-bottom: $margin;
