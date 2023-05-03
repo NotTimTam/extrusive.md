@@ -77,15 +77,20 @@ body img {
 body span.key {
   display: inline-flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   border-radius: 2px;
   padding: 0.25rem;
-  padding-top: 0;
-  display: inline-block;
+  height: 29px;
+  min-width: 32px;
+  height: -moz-min-content;
+  height: min-content;
   background-color: var(--text);
   color: var(--background);
   font-weight: 600;
+}
+body span.key ion-icon {
+  color: var(--background);
 }
 body input,
 body button {
@@ -324,7 +329,7 @@ body > main > article div.article-inner {
   display: flex;
   flex-direction: column;
 }
-body > main > article footer {
+body > main > article > footer {
   border-top: var(--border);
   padding-top: 1rem;
   display: flex;
@@ -332,13 +337,13 @@ body > main > article footer {
   justify-content: space-between;
   gap: 0.25rem;
 }
-body > main > article footer section {
+body > main > article > footer section {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.25rem;
 }
-body > main > article footer section p.credit a {
+body > main > article > footer section p.credit a {
   color: var(--info);
 }
 body > main aside.inner-nav {
@@ -400,7 +405,7 @@ body div.search-modal-container div.search-modal div.recent-searches h1 {
   text-transform: uppercase;
   font-size: 1rem;
 }
-body div.search-modal-container div.search-modal footer {
+body div.search-modal-container div.search-modal > footer {
   margin: 1rem;
   padding-top: 1rem;
   border-top: var(--border);
@@ -410,8 +415,12 @@ body div.search-modal-container div.search-modal footer {
   justify-content: space-between;
   gap: 0.25rem;
 }
-body div.search-modal-container div.search-modal footer p {
-  color: var(--background-3);
+body div.search-modal-container div.search-modal > footer p {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 @media (max-width: 1025px) {
   body div.search-modal-container {

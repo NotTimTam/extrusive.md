@@ -122,15 +122,21 @@ const handleCloseNav = () => {
 };
 
 /**
- * Open the search bar.
+ * Open the search modal.
  */
-const handleOpenSearch = () =>
+const handleOpenSearch = () => {
 	document
 		.querySelector("div.search-modal-container")
 		.setAttribute("open", "true");
 
+	const search = document.querySelector("input#search");
+
+	search.value = "";
+	search.focus(); // Focus on the searchbar.
+};
+
 /**
- * Close the search bar.
+ * Close the search modal.
  */
 const handleCloseSearch = () =>
 	document
@@ -141,6 +147,7 @@ const handleCloseSearch = () =>
  * Stop propagation of a click.
  */
 const handleStopPropagation = (e) => e.stopPropagation();
+const handlePreventDefault = (e) => e.preventDefault();
 
 // Set up app.
 updateColorThemeButton();
@@ -150,10 +157,9 @@ updateNavbarButton();
 window.addEventListener("keydown", (e) => {
 	if (e.key === "Escape") handleCloseSearch();
 	if (e.ctrlKey) {
-		e.preventDefault();
-
 		switch (e.key) {
 			case "k":
+				handlePreventDefault(e);
 				return handleOpenSearch();
 			default:
 				return;
