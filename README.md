@@ -2,11 +2,13 @@
 
 [Obsidian](https://obsidian.md/) is an **"extrusive”** rock, which means it is made from magma that erupted out of a volcano.
 
+---
+
 There are a lot of markdown interfaces out there. There are a lot of documentation tools out there.
 
 `extrusive.md` fills the niche that none of these do.
 
-1. It is, and always will be, 100% free and open-source.
+1. It is, and always will be, **100% free and open-source**.
 2. It hands you control, to self-host and self-deploy.
 3. It has a simple interface that requires very little documentation.
 4. It allows you to easily implement custom styles in your documentation. It builds lightning-fast using your folder structure and `.md` files. Meaning you can edit your docs in whatever environment you want.
