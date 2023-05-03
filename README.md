@@ -16,3 +16,13 @@ There are a lot of markdown interfaces out there. There are a lot of documentati
 6. It has a nice toggle for light/dark mode and was built mobile-first!
 
 `extrusive.md` may not have all the bells and whistles, but it makes up for these by being open-ended and ready for you to customize!
+
+## Installation
+
+Just run `npm install -g https://github.com/NotTimTam/extrusive.md.git` to install the `extrusive` CLI globally.
+
+Then, in your desired work directory, create your project by running:
+`npx exstrusive create`
+or
+`npx exstrusive create --project-directory <project-directory>`
+to specify a project directory.
