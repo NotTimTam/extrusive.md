@@ -132,7 +132,7 @@ function recurseDisplayFolderTree(data, html = "", nestLevel = 0) {
 		// Handle folders.
 
 		return `${html} 
-			<section depth="${nestLevel}" class="folder" id="${name}-${nestLevel}">
+			<section depth="${nestLevel}" class="folder" id="folder-${name}-${nestLevel}">
 			${
 				nestLevel === 0
 					? ""
