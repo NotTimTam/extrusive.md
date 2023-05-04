@@ -4,6 +4,7 @@ const fs = require("fs-extra");
 const { execSync } = require("child_process");
 const dirTree = require("directory-tree");
 const { marked } = require("marked");
+const { normalize_path, replace_all } = require("./util");
 
 /**
  * Recursively convert all markdown files to html and build search indices.
@@ -28,7 +29,7 @@ const convert_to_html = (path, cwd) => {
 			const existingData = fs.readFileSync(filePath, "utf-8");
 
 			const convertedData = marked.parse(existingData);
-			const newPath = filePath.replace(new RegExp(".md", "g"), ".html");
+			const newPath = replace_all(filePath, ".md", ".html"); // Replace any .md file extensions with .html.
 
 			// Rename the file.
 			fs.renameSync(filePath, newPath);
@@ -42,11 +43,12 @@ const convert_to_html = (path, cwd) => {
 			search_indices = [
 				...search_indices,
 				{
-					path: newPath
-						.split("\\")
-						.join("/")
-						.replace(new RegExp(cwd.split("\\").join("/"), "g"), "")
-						.replace(new RegExp("/build/server", "g"), ""),
+					// Replace all instances of the cwd or "/build/server" from the newly normalized path.
+					path: replace_all(
+						replace_all(normalize_path(newPath), cwd, ""),
+						"/build/server",
+						""
+					),
 					data: Array.from(new Set(existingData.split(" ")))
 						.join(" ")
 						.toLowerCase(),
@@ -224,11 +226,17 @@ const build_client = (target, config, cwd) => {
 	const caches = [
 		[
 			// The file tree is localized to not include the servers entire file structure in the path.
-			`const fileTree = ${JSON.stringify(
-				dirTree(contentTarget, { normalizePath: true })
-			)
-				.replace(new RegExp(cwd.split("\\").join("/"), "g"), "")
-				.replace(new RegExp("/build/server", "g"), "")}`,
+			`const fileTree = ${replace_all(
+				replace_all(
+					JSON.stringify(
+						dirTree(contentTarget, { normalizePath: true })
+					),
+					cwd,
+					""
+				),
+				"/build/server",
+				""
+			)}`,
 			"file-tree.js",
 		],
 	];
@@ -266,9 +274,10 @@ const build_app = ({ outputDirectory, force }, commands) => {
 				target = outputDirectory;
 			}
 		}
+		target = normalize_path(target); // Ensure the path string to the target is normalized.
 
 		// Get the current working directory.
-		const cwd = process.cwd();
+		const cwd = normalize_path(process.cwd());
 		target = target || `${cwd}/build`;
 		console.log(`Building from "${cwd}".`);
 
