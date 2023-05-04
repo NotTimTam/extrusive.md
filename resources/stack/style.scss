@@ -829,6 +829,13 @@ body {
 				border-top-right-radius: $border-radius;
 				border-bottom-right-radius: $border-radius;
 
+				div.title {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					gap: $gap;
+				}
+
 				&:hover {
 					background-color: var(--background-3);
 				}

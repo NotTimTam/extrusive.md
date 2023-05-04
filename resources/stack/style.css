@@ -339,6 +339,12 @@ body aside.nav section.folder > h1 {
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
 }
+body aside.nav section.folder > h1 div.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.25rem;
+}
 body aside.nav section.folder > h1:hover {
   background-color: var(--background-3);
 }
