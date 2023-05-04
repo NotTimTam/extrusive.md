@@ -11,7 +11,7 @@ const { normalize_path, replace_all, copy_path } = require("./util");
  * @param {string} cwd - The current working directory.
  * @returns Newly generated search indices.
  */
-const convert_to_html = (path, cwd) => {
+const compile_file_tree = (path, cwd) => {
 	const files = fs.readdirSync(path);
 
 	let search_indices = [];
@@ -21,7 +21,7 @@ const convert_to_html = (path, cwd) => {
 		const stat = fs.statSync(filePath);
 
 		if (stat.isDirectory()) {
-			const additionalIndices = convert_to_html(filePath, cwd);
+			const additionalIndices = compile_file_tree(filePath, cwd);
 
 			search_indices = [...search_indices, ...additionalIndices];
 		} else {
@@ -154,7 +154,7 @@ const build_server = async (target, config, cwd) => {
 	}
 
 	// Convert all markdown to pre-rendered html and get search indices.
-	const search_indices = convert_to_html(`${target}/server/content`, cwd);
+	const search_indices = compile_file_tree(`${target}/server/content`, cwd);
 
 	// Save search indices.
 	await fs.outputFile(
