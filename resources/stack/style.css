@@ -593,6 +593,10 @@ body article.content div.article-inner samp {
 body article.content div.article-inner del code {
   text-decoration: inherit;
 }
+body article.content div.article-inner pre code {
+  width: 100%;
+  padding: 1rem;
+}
 body article.content div.article-inner code,
 body article.content div.article-inner tt {
   padding: 0.2em 0.4em;

@@ -303,8 +303,12 @@ body {
 			text-decoration: inherit;
 		}
 
-		// Block-level code.
-		// pre > code {}
+		pre {
+			code {
+				width: 100%;
+				padding: $margin;
+			}
+		}
 
 		code,
 		tt {
