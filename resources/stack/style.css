@@ -297,6 +297,9 @@ body header.page-header section div.logo:hover {
 body header.page-header section div.logo:active {
   opacity: 0.5;
 }
+body header.page-header section div.logo * {
+  max-height: 4.75rem;
+}
 body aside.nav {
   grid-row: 2/3;
   grid-column: 1/2;
