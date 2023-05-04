@@ -199,7 +199,9 @@ function handleScroll(query) {
 /**
  * Determine which subfolder should be highlighted.
  */
-function determineInnerNavPos() {
+async function determineInnerNavPos() {
+	if (window.innerWidth < 1535) return;
+
 	try {
 		const navButtons = document.querySelectorAll(
 			"aside.inner-nav h1, aside.inner-nav h2, aside.inner-nav h3, aside.inner-nav h4, aside.inner-nav h5, aside.inner-nav h6"
