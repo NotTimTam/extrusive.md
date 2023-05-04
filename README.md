@@ -35,13 +35,20 @@ to specify a project directory.
 
 ## Development Roadmap
 
--   Functional keyboard interaction with search modal.
--   Improved search functionality.
--   Clean, reduced-footprint clientside code.
--   More robust server defense firewall.
--   **"start"** command with live server for development that does not rely on a build.
--   Path normalization functions to make building work on more operating systems.
+Client:
+
 -   Better loading/error indicators.
--   Hide "On this page" menu if there are no headings on the page.
--   Static, serverless build option.
 -   Code highlighting.
+-   Functional keyboard interaction with search modal.
+-   Clean, reduced-footprint clientside code.
+
+Server/CLI:
+
+-   Static, serverless build option.
+-   **"start"** command with live server for development that does not rely on a build.
+-   Improved search functionality.
+-   More robust server defense firewall.
+
+Both:
+
+-   Path normalization functions to make building work on more operating systems.
