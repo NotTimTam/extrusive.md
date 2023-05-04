@@ -136,7 +136,7 @@ function recurseDisplayFolderTree(data, html = "", nestLevel = 0) {
 			${
 				nestLevel === 0
 					? ""
-					: `<h1 id="file-${
+					: `<h1 id="folder-${
 							path.split("/").join("_").split(".")[0]
 					  }" style="padding-left: ${
 							16 * nestLevel
