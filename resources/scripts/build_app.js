@@ -68,60 +68,58 @@ const copy_html = async (stackDir, target, config, imports) => {
 		const { logo, title, author, description, favicon, styles, copyright } =
 			config;
 
+		/**
+		 * Everything that needs to be populated in the HTML file.
+		 */
+		const replacements = [
+			// Title
+			["{{TITLE}}", title || "my extrusive.md app"],
+			// Metadata
+			[
+				"{{META}}",
+				`
+<meta name="author" content="${author || "Anonymous"}">
+<meta name="description" content="${
+					description ||
+					"Website built with extrusive.md! https://github.com/NotTimTam/extrusive.md"
+				}">
+<link rel="shortcut icon" href="/${favicon}" type="image/x-icon">
+`,
+			],
+			// Logo
+			[
+				"{{LOGO}}",
+				logo ? logo.data : `<h1 class="no-title">my extrusive app</h1>`,
+			],
+			// Copyright
+			["{{COPYRIGHT}}", copyright ? copyright : ""],
+			// Custom CSS Files
+			[
+				"{{STYLE}}",
+				`
+			${styles ? styles.map((src) => `<link rel="stylesheet" href="/${src}" />`) : ""}
+		`,
+			],
+			// Scripts
+			[
+				"{{SCRIPT}}",
+				imports
+					? imports
+							.map(({ path, type }) => {
+								if (type === "script")
+									return `<script src="/${path}"></script>`;
+							})
+							.join("\n")
+					: "",
+			],
+		];
+
 		// Load the html data.
 		let HTMLData = await fs.readFile(`${stackDir}/index.html`, "utf-8");
 
-		// Configure title.
-		HTMLData = HTMLData.replace(
-			"{{TITLE}}",
-			title || "my extrusive.md app"
-		);
-
-		// Configure metadata.
-		HTMLData = HTMLData.replace(
-			"{{META}}",
-			`
-	<meta name="author" content="${author || "Anonymous"}">
-    <meta name="description" content="${
-		description ||
-		"Website built with extrusive.md! https://github.com/NotTimTam/extrusive.md"
-	}">
-	<link rel="shortcut icon" href="/${favicon}" type="image/x-icon">
-	`
-		);
-
-		// Configure logo.
-		HTMLData = HTMLData.replace(
-			"{{LOGO}}",
-			logo ? logo.data : `<h1 class="no-title">my extrusive app</h1>`
-		);
-
-		// Configure copyright.
-		HTMLData = HTMLData.replace(
-			"{{COPYRIGHT}}",
-			copyright ? copyright : ""
-		);
-
-		// Configure custom user styles.
-		HTMLData = HTMLData.replace(
-			"{{STYLE}}",
-			`
-			${styles ? styles.map((src) => `<link rel="stylesheet" href="/${src}" />`) : ""}
-		`
-		);
-
-		// Configure additional imports.
-		HTMLData = HTMLData.replace(
-			"{{SCRIPT}}",
-			imports
-				? imports
-						.map(({ path, type }) => {
-							if (type === "script")
-								return `<script src="/${path}"></script>`;
-						})
-						.join("\n")
-				: ""
-		);
+		// Configure replacements.
+		for (const [target, data] of replacements)
+			HTMLData = HTMLData.replace(target, data);
 
 		// Write the HTML file.
 		await fs.writeFile(target, HTMLData);
