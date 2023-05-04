@@ -268,7 +268,7 @@ body header.page-header section.main button.search-bar {
     display: none;
   }
 }
-@media (min-width: 1026px) {
+@media (min-width: 1185px) {
   body header.page-header section.toggle-nav-parent {
     display: none;
   }
