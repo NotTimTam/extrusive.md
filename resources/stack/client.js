@@ -470,7 +470,14 @@ function indicateSelectedNav(path) {
 
 		const activeButton = document.querySelector(
 			`aside.nav button.file#file-${
-				path.split("/").join("_").split(" ").join("S20S").split(".")[0]
+				path
+					.split("/")
+					.join("_")
+					.split("%20")
+					.join("S20S")
+					.split(" ")
+					.join("S20S")
+					.split(".")[0]
 			}`
 		);
 
