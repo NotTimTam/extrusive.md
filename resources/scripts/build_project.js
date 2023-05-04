@@ -36,7 +36,7 @@ const build_project = (directory, { force }) => {
 			["resources/stack/README.md", "content/README.md"],
 			["resources/stack/config.json", "extrusive.config.json"],
 			["resources/stack/favicon.svg", "public/favicon.svg"],
-			["resources/stack/gitignore.txt", ".gitignore"],
+			// ["resources/stack/gitignore.txt", ".gitignore"],
 			[null, "styles/custom.css"],
 		];
 		for (const [src, dest] of files) {
