@@ -43,3 +43,4 @@ to specify a project directory.
 -   Path normalization functions to make building work on more operating systems.
 -   Better loading/error indicators.
 -   Hide "On this page" menu if there are no headings on the page.
+-   Static, serverless build option.
