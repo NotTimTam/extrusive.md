@@ -164,6 +164,16 @@ const build_server = (target, config, cwd) => {
 		{ recursive: true }
 	);
 
+	// Save package.json.
+	if (fs.existsSync(`${stackDir}/package.json.txt`)) {
+		console.log("Generating package.json.");
+		const newPackage = JSON.parse(
+			fs.readFileSync(`${stackDir}/package.json.txt`, "utf-8")
+		);
+
+		fs.outputFileSync(`${target}/package.json`, JSON.stringify(newPackage));
+	}
+
 	console.log("Finished copying server.");
 };
 
@@ -271,11 +281,6 @@ const build_app = ({ outputDirectory, force }, commands) => {
 
 		build_server(target, config, cwd); // Build the server-side.
 		build_client(target, config, cwd); // Build the client-side.
-
-		// Install necessary packages.
-		console.log("Installing necessary packages...");
-		process.chdir(target);
-		execSync("npm install express dotenv cors fs-extra");
 
 		console.log(
 			"\nBuild complete. Your markdown is now ready to shine! ✨\n"
