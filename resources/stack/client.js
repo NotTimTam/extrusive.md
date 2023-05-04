@@ -87,7 +87,9 @@ function createFileButton(name, path, nestLevel) {
 	return `
 <button class="file" onclick="handleCloseNav(); handleRequestFile('${path}');" style="padding-left: ${
 		nestLevel * 16
-	}px;" id="${path.split("/").join("_").split(".")[0]}">
+	}px;" id="${
+		path.split("/").join("_").split(" ").join("space").split(".")[0]
+	}">
 	<ion-icon name="document-outline"></ion-icon>
 	${name.split(".")[0]}
 </button>
@@ -358,7 +360,9 @@ function indicateSelectedNav(path) {
 			}
 
 		const activeButton = document.querySelector(
-			`aside.nav button.file#${path.split("/").join("_").split(".")[0]}`
+			`aside.nav button.file#${
+				path.split("/").join("_").split(" ").join("space").split(".")[0]
+			}`
 		);
 
 		if (activeButton) {

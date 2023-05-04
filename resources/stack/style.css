@@ -306,9 +306,10 @@ body aside.nav {
   left: 0;
   z-index: 50;
   padding-top: 1rem;
+  padding-right: 0.25rem;
   height: -moz-max-content;
   height: max-content;
-  max-height: 100%;
+  max-height: calc(100vh - 5rem);
   overflow-y: auto;
   min-width: 300px;
   transition: all 0.15s ease-in-out;
@@ -379,6 +380,7 @@ body aside.nav section.folder button:active {
     position: absolute !important;
     top: 5rem !important;
     left: 0 !important;
+    padding-right: 0;
     grid-row: unset;
     grid-column: unset;
     z-index: 100;
@@ -768,6 +770,10 @@ body article.content > footer section p.copyright b {
 body aside.inner-nav {
   grid-row: 2/3;
   grid-column: 3/4;
+  height: -moz-max-content;
+  height: max-content;
+  max-height: calc(100vh - 5rem);
+  overflow-y: auto;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
@@ -775,10 +781,6 @@ body aside.inner-nav {
   top: 5rem;
   right: 0;
   padding-top: 1rem;
-  height: -moz-max-content;
-  height: max-content;
-  max-height: 100%;
-  overflow-y: auto;
   padding-right: 0;
   width: 320px;
   display: flex;
@@ -807,7 +809,8 @@ body aside.inner-nav h4,
 body aside.inner-nav h5,
 body aside.inner-nav h6 {
   cursor: pointer;
-  transition: all 0.15s ease-in-out;
+  min-height: 2.5rem;
+  line-height: 1.5rem;
   justify-content: flex-start;
   border-radius: 1rem;
   border-bottom-right-radius: 0;

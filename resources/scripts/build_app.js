@@ -8,6 +8,8 @@ const { marked } = require("marked");
 const convert_to_html = (path) => {
 	const files = fs.readdirSync(path);
 
+	const search_indeces = {};
+
 	files.forEach((file) => {
 		const filePath = `${path}/${file}`;
 		const stat = fs.statSync(filePath);
