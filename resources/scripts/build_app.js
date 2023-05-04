@@ -266,15 +266,14 @@ const build_app = ({ outputDirectory, force }, commands) => {
 			if (fs.existsSync(outputDirectory)) {
 				if (force) {
 					fs.emptyDirSync(outputDirectory);
-					target = outputDirectory;
+					target = normalize_path(outputDirectory); // Ensure the path string to the target is normalized.
 				} else
 					throw 'The provided output directory contains files. Use the "--force" option to overwrite its contents.';
 			} else {
 				fs.mkdirSync(outputDirectory, { recursive: true });
-				target = outputDirectory;
+				target = normalize_path(outputDirectory); // Ensure the path string to the target is normalized.
 			}
 		}
-		target = normalize_path(target); // Ensure the path string to the target is normalized.
 
 		// Get the current working directory.
 		const cwd = normalize_path(process.cwd());
