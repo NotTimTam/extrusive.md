@@ -8,14 +8,16 @@ const { marked } = require("marked");
 const convert_to_html = (path) => {
 	const files = fs.readdirSync(path);
 
-	const search_indeces = {};
+	let search_indices = [];
 
 	files.forEach((file) => {
 		const filePath = `${path}/${file}`;
 		const stat = fs.statSync(filePath);
 
 		if (stat.isDirectory()) {
-			convert_to_html(filePath);
+			const additionalIndices = convert_to_html(filePath, search_indices);
+
+			search_indices = [...search_indices, ...additionalIndices];
 		} else {
 			const existingData = fs.readFileSync(filePath, "utf-8");
 
@@ -27,8 +29,23 @@ const convert_to_html = (path) => {
 
 			// Write the parsed contents.
 			fs.writeFileSync(newPath, convertedData);
+
+			console.log(`Creating search directory for "${newPath}"`);
+
+			// Store page indeces.
+			search_indices = [
+				...search_indices,
+				{
+					path: newPath,
+					data: Array.from(new Set(existingData.split(" "))).join(
+						" "
+					),
+				},
+			];
 		}
 	});
+
+	return search_indices;
 };
 
 /**
@@ -125,8 +142,15 @@ const build_server = (target, config, cwd) => {
 		fs.copySync(src, `${target}/${dest}`);
 	}
 
-	// Convert all markdown to pre-rendered html.
-	convert_to_html(`${target}/server/content`);
+	// Convert all markdown to pre-rendered html and get search indices.
+	const search_indices = convert_to_html(`${target}/server/content`);
+
+	// Save search indices.
+	fs.outputFileSync(
+		`${target}/server/util/searchIndices.js`,
+		`const searchIndices=${JSON.stringify(search_indices)}`,
+		{ recursive: true }
+	);
 
 	console.log("Finished copying server.");
 };
