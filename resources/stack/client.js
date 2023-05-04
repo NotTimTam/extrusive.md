@@ -484,7 +484,11 @@ function indicateSelectedNav(path) {
 		}
 
 		for (const folder of folders)
-			if (path.includes(folder.id.split("_").join("/"))) {
+			if (
+				path.includes(
+					folder.id.split("_").join("/").replace("folder-", "")
+				)
+			) {
 				folder.classList.add("active");
 				folder.parentElement.classList.add("open");
 			}
