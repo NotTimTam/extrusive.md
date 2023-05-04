@@ -1,10 +1,9 @@
 const path = require("path");
 const packageJson = require("../../package.json");
 const fs = require("fs-extra");
-const { execSync } = require("child_process");
 const dirTree = require("directory-tree");
 const { marked } = require("marked");
-const { normalize_path, replace_all } = require("./util");
+const { normalize_path, replace_all, copy_path } = require("./util");
 
 /**
  * Recursively convert all markdown files to html and build search indices.
@@ -12,30 +11,30 @@ const { normalize_path, replace_all } = require("./util");
  * @param {string} cwd - The current working directory.
  * @returns Newly generated search indices.
  */
-const convert_to_html = (path, cwd) => {
-	const files = fs.readdirSync(path);
+const convert_to_html = async (path, cwd) => {
+	const files = await fs.readdir(path);
 
 	let search_indices = [];
 
-	files.forEach((file) => {
+	files.forEach(async (file) => {
 		const filePath = `${path}/${file}`;
-		const stat = fs.statSync(filePath);
+		const stat = await fs.stat(filePath);
 
 		if (stat.isDirectory()) {
-			const additionalIndices = convert_to_html(filePath, cwd);
+			const additionalIndices = await convert_to_html(filePath, cwd);
 
 			search_indices = [...search_indices, ...additionalIndices];
 		} else {
-			const existingData = fs.readFileSync(filePath, "utf-8");
+			const existingData = await fs.readFile(filePath, "utf-8");
 
 			const convertedData = marked.parse(existingData);
 			const newPath = replace_all(filePath, ".md", ".html"); // Replace any .md file extensions with .html.
 
 			// Rename the file.
-			fs.renameSync(filePath, newPath);
+			await fs.rename(filePath, newPath);
 
 			// Write the parsed contents.
-			fs.writeFileSync(newPath, convertedData);
+			await fs.writeFile(newPath, convertedData);
 
 			console.log(`Creating search directory for "${newPath}"`);
 
@@ -64,13 +63,13 @@ const convert_to_html = (path, cwd) => {
  * Configure and copy the HTML file from the stack directory.
  * @param {string} stackDir - The stack directory to get the file from.
  */
-const copy_html = (stackDir, target, config, imports) => {
+const copy_html = async (stackDir, target, config, imports) => {
 	try {
 		const { logo, title, author, description, favicon, styles, copyright } =
 			config;
 
 		// Load the html data.
-		let HTMLData = fs.readFileSync(`${stackDir}/index.html`, "utf-8");
+		let HTMLData = await fs.readFile(`${stackDir}/index.html`, "utf-8");
 
 		// Configure title.
 		HTMLData = HTMLData.replace(
@@ -125,7 +124,7 @@ const copy_html = (stackDir, target, config, imports) => {
 		);
 
 		// Write the HTML file.
-		fs.writeFileSync(target, HTMLData);
+		await fs.writeFile(target, HTMLData);
 	} catch (err) {
 		console.error("\nERROR:", err);
 	}
@@ -137,7 +136,7 @@ const copy_html = (stackDir, target, config, imports) => {
  * @param {*} config - The user's configuration object.
  * @param {string} cwd - The current working directory.
  */
-const build_server = (target, config, cwd) => {
+const build_server = async (target, config, cwd) => {
 	// Copy the build structure.
 	console.log("Copying server.");
 	const stackDir = `${path.dirname(require.main.filename)}/resources/stack`;
@@ -149,16 +148,19 @@ const build_server = (target, config, cwd) => {
 		[`${stackDir}/env.txt`, ".env", "file"],
 	];
 	for (const [src, dest, type] of structure) {
-		if (!fs.existsSync(src))
+		if (!(await fs.exists(src)))
 			throw `"${src.split("/")[1]}" ${type} does not exist.`;
-		fs.copySync(src, `${target}/${dest}`);
+		await fs.copy(src, `${target}/${dest}`);
 	}
 
 	// Convert all markdown to pre-rendered html and get search indices.
-	const search_indices = convert_to_html(`${target}/server/content`, cwd);
+	const search_indices = await convert_to_html(
+		`${target}/server/content`,
+		cwd
+	);
 
 	// Save search indices.
-	fs.outputFileSync(
+	await fs.outputFile(
 		`${target}/server/util/searchIndices.js`,
 		`const searchIndices=${JSON.stringify(
 			search_indices
@@ -167,13 +169,13 @@ const build_server = (target, config, cwd) => {
 	);
 
 	// Save package.json.
-	if (fs.existsSync(`${stackDir}/package.json.txt`)) {
+	if (await fs.exists(`${stackDir}/package.json.txt`)) {
 		console.log("Generating package.json.");
 		const { title, author, description, copyright } = config;
 
 		const newPackage = {
 			...JSON.parse(
-				fs.readFileSync(`${stackDir}/package.json.txt`, "utf-8")
+				await fs.readFile(`${stackDir}/package.json.txt`, "utf-8")
 			),
 			name: title ? title : "",
 			author: author ? author : "",
@@ -181,7 +183,10 @@ const build_server = (target, config, cwd) => {
 			license: copyright ? copyright : "ISC",
 		};
 
-		fs.outputFileSync(`${target}/package.json`, JSON.stringify(newPackage));
+		await fs.outputFile(
+			`${target}/package.json`,
+			JSON.stringify(newPackage)
+		);
 	}
 
 	console.log("Finished copying server.");
@@ -193,7 +198,7 @@ const build_server = (target, config, cwd) => {
  * @param {*} config - The user's configuration object.
  * @param {string} cwd - The current working directory.
  */
-const build_client = (target, config, cwd) => {
+const build_client = async (target, config, cwd) => {
 	// Add sub-directory to target.
 	const contentTarget = `${target}/server/content`;
 	target = target + "/client";
@@ -202,7 +207,7 @@ const build_client = (target, config, cwd) => {
 	console.log("Copying necessary client directories.");
 	const directories = ["content", "public"];
 	for (const dir of directories)
-		if (!fs.existsSync(dir)) fs.mkdirSync(`${target}/${dir}`);
+		if (!(await fs.exists(dir))) await fs.mkdir(`${target}/${dir}`);
 
 	// Copy the build files.
 	console.log("Copying necessary client files.");
@@ -216,9 +221,7 @@ const build_client = (target, config, cwd) => {
 		[`${stackDir}/404.html`, "404.html", "file"],
 	];
 	for (const [src, dest, type] of files) {
-		if (!fs.existsSync(src))
-			throw `"${src.split("/")[1]}" ${type} does not exist.`;
-		fs.copySync(src, `${target}/${dest}`);
+		await copy_path(src, `${target}/${dest}`, type);
 	}
 
 	// Build app indeces.
@@ -241,11 +244,11 @@ const build_client = (target, config, cwd) => {
 		],
 	];
 	for (const [data, dest] of caches) {
-		fs.outputFileSync(`${target}/${dest}`, data);
+		await fs.outputFile(`${target}/${dest}`, data);
 	}
 
 	// Configure and copy html.
-	copy_html(stackDir, `${target}/index.html`, config, [
+	await copy_html(stackDir, `${target}/index.html`, config, [
 		{ path: "file-tree.js", type: "script" },
 	]);
 };
@@ -253,7 +256,7 @@ const build_client = (target, config, cwd) => {
 /**
  * Build an extrusive app.
  */
-const build_app = ({ outputDirectory, force }, commands) => {
+const build_app = async ({ outputDirectory, force }, commands) => {
 	try {
 		const logInitializer = `extrusive.md v${packageJson.version}`;
 		console.log(
@@ -263,14 +266,14 @@ const build_app = ({ outputDirectory, force }, commands) => {
 		// Handle a user provided output directory.
 		let target;
 		if (outputDirectory) {
-			if (fs.existsSync(outputDirectory)) {
+			if (await fs.exists(outputDirectory)) {
 				if (force) {
-					fs.emptyDirSync(outputDirectory);
+					await fs.emptyDir(outputDirectory);
 					target = normalize_path(outputDirectory); // Ensure the path string to the target is normalized.
 				} else
 					throw 'The provided output directory contains files. Use the "--force" option to overwrite its contents.';
 			} else {
-				fs.mkdirSync(outputDirectory, { recursive: true });
+				await fs.mkdir(outputDirectory, { recursive: true });
 				target = normalize_path(outputDirectory); // Ensure the path string to the target is normalized.
 			}
 		}
@@ -283,20 +286,22 @@ const build_app = ({ outputDirectory, force }, commands) => {
 		// Load configuration from user.
 		console.log("Loading user configuration.");
 		const configSrc = `${cwd}/extrusive.config.json`;
-		if (!fs.existsSync(configSrc))
+		if (!(await fs.exists(configSrc)))
 			throw 'An "extrusive.config.js" file does not exist in the root of your project directory.';
-		const config = JSON.parse(fs.readFileSync(configSrc, "utf-8") || "{}");
+		const config = JSON.parse(
+			(await fs.readFile(configSrc, "utf-8")) || "{}"
+		);
 
 		// If a build folder exists, clear it.
-		if (fs.existsSync(target)) {
-			fs.emptydirSync(target);
+		if (await fs.exists(target)) {
+			await fs.emptydir(target);
 		} else {
 			// Create the build folder if it doesn't exist.
-			fs.mkdirSync(target, { recursive: true });
+			await fs.mkdir(target, { recursive: true });
 		}
 
-		build_server(target, config, cwd); // Build the server-side.
-		build_client(target, config, cwd); // Build the client-side.
+		await build_server(target, config, cwd); // Build the server-side.
+		await build_client(target, config, cwd); // Build the client-side.
 
 		console.log(
 			"\nBuild complete. Your markdown is now ready to shine! ✨\n"

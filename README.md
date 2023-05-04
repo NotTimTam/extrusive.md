@@ -48,7 +48,3 @@ Server/CLI:
 -   **"start"** command with live server for development that does not rely on a build.
 -   Improved search functionality.
 -   More robust server defense firewall.
-
-Both:
-
--   Path normalization functions to make building work on more operating systems.
