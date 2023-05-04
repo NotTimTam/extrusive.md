@@ -44,3 +44,4 @@ to specify a project directory.
 -   Better loading/error indicators.
 -   Hide "On this page" menu if there are no headings on the page.
 -   Static, serverless build option.
+-   Code highlighting.
