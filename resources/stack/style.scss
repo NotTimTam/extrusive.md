@@ -988,6 +988,8 @@ body {
 			h6 {
 				cursor: pointer;
 
+				transition: $transition;
+
 				justify-content: flex-start;
 				border-radius: $border-radius;
 				border-bottom-right-radius: 0;

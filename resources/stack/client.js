@@ -207,20 +207,20 @@ async function determineInnerNavPos() {
 			"aside.inner-nav h1, aside.inner-nav h2, aside.inner-nav h3, aside.inner-nav h4, aside.inner-nav h5, aside.inner-nav h6"
 		);
 
-		for (const button of navButtons) button.classList.remove("active");
-
+		let scrolledElem = null;
 		for (const button of navButtons) {
-			const targetElement =
-				document.body.scrollTop -
-				document
-					.querySelector(
-						`${button.tagName}#${button.getAttribute("target")}`
-					)
-					.getBoundingClientRect().y;
+			const targetElement = document.querySelector(
+				`${button.tagName}#${button.getAttribute("target")}`
+			);
+			const targetElementPosition = targetElement.offsetTop;
+			const scrollPosition = document.body.scrollTop;
 
-			if (document.body.scrollTop >= targetElement) {
-				return button.classList.add("active");
-			}
+			if (scrollPosition >= targetElementPosition) scrolledElem = button;
+		}
+
+		if (scrolledElem && !scrolledElem.classList.contains("active")) {
+			for (const button of navButtons) button.classList.remove("active");
+			scrolledElem.classList.add("active");
 		}
 	} catch (err) {
 		console.error(err);

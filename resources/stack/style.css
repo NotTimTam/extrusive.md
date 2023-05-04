@@ -776,6 +776,7 @@ body main.page aside.inner-nav h4,
 body main.page aside.inner-nav h5,
 body main.page aside.inner-nav h6 {
   cursor: pointer;
+  transition: all 0.15s ease-in-out;
   justify-content: flex-start;
   border-radius: 1rem;
   border-bottom-right-radius: 0;
