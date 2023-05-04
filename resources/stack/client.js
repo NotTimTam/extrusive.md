@@ -174,6 +174,90 @@ function createFolderStructureDisplay(data) {
 }
 
 /**
+ * Scroll to an element properly.
+ * @param {string} query - The HTML query selector of the element to scroll to.
+ */
+function handleScroll(query) {
+	try {
+		const targetElement = document.querySelector(query);
+
+		const articleInner = document
+			.querySelector("div.article-inner")
+			.getBoundingClientRect().y;
+
+		const offset = targetElement.getBoundingClientRect().y - articleInner;
+
+		document.body.scrollTo({
+			top: offset,
+			behavior: "smooth",
+		});
+	} catch (err) {
+		console.error(err);
+	}
+}
+
+/**
+ * Determine which subfolder should be highlighted.
+ */
+function determineInnerNavPos() {
+	try {
+		const navButtons = document.querySelectorAll(
+			"aside.inner-nav h1, aside.inner-nav h2, aside.inner-nav h3, aside.inner-nav h4, aside.inner-nav h5, aside.inner-nav h6"
+		);
+
+		for (const button of navButtons) button.classList.remove("active");
+
+		for (const button of navButtons) {
+			const targetElement =
+				document.body.scrollTop -
+				document
+					.querySelector(
+						`${button.tagName}#${button.getAttribute("target")}`
+					)
+					.getBoundingClientRect().y;
+
+			if (document.body.scrollTop >= targetElement) {
+				return button.classList.add("active");
+			}
+		}
+	} catch (err) {
+		console.error(err);
+	}
+}
+
+/**
+ * Create the link structure display for the inner nav.
+ * @param {*} data - The folder structure data compiled with the app.
+ */
+function createInnerNavStructure(data) {
+	try {
+		const innerNav = document.querySelector("aside.inner-nav");
+		innerNav.innerHTML = `
+		<p class="head">On This Page</p>`;
+
+		const headingRegex = /<h[1-6][^>]*>(.*?)<\/h[1-6]>/gi;
+		const matches = data.match(headingRegex);
+
+		for (const match of matches) {
+			const id = match.split('"')[1];
+			const headingNum = +match.split("h")[1][0];
+			const element = `h${headingNum}`;
+
+			innerNav.innerHTML += match.replace(
+				"id=",
+				`style="padding-left: ${
+					8 + 16 * (headingNum - 1)
+				}px;" onclick="handleScroll('${element}#${id}')" target=`
+			);
+		}
+
+		determineInnerNavPos();
+	} catch (err) {
+		console.error(err);
+	}
+}
+
+/**
  * Update the content of the html page.
  * @param {string} data - The new page content.
  */
@@ -218,6 +302,9 @@ function renderArticle(data, path) {
 	// Update the page content.
 	updatePageContent(data);
 
+	// Create side nav.
+	createInnerNavStructure(data);
+
 	// If there was an inter-page link, route to it.
 	triggerRescroll(hash, location);
 }
@@ -260,8 +347,6 @@ function repositionSides() {
  */
 function indicateSelectedNav(path) {
 	try {
-		const pathElements = path.split("/");
-
 		const folders = document.querySelectorAll("aside.nav h1");
 		const navElements = [
 			...document.querySelectorAll("aside.nav button"),
@@ -424,8 +509,9 @@ window.onload = () => {
 };
 
 window.addEventListener("resize", repositionSides);
-document.body.addEventListener("scroll", () =>
+document.body.addEventListener("scroll", () => {
+	determineInnerNavPos();
 	document
 		.querySelector("header.page-header")
-		.classList.toggle("scrolled", document.body.scrollTop > 0)
-);
+		.classList.toggle("scrolled", document.body.scrollTop > 0);
+});

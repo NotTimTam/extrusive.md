@@ -791,6 +791,9 @@ body {
 
 			min-width: 300px;
 
+			transition: $transition;
+			transition-property: background;
+
 			height: 100%;
 
 			// border-right: var(--border);
@@ -960,6 +963,9 @@ body {
 			right: $margin;
 
 			padding: $margin;
+			padding-right: 0;
+
+			width: 320px;
 
 			display: flex;
 			flex-direction: column;
@@ -967,6 +973,69 @@ body {
 
 			@media (max-width: 1535px) {
 				display: none;
+			}
+
+			p.head {
+				text-transform: uppercase;
+				font-weight: 600;
+			}
+
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				cursor: pointer;
+
+				justify-content: flex-start;
+				border-radius: $border-radius;
+				border-bottom-right-radius: 0;
+				border-top-right-radius: 0;
+
+				padding: $padding $margin;
+
+				width: 100%;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+
+				&.active {
+					background-color: var(--background-3);
+					color: var(--info);
+				}
+
+				&:hover {
+					background-color: var(--background-3);
+				}
+
+				&:active {
+					transform: unset;
+				}
+			}
+
+			h1 {
+				font-size: 1rem;
+			}
+
+			h2 {
+				font-size: 0.95rem;
+			}
+
+			h3 {
+				font-size: 0.9rem;
+			}
+
+			h4 {
+				font-size: 0.85rem;
+			}
+
+			h5 {
+				font-size: 0.8rem;
+			}
+
+			h6 {
+				font-size: 0.75rem;
 			}
 		}
 	}

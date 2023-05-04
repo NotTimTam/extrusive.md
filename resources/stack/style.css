@@ -305,6 +305,8 @@ body main.page aside.nav {
   z-index: 50;
   overflow-y: auto;
   min-width: 300px;
+  transition: all 0.15s ease-in-out;
+  transition-property: background;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -752,6 +754,8 @@ body main.page aside.inner-nav {
   top: 0;
   right: 1rem;
   padding: 1rem;
+  padding-right: 0;
+  width: 320px;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -760,6 +764,70 @@ body main.page aside.inner-nav {
   body main.page aside.inner-nav {
     display: none;
   }
+}
+body main.page aside.inner-nav p.head {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+body main.page aside.inner-nav h1,
+body main.page aside.inner-nav h2,
+body main.page aside.inner-nav h3,
+body main.page aside.inner-nav h4,
+body main.page aside.inner-nav h5,
+body main.page aside.inner-nav h6 {
+  cursor: pointer;
+  justify-content: flex-start;
+  border-radius: 1rem;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+body main.page aside.inner-nav h1.active,
+body main.page aside.inner-nav h2.active,
+body main.page aside.inner-nav h3.active,
+body main.page aside.inner-nav h4.active,
+body main.page aside.inner-nav h5.active,
+body main.page aside.inner-nav h6.active {
+  background-color: var(--background-3);
+  color: var(--info);
+}
+body main.page aside.inner-nav h1:hover,
+body main.page aside.inner-nav h2:hover,
+body main.page aside.inner-nav h3:hover,
+body main.page aside.inner-nav h4:hover,
+body main.page aside.inner-nav h5:hover,
+body main.page aside.inner-nav h6:hover {
+  background-color: var(--background-3);
+}
+body main.page aside.inner-nav h1:active,
+body main.page aside.inner-nav h2:active,
+body main.page aside.inner-nav h3:active,
+body main.page aside.inner-nav h4:active,
+body main.page aside.inner-nav h5:active,
+body main.page aside.inner-nav h6:active {
+  transform: unset;
+}
+body main.page aside.inner-nav h1 {
+  font-size: 1rem;
+}
+body main.page aside.inner-nav h2 {
+  font-size: 0.95rem;
+}
+body main.page aside.inner-nav h3 {
+  font-size: 0.9rem;
+}
+body main.page aside.inner-nav h4 {
+  font-size: 0.85rem;
+}
+body main.page aside.inner-nav h5 {
+  font-size: 0.8rem;
+}
+body main.page aside.inner-nav h6 {
+  font-size: 0.75rem;
 }
 body div.search-modal-container {
   display: none;
