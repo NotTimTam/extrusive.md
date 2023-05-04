@@ -12,7 +12,7 @@ There are a lot of markdown interfaces out there. There are a lot of documentati
 
 1. It is, and always will be, **100% free and open-source**.
 2. It hands you control, to self-host and self-deploy.
-3. It has a simple interface that requires very little documentation.
+3. It has a simple interface that requires almost no set-up work.
 4. It allows you to easily implement custom styles in your documentation. It builds lightning-fast using your folder structure and `.md` files. Meaning you can edit your docs in whatever environment you want.
 5. It has a built-in search bar, that works... That you don't have to pay for!
 6. It has a nice toggle for light/dark mode and was built mobile-first!
