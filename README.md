@@ -4,6 +4,8 @@
 
 ---
 
+#### Please note: this project is currently being developed and is not yet stable. Please report bugs and refer to the below roadmap for missing features.
+
 There are a lot of markdown interfaces out there. There are a lot of documentation tools out there.
 
 `extrusive.md` fills the niche that none of these do.
@@ -26,3 +28,11 @@ Then, in your desired work directory, create your project by running:
 or
 `npx exstrusive create --project-directory <project-directory>`
 to specify a project directory.
+
+## Development Roadmap
+
+- Functional keyboard interaction with search modal.
+- Improved search functionality.
+- Clean, reduced-footprint clientside code.
+- More robust server defense firewall.
+- **"Start"** command with live server for development that does not rely on a build.
