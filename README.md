@@ -31,9 +31,9 @@ to specify a project directory.
 
 ## Development Roadmap
 
-- Functional keyboard interaction with search modal.
-- Improved search functionality.
-- Clean, reduced-footprint clientside code.
-- More robust server defense firewall.
-- **"Start"** command with live server for development that does not rely on a build.
-- Path normalization functions to make building work on more operating systems.
+-   Functional keyboard interaction with search modal.
+-   Improved search functionality.
+-   Clean, reduced-footprint clientside code.
+-   More robust server defense firewall.
+-   **"start"** command with live server for development that does not rely on a build.
+-   Path normalization functions to make building work on more operating systems.
