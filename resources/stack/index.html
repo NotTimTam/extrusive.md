@@ -28,6 +28,7 @@
 								size="16"
 							></ion-icon>
 							<input
+								oninput="handleSearchFiles(event);"
 								type="text"
 								name="search"
 								id="search"
@@ -40,9 +41,7 @@
 					</button>
 				</header>
 
-				<div class="recent-searches">
-					<h1>Recent</h1>
-				</div>
+				<div class="search-content"></div>
 
 				<footer>
 					<p>

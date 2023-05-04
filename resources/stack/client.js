@@ -281,6 +281,115 @@ function updatePageContent(data) {
 }
 
 /**
+ * Update the content section of the search modal to new data.
+ * @param {string} html - The html data to update to.
+ */
+function updateSearchContent(html) {
+	document.querySelector("div.search-content").innerHTML = html;
+}
+
+/**
+ * Save a search.
+ */
+function saveRecentSearch(path) {
+	let recentSearches = localStorage.getItem("recentSearches");
+	if (recentSearches) recentSearches = JSON.parse(recentSearches);
+	else recentSearches = [];
+
+	if (!recentSearches.includes(path)) recentSearches.push(path);
+
+	while (recentSearches > 5) recentSearches.shift();
+
+	localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+}
+
+/**
+ * Display previous search results.
+ */
+function displayRecentSearches() {
+	let recentSearches = localStorage.getItem("recentSearches");
+	if (recentSearches) recentSearches = JSON.parse(recentSearches);
+	else recentSearches = [];
+
+	if (recentSearches && recentSearches.length > 0)
+		updateSearchContent(`
+		<div class="recent-searches">
+			<h1>Recent</h1>
+			${recentSearches
+				.map(
+					(path) =>
+						`
+			<button class="file" onclick="handleCloseSearch(); handleRequestFile('${path}');">
+				<div>
+				<ion-icon size="large" name="time-outline"></ion-icon>
+					<span class="inner">
+						<p>${path.split("/")[path.split("/").length - 1].split(".")[0]}</p>
+						<h6>${path}</h6>
+					</span>
+				</div>
+
+				<ion-icon name="return-down-back-outline"></ion-icon>
+			</button>`
+				)
+				.join(" ")}
+		</div>
+	`);
+	else
+		updateSearchContent(`
+		<div class="no-results">
+			<h6>
+				No recent searches
+			</h6>
+		</div>
+	`);
+}
+
+function displaySearchResults(data) {
+	if (data && data.length > 0)
+		updateSearchContent(`
+		<div class="results">
+			<h1>Learn</h1>
+			${data
+				.map(
+					(path) =>
+						`
+			<button class="file" onclick="handleCloseSearch(); saveRecentSearch('${path}'); handleRequestFile('${path}');">
+				<div>
+					<ion-icon name="document-outline" size="large"></ion-icon>
+					<span class="inner">
+						<p>${path.split("/")[path.split("/").length - 1].split(".")[0]}</p>
+						<h6>${path}</h6>
+					</span>
+				</div>
+
+				<ion-icon name="return-down-back-outline"></ion-icon>
+			</button>`
+				)
+				.join(" ")}
+		</div>
+	`);
+	else {
+		const query = document.querySelector(
+			"div.search-bar input#search"
+		).value;
+
+		updateSearchContent(`
+			<div class="no-results">
+				<ion-icon name="close-outline" size="64"></ion-icon>
+
+				<p class="query">
+					No results for "${query}"
+				</p>
+
+				<h6>
+					Believe this query should return results? Let us know.
+				</h6>
+			</div>
+		`);
+	}
+}
+
+/**
  * Trigger the page to scroll back to where it was.
  * @param {string} hash - The portion of the page to scroll to.
  * @param {string} location - The last location of the page before the route change.
@@ -399,6 +508,31 @@ const handleRequestFile = async (path) => {
 	}
 };
 
+let cancelSearch;
+/**
+ * Search files for info.
+ * @param {Event} e - The input element's event for oninput.
+ */
+const handleSearchFiles = async (e) => {
+	try {
+		const { value: query } = e.target;
+
+		if (query < 3) return;
+
+		cancelSearch && cancelSearch();
+		const { data } = await axios.get(`/api/v1/markdown/search`, {
+			params: { query },
+			cancelToken: new axios.CancelToken((canceler) => {
+				cancelSearch = canceler;
+			}),
+		});
+
+		displaySearchResults(data);
+	} catch (err) {
+		console.error(err);
+	}
+};
+
 /**
  * Toggle the color theme and update the theme button element.
  * @param {Element} e - The theme button.
@@ -462,6 +596,8 @@ const handleOpenSearch = () => {
 
 	search.value = "";
 	search.focus(); // Focus on the searchbar.
+
+	displayRecentSearches(); // Load previous searches
 };
 
 /**

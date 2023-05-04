@@ -5,7 +5,13 @@ const { execSync } = require("child_process");
 const dirTree = require("directory-tree");
 const { marked } = require("marked");
 
-const convert_to_html = (path) => {
+/**
+ * Recursively convert all markdown files to html and build search indices.
+ * @param {*} path -  The path to the file.
+ * @param {string} cwd - The current working directory.
+ * @returns Newly generated search indices.
+ */
+const convert_to_html = (path, cwd) => {
 	const files = fs.readdirSync(path);
 
 	let search_indices = [];
@@ -15,7 +21,7 @@ const convert_to_html = (path) => {
 		const stat = fs.statSync(filePath);
 
 		if (stat.isDirectory()) {
-			const additionalIndices = convert_to_html(filePath, search_indices);
+			const additionalIndices = convert_to_html(filePath, cwd);
 
 			search_indices = [...search_indices, ...additionalIndices];
 		} else {
@@ -36,10 +42,14 @@ const convert_to_html = (path) => {
 			search_indices = [
 				...search_indices,
 				{
-					path: newPath,
-					data: Array.from(new Set(existingData.split(" "))).join(
-						" "
-					),
+					path: newPath
+						.split("\\")
+						.join("/")
+						.replace(new RegExp(cwd.split("\\").join("/"), "g"), "")
+						.replace(new RegExp("/build/server", "g"), ""),
+					data: Array.from(new Set(existingData.split(" ")))
+						.join(" ")
+						.toLowerCase(),
 				},
 			];
 		}
@@ -143,12 +153,14 @@ const build_server = (target, config, cwd) => {
 	}
 
 	// Convert all markdown to pre-rendered html and get search indices.
-	const search_indices = convert_to_html(`${target}/server/content`);
+	const search_indices = convert_to_html(`${target}/server/content`, cwd);
 
 	// Save search indices.
 	fs.outputFileSync(
 		`${target}/server/util/searchIndices.js`,
-		`const searchIndices=${JSON.stringify(search_indices)}`,
+		`const searchIndices=${JSON.stringify(
+			search_indices
+		)}; module.exports = searchIndices;`,
 		{ recursive: true }
 	);
 

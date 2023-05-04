@@ -1,4 +1,5 @@
 const fs = require("fs-extra");
+const searchIndices = require("../util/searchIndices");
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 GET FILE
@@ -28,4 +29,31 @@ const getFile = async (req, res) => {
 	}
 };
 
-module.exports = { getFile };
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+SEARCH FILE
+.get('/search')
+req.query {
+	query
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+const searchFiles = async (req, res) => {
+	const { query } = req.query;
+	try {
+		if (!query) return res.status(403).send("No query sent.");
+
+		res.status(200).json(
+			searchIndices
+				.filter(
+					({ path, data }) =>
+						path.toLowerCase().includes(query.toLowerCase()) ||
+						data.includes(query.toLowerCase())
+				)
+				.map(({ path }) => path)
+		);
+	} catch (err) {
+		console.error(err);
+		return res.status(500).send("Unknown server-side error occured.");
+	}
+};
+
+module.exports = { getFile, searchFiles };
