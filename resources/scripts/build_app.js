@@ -251,7 +251,7 @@ const build_app = ({ outputDirectory, force }, commands) => {
 
 		// Get the current working directory.
 		const cwd = process.cwd();
-		target = target || `${cwd}\\build`;
+		target = target || `${cwd}/build`;
 		console.log(`Building from "${cwd}".`);
 
 		// Load configuration from user.
