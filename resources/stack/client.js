@@ -217,6 +217,7 @@ async function determineInnerNavPos() {
 			const targetElement = document.querySelector(
 				`${button.tagName}#${button.getAttribute("target")}`
 			);
+			if (!targetElement) continue;
 			const targetElementPosition =
 				targetElement.offsetTop -
 				header -
@@ -283,13 +284,17 @@ function updatePageContent(data) {
  * @param {string} location - The last location of the page before the route change.
  */
 function triggerRescroll(hash, location) {
-	if (hash && location === window.location.pathname) {
-		setTimeout(() => {
-			window.location.hash = hash;
+	try {
+		if (hash && location === window.location.pathname) {
+			setTimeout(() => {
+				window.location.hash = hash;
 
-			const hashSrc = document.querySelector(hash);
-			if (hashSrc) handleScroll(hash);
-		}, 250);
+				const hashSrc = document.querySelector(hash);
+				if (hashSrc) handleScroll(hash);
+			}, 250);
+		}
+	} catch (err) {
+		console.error("Failed rescroll.", err);
 	}
 }
 
@@ -328,27 +333,6 @@ function triggerLoading() {
 	updatePageContent(
 		`<p class="loading"><ion-icon name="cloud-download-outline"></ion-icon> Loading...</p>`
 	);
-}
-
-/**
- * Reposition content element sides so they line up.
- */
-function repositionSides() {
-	try {
-		const nav = document.querySelector("aside.nav");
-		const article = document.querySelector("article.content");
-		const innerNav = document.querySelector("aside.inner-nav");
-		const header = document
-			.querySelector("header.page-header")
-			.getBoundingClientRect();
-
-		nav.style.top = `${header.bottom}px`;
-		innerNav.style.top = `${header.bottom}px`;
-
-		article.style.marginLeft = `${nav.getBoundingClientRect().right}px`;
-	} catch (err) {
-		console.error("Could not reposition elements.", err);
-	}
 }
 
 /**
@@ -494,7 +478,6 @@ const handlePreventDefault = (e) => e.preventDefault();
 updateColorThemeButton();
 updateNavButton();
 getFolderTree();
-repositionSides();
 
 // Add event listeners.
 window.addEventListener("keydown", (e) => {
@@ -511,14 +494,11 @@ window.addEventListener("keydown", (e) => {
 });
 
 window.onload = () => {
-	repositionSides();
-
 	if (window.location.pathname === "/")
 		handleRequestFile("/content/README.html");
 	else handleRequestFile(window.location.pathname);
 };
 
-window.addEventListener("resize", repositionSides);
 document.body.addEventListener("scroll", () => {
 	determineInnerNavPos();
 	document

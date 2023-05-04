@@ -31,6 +31,8 @@
   outline: none;
   border: none;
   background: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   transition: all 0.15s ease-in-out;
   transition-property: color;
@@ -52,8 +54,9 @@ body {
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr auto;
   background-color: var(--background);
 }
 body.light {
@@ -73,6 +76,11 @@ body.dark {
   --text: white;
   --border: 1px solid var(--background-3);
   color-scheme: dark;
+}
+@media (max-width: 1025px) {
+  body {
+    grid-template-columns: 1fr;
+  }
 }
 body ion-icon {
   transition: all 0.15s ease-in-out;
@@ -194,6 +202,9 @@ body code {
   font-family: "Courier New", Courier, monospace;
 }
 body header.page-header {
+  grid-row: 1/2;
+  grid-column: 1/-1;
+  height: 5rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -286,28 +297,22 @@ body header.page-header section div.logo:hover {
 body header.page-header section div.logo:active {
   opacity: 0.5;
 }
-body main.page {
-  flex-grow: 2;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-}
-@media (max-width: 1025px) {
-  body main.page {
-    position: relative;
-  }
-}
-body main.page aside.nav {
-  position: fixed;
-  top: 0;
+body aside.nav {
+  grid-row: 2/3;
+  grid-column: 1/2;
+  align-self: flex-start;
+  position: sticky;
+  top: 5rem;
   left: 0;
   z-index: 50;
+  padding-top: 1rem;
+  height: -moz-max-content;
+  height: max-content;
+  max-height: 100%;
   overflow-y: auto;
   min-width: 300px;
   transition: all 0.15s ease-in-out;
   transition-property: background;
-  height: 100%;
   display: flex;
   flex-direction: column;
   background-color: var(--background);
@@ -315,7 +320,7 @@ body main.page aside.nav {
      -moz-user-select: none;
           user-select: none;
 }
-body main.page aside.nav section.folder > h1 {
+body aside.nav section.folder > h1 {
   padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
@@ -330,70 +335,84 @@ body main.page aside.nav section.folder > h1 {
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
 }
-body main.page aside.nav section.folder > h1:hover {
+body aside.nav section.folder > h1:hover {
   background-color: var(--background-3);
 }
-body main.page aside.nav section.folder > h1.active {
+body aside.nav section.folder > h1.active {
   background-color: var(--background-3);
 }
-body main.page aside.nav section.folder > h1.active div.title {
+body aside.nav section.folder > h1.active div.title {
   color: var(--info);
 }
-body main.page aside.nav section.folder > h1.active ion-icon {
+body aside.nav section.folder > h1.active ion-icon {
   color: var(--info);
 }
-body main.page aside.nav section.folder:not([depth="0"]):not(.open) button,
-body main.page aside.nav section.folder:not([depth="0"]):not(.open) section {
+body aside.nav section.folder:not([depth="0"]):not(.open) button,
+body aside.nav section.folder:not([depth="0"]):not(.open) section {
   display: none;
 }
-body main.page aside.nav section.folder.open > h1 ion-icon#arrow {
+body aside.nav section.folder.open > h1 ion-icon#arrow {
   transform: rotate(-180deg);
 }
-body main.page aside.nav section.folder button {
+body aside.nav section.folder button {
   justify-content: flex-start;
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
   padding: 0.5rem 1rem;
   width: 100%;
 }
-body main.page aside.nav section.folder button:last-of-type {
+body aside.nav section.folder button:last-of-type {
   margin-bottom: 0.5rem;
 }
-body main.page aside.nav section.folder button.active {
+body aside.nav section.folder button.active {
   background-color: var(--background-3);
   color: var(--info);
 }
-body main.page aside.nav section.folder button.active ion-icon {
+body aside.nav section.folder button.active ion-icon {
   color: var(--info);
 }
-body main.page aside.nav section.folder button:active {
+body aside.nav section.folder button:active {
   transform: unset;
 }
 @media (max-width: 1025px) {
-  body main.page aside.nav {
+  body aside.nav {
     position: absolute !important;
-    top: 0 !important;
+    top: 5rem !important;
     left: 0 !important;
+    grid-row: unset;
+    grid-column: unset;
+    z-index: 100;
     display: none;
     width: 100%;
-    height: 100%;
+    height: calc(100% - 5rem);
   }
-  body main.page aside.nav[open=true] {
+  body aside.nav[open=true] {
     display: flex;
   }
-  body main.page aside.nav section button {
-    border-radius: 0;
+  body aside.nav section button,
+  body aside.nav section h1 {
+    border-radius: 0 !important;
   }
 }
-body main.page article.content {
+body article.content {
+  grid-row: 2/3;
+  grid-column: 2/3;
   flex-grow: 2;
   display: flex;
   flex-direction: column;
   padding: 1rem 2rem;
   width: 896px;
   max-width: 896px;
+  margin: 0 auto;
 }
-body main.page article.content div.article-inner {
+@media (max-width: 1025px) {
+  body article.content {
+    grid-row: unset;
+    grid-column: unset;
+    max-width: 100vw;
+  }
+}
+body article.content div.article-inner {
   flex-grow: 2;
   display: flex;
   flex-direction: column;
@@ -401,8 +420,8 @@ body main.page article.content div.article-inner {
   padding-bottom: 1rem;
   font-size: var(--content-font-size);
 }
-body main.page article.content div.article-inner p.loading,
-body main.page article.content div.article-inner p.error {
+body article.content div.article-inner p.loading,
+body article.content div.article-inner p.error {
   align-self: center;
   display: flex;
   flex-direction: row;
@@ -411,138 +430,138 @@ body main.page article.content div.article-inner p.error {
   gap: 0.25rem;
   flex-wrap: wrap;
 }
-body main.page article.content div.article-inner p.error {
+body article.content div.article-inner p.error {
   color: var(--error);
 }
-body main.page article.content div.article-inner p.error ion-icon {
+body article.content div.article-inner p.error ion-icon {
   color: var(--error);
 }
-body main.page article.content div.article-inner h1,
-body main.page article.content div.article-inner h2,
-body main.page article.content div.article-inner h3,
-body main.page article.content div.article-inner h4,
-body main.page article.content div.article-inner h5,
-body main.page article.content div.article-inner h6 {
+body article.content div.article-inner h1,
+body article.content div.article-inner h2,
+body article.content div.article-inner h3,
+body article.content div.article-inner h4,
+body article.content div.article-inner h5,
+body article.content div.article-inner h6 {
   margin-top: 24px;
   margin-bottom: 16px;
   font-weight: 600;
   line-height: 1.25;
 }
-body main.page article.content div.article-inner h1 tt,
-body main.page article.content div.article-inner h1 code,
-body main.page article.content div.article-inner h2 tt,
-body main.page article.content div.article-inner h2 code,
-body main.page article.content div.article-inner h3 tt,
-body main.page article.content div.article-inner h3 code,
-body main.page article.content div.article-inner h4 tt,
-body main.page article.content div.article-inner h4 code,
-body main.page article.content div.article-inner h5 tt,
-body main.page article.content div.article-inner h5 code,
-body main.page article.content div.article-inner h6 tt,
-body main.page article.content div.article-inner h6 code {
+body article.content div.article-inner h1 tt,
+body article.content div.article-inner h1 code,
+body article.content div.article-inner h2 tt,
+body article.content div.article-inner h2 code,
+body article.content div.article-inner h3 tt,
+body article.content div.article-inner h3 code,
+body article.content div.article-inner h4 tt,
+body article.content div.article-inner h4 code,
+body article.content div.article-inner h5 tt,
+body article.content div.article-inner h5 code,
+body article.content div.article-inner h6 tt,
+body article.content div.article-inner h6 code {
   padding: 0 0.2em;
   font-size: inherit;
 }
-body main.page article.content div.article-inner h1 {
+body article.content div.article-inner h1 {
   font-weight: 700;
   font-size: 40px;
 }
-body main.page article.content div.article-inner h2 {
+body article.content div.article-inner h2 {
   font-weight: 600;
   padding-bottom: 0.3em;
   font-size: 1.5em;
   border-bottom: var(--border);
 }
-body main.page article.content div.article-inner h3 {
+body article.content div.article-inner h3 {
   font-weight: 600;
   font-size: 1.25em;
 }
-body main.page article.content div.article-inner h4 {
+body article.content div.article-inner h4 {
   font-weight: 600;
   font-size: 1em;
 }
-body main.page article.content div.article-inner h5 {
+body article.content div.article-inner h5 {
   font-weight: 600;
   font-size: 0.875em;
 }
-body main.page article.content div.article-inner h6 {
+body article.content div.article-inner h6 {
   font-weight: 600;
   font-size: 0.85em;
   color: var(--background-3);
 }
-body main.page article.content div.article-inner blockquote {
+body article.content div.article-inner blockquote {
   margin: 0;
   padding: 0 1em;
   color: var(--background-3);
   border-left: var(--border);
   border-width: 4px;
 }
-body main.page article.content div.article-inner blockquote > :first-child {
+body article.content div.article-inner blockquote > :first-child {
   margin-top: 0;
 }
-body main.page article.content div.article-inner blockquote > :last-child {
+body article.content div.article-inner blockquote > :last-child {
   margin-bottom: 0;
 }
-body main.page article.content div.article-inner ol[type=a] {
+body article.content div.article-inner ol[type=a] {
   list-style-type: lower-alpha;
 }
-body main.page article.content div.article-inner ol[type=A] {
+body article.content div.article-inner ol[type=A] {
   list-style-type: upper-alpha;
 }
-body main.page article.content div.article-inner ol[type=i] {
+body article.content div.article-inner ol[type=i] {
   list-style-type: lower-roman;
 }
-body main.page article.content div.article-inner ol[type=I] {
+body article.content div.article-inner ol[type=I] {
   list-style-type: upper-roman;
 }
-body main.page article.content div.article-inner ol[type="1"] {
+body article.content div.article-inner ol[type="1"] {
   list-style-type: decimal;
 }
-body main.page article.content div.article-inner ol:not([type]) {
+body article.content div.article-inner ol:not([type]) {
   list-style-type: decimal;
 }
-body main.page article.content div.article-inner ul,
-body main.page article.content div.article-inner ol {
+body article.content div.article-inner ul,
+body article.content div.article-inner ol {
   margin-top: 0;
   margin-bottom: 0;
   padding-left: 2rem;
 }
-body main.page article.content div.article-inner ol ol,
-body main.page article.content div.article-inner ul ol {
+body article.content div.article-inner ol ol,
+body article.content div.article-inner ul ol {
   list-style-type: lower-roman;
 }
-body main.page article.content div.article-inner ul ul,
-body main.page article.content div.article-inner ul ol,
-body main.page article.content div.article-inner ol ol,
-body main.page article.content div.article-inner ol ul {
+body article.content div.article-inner ul ul,
+body article.content div.article-inner ul ol,
+body article.content div.article-inner ol ol,
+body article.content div.article-inner ol ul {
   margin-top: 0;
   margin-bottom: 0;
 }
-body main.page article.content div.article-inner ul ul ol,
-body main.page article.content div.article-inner ul ol ol,
-body main.page article.content div.article-inner ol ul ol,
-body main.page article.content div.article-inner ol ol ol {
+body article.content div.article-inner ul ul ol,
+body article.content div.article-inner ul ol ol,
+body article.content div.article-inner ol ul ol,
+body article.content div.article-inner ol ol ol {
   list-style-type: lower-alpha;
 }
-body main.page article.content div.article-inner li + li {
+body article.content div.article-inner li + li {
   margin-top: 0.25em;
 }
-body main.page article.content div.article-inner li {
+body article.content div.article-inner li {
   padding-left: 0.25rem;
 }
-body main.page article.content div.article-inner li > p {
+body article.content div.article-inner li > p {
   margin-top: 16px;
 }
-body main.page article.content div.article-inner * {
+body article.content div.article-inner * {
   max-width: 100%;
 }
-body main.page article.content div.article-inner *:first-child {
+body article.content div.article-inner *:first-child {
   margin-top: 0 !important;
 }
-body main.page article.content div.article-inner *:last-child {
+body article.content div.article-inner *:last-child {
   margin-bottom: 0 !important;
 }
-body main.page article.content div.article-inner img {
+body article.content div.article-inner img {
   max-width: 100%;
   height: auto;
   box-sizing: content-box;
@@ -550,34 +569,34 @@ body main.page article.content div.article-inner img {
   border: var(--border);
   margin: 1rem auto;
 }
-body main.page article.content div.article-inner code,
-body main.page article.content div.article-inner kbd,
-body main.page article.content div.article-inner pre,
-body main.page article.content div.article-inner samp {
+body article.content div.article-inner code,
+body article.content div.article-inner kbd,
+body article.content div.article-inner pre,
+body article.content div.article-inner samp {
   font-family: monospace;
   font-size: 1em;
 }
-body main.page article.content div.article-inner tt,
-body main.page article.content div.article-inner code,
-body main.page article.content div.article-inner samp {
+body article.content div.article-inner tt,
+body article.content div.article-inner code,
+body article.content div.article-inner samp {
   font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   font-size: 12px;
 }
-body main.page article.content div.article-inner samp {
+body article.content div.article-inner samp {
   font-size: 85%;
 }
-body main.page article.content div.article-inner pre {
+body article.content div.article-inner pre {
   margin-top: 0;
   margin-bottom: 0;
   font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
   font-size: 12px;
   word-wrap: normal;
 }
-body main.page article.content div.article-inner pre code {
+body article.content div.article-inner pre code {
   font-size: 100%;
 }
-body main.page article.content div.article-inner pre code,
-body main.page article.content div.article-inner pre tt {
+body article.content div.article-inner pre code,
+body article.content div.article-inner pre tt {
   display: inline;
   max-width: auto;
   padding: 0;
@@ -588,7 +607,7 @@ body main.page article.content div.article-inner pre tt {
   background-color: transparent;
   border: 0;
 }
-body main.page article.content div.article-inner pre > code {
+body article.content div.article-inner pre > code {
   padding: 0;
   margin: 0;
   word-break: normal;
@@ -596,11 +615,11 @@ body main.page article.content div.article-inner pre > code {
   background: transparent;
   border: 0;
 }
-body main.page article.content div.article-inner del code {
+body article.content div.article-inner del code {
   text-decoration: inherit;
 }
-body main.page article.content div.article-inner code,
-body main.page article.content div.article-inner tt {
+body article.content div.article-inner code,
+body article.content div.article-inner tt {
   padding: 0.2em 0.4em;
   margin: 0;
   font-size: 85%;
@@ -608,14 +627,14 @@ body main.page article.content div.article-inner tt {
   background-color: var(--background-2);
   border-radius: 6px;
 }
-body main.page article.content div.article-inner code br,
-body main.page article.content div.article-inner tt br {
+body article.content div.article-inner code br,
+body article.content div.article-inner tt br {
   display: none;
 }
-body main.page article.content div.article-inner figure {
+body article.content div.article-inner figure {
   margin: 1em 40px;
 }
-body main.page article.content div.article-inner hr {
+body article.content div.article-inner hr {
   box-sizing: content-box;
   overflow: hidden;
   background: var(--background-3);
@@ -624,18 +643,18 @@ body main.page article.content div.article-inner hr {
   margin: 24px 0;
   border: 0;
 }
-body main.page article.content div.article-inner a {
+body article.content div.article-inner a {
   color: var(--info);
   text-decoration: none;
 }
-body main.page article.content div.article-inner a:hover {
+body article.content div.article-inner a:hover {
   text-decoration: underline;
 }
-body main.page article.content div.article-inner a:not([href]) {
+body article.content div.article-inner a:not([href]) {
   color: inherit;
   text-decoration: none;
 }
-body main.page article.content div.article-inner table {
+body article.content div.article-inner table {
   border-spacing: 0;
   border-collapse: collapse;
   display: block;
@@ -644,61 +663,61 @@ body main.page article.content div.article-inner table {
   max-width: 100%;
   overflow: auto;
 }
-body main.page article.content div.article-inner table img {
+body article.content div.article-inner table img {
   background-color: transparent;
 }
-body main.page article.content div.article-inner table img[align=right] {
+body article.content div.article-inner table img[align=right] {
   padding-left: 20px;
 }
-body main.page article.content div.article-inner table img[align=left] {
+body article.content div.article-inner table img[align=left] {
   padding-right: 20px;
 }
-body main.page article.content div.article-inner table th {
+body article.content div.article-inner table th {
   font-weight: 600;
 }
-body main.page article.content div.article-inner table th,
-body main.page article.content div.article-inner table td {
+body article.content div.article-inner table th,
+body article.content div.article-inner table td {
   padding: 6px 13px;
   border: var(--border);
 }
-body main.page article.content div.article-inner table thead tr,
-body main.page article.content div.article-inner table tr:nth-child(2n) {
+body article.content div.article-inner table thead tr,
+body article.content div.article-inner table tr:nth-child(2n) {
   background-color: var(--background-2);
 }
-body main.page article.content div.article-inner table tr {
+body article.content div.article-inner table tr {
   border-top: var(--border);
 }
-body main.page article.content div.article-inner dl {
+body article.content div.article-inner dl {
   padding: 0;
 }
-body main.page article.content div.article-inner dl dt {
+body article.content div.article-inner dl dt {
   padding: 0;
   margin-top: 16px;
   font-size: 1em;
   font-style: italic;
   font-weight: 600;
 }
-body main.page article.content div.article-inner dl dd {
+body article.content div.article-inner dl dd {
   padding: 0 16px;
   margin-bottom: 16px;
 }
-body main.page article.content div.article-inner details summary {
+body article.content div.article-inner details summary {
   cursor: pointer;
 }
-body main.page article.content div.article-inner summary h1,
-body main.page article.content div.article-inner summary h2,
-body main.page article.content div.article-inner summary h3,
-body main.page article.content div.article-inner summary h4,
-body main.page article.content div.article-inner summary h5,
-body main.page article.content div.article-inner summary h6 {
+body article.content div.article-inner summary h1,
+body article.content div.article-inner summary h2,
+body article.content div.article-inner summary h3,
+body article.content div.article-inner summary h4,
+body article.content div.article-inner summary h5,
+body article.content div.article-inner summary h6 {
   display: inline-block;
 }
-body main.page article.content div.article-inner summary h1,
-body main.page article.content div.article-inner summary h2 {
+body article.content div.article-inner summary h1,
+body article.content div.article-inner summary h2 {
   padding-bottom: 0;
   border-bottom: 0;
 }
-body main.page article.content div.article-inner kbd {
+body article.content div.article-inner kbd {
   display: inline-block;
   padding: 3px 5px;
   font: 11px ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
@@ -711,21 +730,21 @@ body main.page article.content div.article-inner kbd {
   border-radius: 6px;
   box-shadow: inset 0 -1px 0 var(--color-neutral-muted);
 }
-body main.page article.content div.article-inner p:has(> img) {
+body article.content div.article-inner p:has(> img) {
   display: flex;
 }
-body main.page article.content div.article-inner p,
-body main.page article.content div.article-inner blockquote,
-body main.page article.content div.article-inner ul,
-body main.page article.content div.article-inner ol,
-body main.page article.content div.article-inner dl,
-body main.page article.content div.article-inner table,
-body main.page article.content div.article-inner pre,
-body main.page article.content div.article-inner details {
+body article.content div.article-inner p,
+body article.content div.article-inner blockquote,
+body article.content div.article-inner ul,
+body article.content div.article-inner ol,
+body article.content div.article-inner dl,
+body article.content div.article-inner table,
+body article.content div.article-inner pre,
+body article.content div.article-inner details {
   margin-top: 0;
   margin-bottom: 16px;
 }
-body main.page article.content > footer {
+body article.content > footer {
   transition: all 0.15s ease-in-out;
   border-top: var(--border);
   padding-top: 1rem;
@@ -734,47 +753,59 @@ body main.page article.content > footer {
   justify-content: space-between;
   gap: 0.25rem;
 }
-body main.page article.content > footer section {
+body article.content > footer section {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.25rem;
 }
-body main.page article.content > footer section p.credit a {
+body article.content > footer section p.credit a {
   color: var(--info);
 }
-body main.page article.content > footer section p.copyright b {
+body article.content > footer section p.copyright b {
   color: var(--info);
 }
-body main.page aside.inner-nav {
+body aside.inner-nav {
+  grid-row: 2/3;
+  grid-column: 3/4;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
-  position: fixed;
-  top: 0;
-  right: 1rem;
-  padding: 1rem;
+  position: sticky;
+  top: 5rem;
+  right: 0;
+  padding-top: 1rem;
+  height: -moz-max-content;
+  height: max-content;
+  max-height: 100%;
+  overflow-y: auto;
   padding-right: 0;
   width: 320px;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
+@media (max-width: 1025px) {
+  body aside.inner-nav {
+    grid-row: unset;
+    grid-column: unset;
+  }
+}
 @media (max-width: 1535px) {
-  body main.page aside.inner-nav {
+  body aside.inner-nav {
     display: none;
   }
 }
-body main.page aside.inner-nav p.head {
+body aside.inner-nav p.head {
   text-transform: uppercase;
   font-weight: 600;
 }
-body main.page aside.inner-nav h1,
-body main.page aside.inner-nav h2,
-body main.page aside.inner-nav h3,
-body main.page aside.inner-nav h4,
-body main.page aside.inner-nav h5,
-body main.page aside.inner-nav h6 {
+body aside.inner-nav h1,
+body aside.inner-nav h2,
+body aside.inner-nav h3,
+body aside.inner-nav h4,
+body aside.inner-nav h5,
+body aside.inner-nav h6 {
   cursor: pointer;
   transition: all 0.15s ease-in-out;
   justify-content: flex-start;
@@ -787,47 +818,47 @@ body main.page aside.inner-nav h6 {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-body main.page aside.inner-nav h1.active,
-body main.page aside.inner-nav h2.active,
-body main.page aside.inner-nav h3.active,
-body main.page aside.inner-nav h4.active,
-body main.page aside.inner-nav h5.active,
-body main.page aside.inner-nav h6.active {
+body aside.inner-nav h1.active,
+body aside.inner-nav h2.active,
+body aside.inner-nav h3.active,
+body aside.inner-nav h4.active,
+body aside.inner-nav h5.active,
+body aside.inner-nav h6.active {
   background-color: var(--background-3);
   color: var(--info);
 }
-body main.page aside.inner-nav h1:hover,
-body main.page aside.inner-nav h2:hover,
-body main.page aside.inner-nav h3:hover,
-body main.page aside.inner-nav h4:hover,
-body main.page aside.inner-nav h5:hover,
-body main.page aside.inner-nav h6:hover {
+body aside.inner-nav h1:hover,
+body aside.inner-nav h2:hover,
+body aside.inner-nav h3:hover,
+body aside.inner-nav h4:hover,
+body aside.inner-nav h5:hover,
+body aside.inner-nav h6:hover {
   background-color: var(--background-3);
 }
-body main.page aside.inner-nav h1:active,
-body main.page aside.inner-nav h2:active,
-body main.page aside.inner-nav h3:active,
-body main.page aside.inner-nav h4:active,
-body main.page aside.inner-nav h5:active,
-body main.page aside.inner-nav h6:active {
+body aside.inner-nav h1:active,
+body aside.inner-nav h2:active,
+body aside.inner-nav h3:active,
+body aside.inner-nav h4:active,
+body aside.inner-nav h5:active,
+body aside.inner-nav h6:active {
   transform: unset;
 }
-body main.page aside.inner-nav h1 {
+body aside.inner-nav h1 {
   font-size: 1rem;
 }
-body main.page aside.inner-nav h2 {
+body aside.inner-nav h2 {
   font-size: 0.95rem;
 }
-body main.page aside.inner-nav h3 {
+body aside.inner-nav h3 {
   font-size: 0.9rem;
 }
-body main.page aside.inner-nav h4 {
+body aside.inner-nav h4 {
   font-size: 0.85rem;
 }
-body main.page aside.inner-nav h5 {
+body aside.inner-nav h5 {
   font-size: 0.8rem;
 }
-body main.page aside.inner-nav h6 {
+body aside.inner-nav h6 {
   font-size: 0.75rem;
 }
 body div.search-modal-container {
