@@ -3,7 +3,9 @@
 # extrusive.md
 
 [Obsidian](https://obsidian.md/) is an **"extrusive”** rock, which means it is made from magma that erupted out of a volcano.
+<br/>
 ^ Wonderful markdown editor!
+
 ---
 
 #### Please note: this project is currently being developed and is not yet stable. Please report bugs and refer to the below roadmap for missing features.
