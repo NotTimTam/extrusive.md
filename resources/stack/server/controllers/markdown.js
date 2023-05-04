@@ -15,7 +15,9 @@ const getFile = async (req, res) => {
 		if (!path)
 			return res.status(403).send("The path request must be provided.");
 
-		const absolutePath = __dirname.replace("\\controllers", path);
+		const absolutePath = __dirname
+			.replace("\\controllers", path)
+			.replace("/controllers", path);
 		const fileExists = await fs.exists(absolutePath);
 
 		if (!fileExists) return res.status(404).send("File not found.");
