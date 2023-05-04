@@ -270,6 +270,8 @@ function createInnerNavStructure(data) {
 		const headingRegex = /<h[1-6][^>]*>(.*?)<\/h[1-6]>/gi;
 		const matches = data.match(headingRegex);
 
+		if (!matches || matches.length < 1) return (innerNav.innerHTML = null);
+
 		for (const match of matches) {
 			const id = match.split('"')[1];
 			const headingNum = +match.split("h")[1][0];
