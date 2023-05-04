@@ -1,6 +1,6 @@
 {
   "name": "",
-  "version": "",
+  "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "update": "npm update"
   },
   "author": "",
-  "license": "ISC",
+  "license": "",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

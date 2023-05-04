@@ -167,9 +167,17 @@ const build_server = (target, config, cwd) => {
 	// Save package.json.
 	if (fs.existsSync(`${stackDir}/package.json.txt`)) {
 		console.log("Generating package.json.");
-		const newPackage = JSON.parse(
-			fs.readFileSync(`${stackDir}/package.json.txt`, "utf-8")
-		);
+		const { title, author, description, copyright } = config;
+
+		const newPackage = {
+			...JSON.parse(
+				fs.readFileSync(`${stackDir}/package.json.txt`, "utf-8")
+			),
+			name: title ? title : "",
+			author: author ? author : "",
+			description: description ? description : "",
+			license: copyright ? copyright : "ISC",
+		};
 
 		fs.outputFileSync(`${target}/package.json`, JSON.stringify(newPackage));
 	}
