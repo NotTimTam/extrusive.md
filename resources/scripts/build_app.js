@@ -11,30 +11,30 @@ const { normalize_path, replace_all, copy_path } = require("./util");
  * @param {string} cwd - The current working directory.
  * @returns Newly generated search indices.
  */
-const convert_to_html = async (path, cwd) => {
-	const files = await fs.readdir(path);
+const convert_to_html = (path, cwd) => {
+	const files = fs.readdirSync(path);
 
 	let search_indices = [];
 
-	files.forEach(async (file) => {
+	files.forEach((file) => {
 		const filePath = `${path}/${file}`;
-		const stat = await fs.stat(filePath);
+		const stat = fs.statSync(filePath);
 
 		if (stat.isDirectory()) {
-			const additionalIndices = await convert_to_html(filePath, cwd);
+			const additionalIndices = convert_to_html(filePath, cwd);
 
 			search_indices = [...search_indices, ...additionalIndices];
 		} else {
-			const existingData = await fs.readFile(filePath, "utf-8");
+			const existingData = fs.readFileSync(filePath, "utf-8");
 
 			const convertedData = marked.parse(existingData);
 			const newPath = replace_all(filePath, ".md", ".html"); // Replace any .md file extensions with .html.
 
 			// Rename the file.
-			await fs.rename(filePath, newPath);
+			fs.renameSync(filePath, newPath);
 
 			// Write the parsed contents.
-			await fs.writeFile(newPath, convertedData);
+			fs.writeFileSync(newPath, convertedData);
 
 			console.log(`Creating search directory for "${newPath}"`);
 
@@ -154,10 +154,7 @@ const build_server = async (target, config, cwd) => {
 	}
 
 	// Convert all markdown to pre-rendered html and get search indices.
-	const search_indices = await convert_to_html(
-		`${target}/server/content`,
-		cwd
-	);
+	const search_indices = convert_to_html(`${target}/server/content`, cwd);
 
 	// Save search indices.
 	await fs.outputFile(
