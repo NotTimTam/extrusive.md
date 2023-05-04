@@ -102,7 +102,9 @@ function createFileButton(name, path, nestLevel) {
  */
 function toggleNavDropdown(folder) {
 	try {
-		document.querySelector(`section#${folder}`).classList.toggle("open");
+		document
+			.querySelector(`section#folder-${folder}`)
+			.classList.toggle("open");
 	} catch (err) {
 		console.error(err);
 	}
@@ -134,7 +136,7 @@ function recurseDisplayFolderTree(data, html = "", nestLevel = 0) {
 			${
 				nestLevel === 0
 					? ""
-					: `<h1 id="${
+					: `<h1 id="file-${
 							path.split("/").join("_").split(".")[0]
 					  }" style="padding-left: ${
 							16 * nestLevel
