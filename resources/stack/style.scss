@@ -299,41 +299,6 @@ body {
 			font-size: 85%;
 		}
 
-		pre {
-			margin-top: 0;
-			margin-bottom: 0;
-			font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas,
-				Liberation Mono, monospace;
-			font-size: 12px;
-			word-wrap: normal;
-
-			code {
-				font-size: 100%;
-			}
-
-			code,
-			tt {
-				display: inline;
-				max-width: auto;
-				padding: 0;
-				margin: 0;
-				overflow: visible;
-				line-height: inherit;
-				word-wrap: normal;
-				background-color: transparent;
-				border: 0;
-			}
-
-			> code {
-				padding: 0;
-				margin: 0;
-				word-break: normal;
-				white-space: pre;
-				background: transparent;
-				border: 0;
-			}
-		}
-
 		del code {
 			text-decoration: inherit;
 		}
