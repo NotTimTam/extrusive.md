@@ -181,6 +181,8 @@ function handleScroll(query) {
 	try {
 		const targetElement = document.querySelector(query);
 
+		window.location.hash = `#${targetElement.id}`;
+
 		const articleInner = document
 			.querySelector("div.article-inner")
 			.getBoundingClientRect().y;
@@ -203,6 +205,9 @@ async function determineInnerNavPos() {
 	if (window.innerWidth < 1535) return;
 
 	try {
+		const header = document
+			.querySelector("header.page-header")
+			.getBoundingClientRect().height;
 		const navButtons = document.querySelectorAll(
 			"aside.inner-nav h1, aside.inner-nav h2, aside.inner-nav h3, aside.inner-nav h4, aside.inner-nav h5, aside.inner-nav h6"
 		);
@@ -212,7 +217,10 @@ async function determineInnerNavPos() {
 			const targetElement = document.querySelector(
 				`${button.tagName}#${button.getAttribute("target")}`
 			);
-			const targetElementPosition = targetElement.offsetTop;
+			const targetElementPosition =
+				targetElement.offsetTop -
+				header -
+				targetElement.getBoundingClientRect().height;
 			const scrollPosition = document.body.scrollTop;
 
 			if (scrollPosition >= targetElementPosition) scrolledElem = button;
@@ -280,7 +288,7 @@ function triggerRescroll(hash, location) {
 			window.location.hash = hash;
 
 			const hashSrc = document.querySelector(hash);
-			if (hashSrc) hashSrc.scrollIntoView({ behavior: "smooth" });
+			if (hashSrc) handleScroll(hash);
 		}, 250);
 	}
 }
