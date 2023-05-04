@@ -38,3 +38,4 @@ to specify a project directory.
 -   **"start"** command with live server for development that does not rely on a build.
 -   Path normalization functions to make building work on more operating systems.
 -   Better loading/error indicators.
+-   Hide "On this page" menu if there are no headings on the page.
