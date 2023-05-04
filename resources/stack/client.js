@@ -348,7 +348,7 @@ function displaySearchResults(data) {
 	if (data && data.length > 0)
 		updateSearchContent(`
 		<div class="results">
-			<h1>Learn</h1>
+			<h1>Results</h1>
 			${data
 				.map(
 					(path) =>
