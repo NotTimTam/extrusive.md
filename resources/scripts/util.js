@@ -14,7 +14,7 @@ const replace_all = (string, searchValue, replaceValue) =>
  * @returns {string} The normalized path.
  */
 const normalize_path = (path) => {
-	return replace_all(replace_all(path, "\\", "/"), "%20", " ");
+	return replace_all(replace_all(path, "\\\\", "/"), "%20", " ");
 };
 
 module.exports = { replace_all, normalize_path };
