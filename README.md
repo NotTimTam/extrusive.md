@@ -37,3 +37,4 @@ to specify a project directory.
 -   More robust server defense firewall.
 -   **"start"** command with live server for development that does not rely on a build.
 -   Path normalization functions to make building work on more operating systems.
+-   Better loading/error indicators.
