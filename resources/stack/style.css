@@ -416,14 +416,14 @@ body article.content {
   max-width: 896px;
   margin: 0 auto;
 }
-@media (max-width: 1535px) {
-  body article.content {
-    margin-right: 100%;
-  }
-}
 @media (min-width: 1185px) {
   body article.content {
     margin: 0 auto;
+  }
+}
+@media (max-width: 1535px) {
+  body article.content {
+    margin-right: 100%;
   }
 }
 @media (max-width: 1185px) {

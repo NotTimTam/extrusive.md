@@ -944,12 +944,12 @@ body {
 
 		margin: 0 auto;
 
-		@media (max-width: 1535px) {
-			margin-right: 100%;
-		}
-
 		@media (min-width: 1185px) {
 			margin: 0 auto;
+		}
+
+		@media (max-width: 1535px) {
+			margin-right: 100%;
 		}
 
 		@media (max-width: 1185px) {
