@@ -3,7 +3,7 @@ const packageJson = require("../../package.json");
 const fs = require("fs-extra");
 const dirTree = require("directory-tree");
 const { marked } = require("marked");
-const { normalize_path, replace_all, copy_path } = require("./util");
+const { normalize_path, replace_all, copy_paths } = require("./util");
 
 /**
  * Recursively convert all markdown files to html and build search indices.
@@ -138,18 +138,13 @@ const build_server = async (target, config, cwd) => {
 	// Copy the build structure.
 	console.log("Copying server.");
 	const stackDir = `${path.dirname(require.main.filename)}/resources/stack`;
-	const structure = [
-		[`${stackDir}/server.js`, "server.js", "file"],
-		[`${stackDir}/server`, "server", "directory"],
-		[`${cwd}/content`, "server/content", "directory"],
-		[`${stackDir}/gitignore.txt`, ".gitignore", "file"],
-		[`${stackDir}/env.txt`, ".env", "file"],
-	];
-	for (const [src, dest, type] of structure) {
-		if (!(await fs.exists(src)))
-			throw `"${src.split("/")[1]}" ${type} does not exist.`;
-		await fs.copy(src, `${target}/${dest}`);
-	}
+	await copy_paths([
+		[`${stackDir}/server.js`, `${target}/server.js`, "file"],
+		[`${stackDir}/server`, `${target}/server`, "directory"],
+		[`${cwd}/content`, `${target}/server/content`, "directory"],
+		[`${stackDir}/gitignore.txt`, `${target}/.gitignore`, "file"],
+		[`${stackDir}/env.txt`, `${target}/.env`, "file"],
+	]);
 
 	// Convert all markdown to pre-rendered html and get search indices.
 	const search_indices = compile_file_tree(`${target}/server/content`, cwd);
@@ -207,17 +202,14 @@ const build_client = async (target, config, cwd) => {
 	// Copy the build files.
 	console.log("Copying necessary client files.");
 	const stackDir = `${path.dirname(require.main.filename)}/resources/stack`;
-	const files = [
-		[`${cwd}/styles`, "styles", "directory"],
-		[`${cwd}/public`, "public", "directory"],
-		[`${stackDir}/style.css`, "style.css", "file"],
-		[`${stackDir}/style.css.map`, "style.css.map", "file"],
-		[`${stackDir}/client.js`, "client.js", "file"],
-		[`${stackDir}/404.html`, "404.html", "file"],
-	];
-	for (const [src, dest, type] of files) {
-		await copy_path(src, `${target}/${dest}`, type);
-	}
+	await copy_paths([
+		[`${cwd}/styles`, `${target}/styles`, "directory"],
+		[`${cwd}/public`, `${target}/public`, "directory"],
+		[`${stackDir}/style.css`, `${target}/style.css`, "file"],
+		[`${stackDir}/style.css.map`, `${target}/style.css.map`, "file"],
+		[`${stackDir}/client.js`, `${target}/client.js`, "file"],
+		[`${stackDir}/404.html`, `${target}/404.html`, "file"],
+	]);
 
 	// Build app indeces.
 	console.log("Building file structure caches.");

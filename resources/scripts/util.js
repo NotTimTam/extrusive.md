@@ -31,4 +31,14 @@ const copy_path = async (src, dest, type = "file") => {
 	await fs.copy(src, dest);
 };
 
-module.exports = { replace_all, normalize_path, copy_path };
+/**
+ * Copy a series of files or directories to another directory.
+ * @param {Array<path>} paths - The array of paths to copy.
+ */
+const copy_paths = async (paths) => {
+	for (const [src, dest, type] of paths) {
+		await copy_path(src, dest, type);
+	}
+};
+
+module.exports = { replace_all, normalize_path, copy_path, copy_paths };
