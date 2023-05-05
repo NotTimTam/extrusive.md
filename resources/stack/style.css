@@ -217,7 +217,6 @@ body header.page-header {
   top: 0;
   left: 0;
   z-index: 100;
-  padding: 0 0.5rem;
   border-bottom: var(--border);
   border-color: transparent;
 }
@@ -245,8 +244,7 @@ body header.page-header section.main button.search-bar {
     transition: all 0.15s ease-in-out;
     border: none;
     border-radius: 50%;
-    margin: 1rem 0;
-    margin-left: auto;
+    margin: 1rem 0 1rem auto !important;
   }
   body header.page-header section.main button.search-bar:hover {
     background-color: var(--background-2);
@@ -269,6 +267,14 @@ body header.page-header section.main button.search-bar {
     display: none;
   }
 }
+@media (max-width: 1535px) {
+  body header.page-header section.main button.search-bar {
+    margin: 1rem 0;
+  }
+}
+body header.page-header section.toggle-nav-parent {
+  padding-left: 1rem;
+}
 @media (min-width: 1186px) {
   body header.page-header section.toggle-nav-parent {
     display: none;
@@ -277,17 +283,35 @@ body header.page-header section.main button.search-bar {
 body header.page-header section.toggle-nav-parent button.toggle-nav[open=true] ion-icon {
   color: var(--info);
 }
+body header.page-header section:last-child {
+  justify-content: flex-end;
+  padding-right: 0.5rem;
+  min-width: 320px;
+}
+@media (max-width: 1535px) {
+  body header.page-header section:last-child {
+    min-width: unset;
+  }
+}
 body header.page-header section div.logo {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
+  min-width: 300px;
   padding: 0.5rem;
+  padding-left: 1rem;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
   cursor: pointer;
   transition: all 0.15s ease-in-out;
+}
+@media (max-width: 1186px) {
+  body header.page-header section div.logo {
+    min-width: unset;
+    padding-left: 0.5rem;
+  }
 }
 body header.page-header section div.logo h1.no-title {
   color: var(--info);

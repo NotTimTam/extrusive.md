@@ -660,7 +660,7 @@ body {
 
 		z-index: 100;
 
-		padding: 0 $padding;
+		// padding: 0 $padding;
 
 		border-bottom: var(--border);
 		border-color: transparent;
@@ -700,8 +700,7 @@ body {
 						border: none;
 						border-radius: 50%;
 
-						margin: $margin 0;
-						margin-left: auto;
+						margin: $margin 0 $margin auto !important;
 
 						div.button-inner {
 							font-size: 0;
@@ -723,10 +722,16 @@ body {
 							}
 						}
 					}
+
+					@media (max-width: 1535px) {
+						margin: $margin 0;
+					}
 				}
 			}
 
 			&.toggle-nav-parent {
+				padding-left: $margin;
+
 				@media (min-width: 1186px) {
 					display: none;
 				}
@@ -740,14 +745,32 @@ body {
 				}
 			}
 
+			&:last-child {
+				justify-content: flex-end;
+				padding-right: $padding;
+				min-width: 320px;
+
+				@media (max-width: 1535px) {
+					min-width: unset;
+				}
+			}
+
 			div.logo {
 				display: flex;
 				flex-direction: row;
 				align-items: center;
 				gap: $padding;
 
+				min-width: 300px;
+
 				padding: $padding;
+				padding-left: $margin;
 				user-select: none;
+
+				@media (max-width: 1186px) {
+					min-width: unset;
+					padding-left: $padding;
+				}
 
 				cursor: pointer;
 
