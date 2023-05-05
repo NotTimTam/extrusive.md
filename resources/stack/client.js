@@ -234,9 +234,14 @@ async function determineInnerNavPos() {
 		);
 
 		let scrolledElem = null;
+
+		if (navButtons.length === 1) {
+			return navButtons[0].classList.add("active");
+		}
+
 		for (const button of navButtons) {
 			const targetElement = document.querySelector(
-				`${button.tagName}#${button.getAttribute("target")}`
+				button.getAttribute("target")
 			);
 			if (!targetElement) continue;
 			const targetElementPosition =
@@ -276,13 +281,11 @@ function createInnerNavStructure(data) {
 			const id = match.split('"')[1];
 			const headingNum = +match.split("h")[1][0];
 			const element = `h${headingNum}`;
+			const content = match.split(">")[1];
 
-			innerNav.innerHTML += match.replace(
-				"id=",
-				`style="padding-left: ${
-					8 + 16 * (headingNum - 1)
-				}px;" onclick="handleScroll('${element}#${id}')" target=`
-			);
+			innerNav.innerHTML += `<${element} target="${element}#${id}" style="padding-left: ${
+				8 + 16 * (headingNum - 1)
+			}px;" onclick="handleScroll('${element}#${id}')">${content}`;
 		}
 
 		determineInnerNavPos();

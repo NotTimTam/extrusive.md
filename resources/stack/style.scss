@@ -106,6 +106,12 @@ body {
 
 		font-size: var(--content-font-size);
 
+		svg.ionicon {
+			color: var(--text);
+			fill: var(--text);
+			stroke: var(--text);
+		}
+
 		p.loading,
 		p.error {
 			align-self: center;
@@ -479,7 +485,8 @@ body {
 
 	background-color: var(--background);
 
-	ion-icon {
+	ion-icon,
+	svg.ionicon {
 		transition: $transition;
 		transition-property: color, transform;
 	}
@@ -674,7 +681,7 @@ body {
 
 				button.search-bar {
 					max-width: 896px;
-					margin: $margin auto $margin 0;
+					margin: $margin auto $margin auto;
 
 					@media (max-width: 768px) {
 						width: max-content;
@@ -764,18 +771,6 @@ body {
 			}
 		}
 	}
-
-	// main.page {
-	// flex-grow: 2;
-	// display: flex;
-	// flex-direction: row;
-	// justify-content: space-between;
-
-	// width: 100%;
-
-	// @media (max-width: 1185px) {
-	// 	position: relative;
-	// }
 
 	aside.nav {
 		grid-row: 2 / 3;
@@ -1091,7 +1086,6 @@ body {
 			font-size: 0.75rem;
 		}
 	}
-	// }
 
 	div.search-modal-container {
 		display: none;

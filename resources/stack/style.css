@@ -82,7 +82,8 @@ body.dark {
     grid-template-columns: 1fr;
   }
 }
-body ion-icon {
+body ion-icon,
+body svg.ionicon {
   transition: all 0.15s ease-in-out;
   transition-property: color, transform;
 }
@@ -234,7 +235,7 @@ body header.page-header section.main {
 }
 body header.page-header section.main button.search-bar {
   max-width: 896px;
-  margin: 1rem auto 1rem 0;
+  margin: 1rem auto 1rem auto;
 }
 @media (max-width: 768px) {
   body header.page-header section.main button.search-bar {
@@ -436,6 +437,11 @@ body article.content div.article-inner {
   align-items: stretch;
   padding-bottom: 1rem;
   font-size: var(--content-font-size);
+}
+body article.content div.article-inner svg.ionicon {
+  color: var(--text);
+  fill: var(--text);
+  stroke: var(--text);
 }
 body article.content div.article-inner p.loading,
 body article.content div.article-inner p.error {
