@@ -1,6 +1,55 @@
 // Functions
 
 /**
+ * Creates and returns an HTML element.
+ * @param {string} tagName - The tag name for the element.
+ * @param {Array<Array<string>>} props - An array of properties to directly set on the object. `[..., [propName, value]]`
+ * @param {Array<Array<string>>} attributes - An array of attributes to add to the element with `.setAttribute()`. `[..., [attrName, value]]`
+ * @param {Array<Array<string>>} attributes - An array of event listeners to add to the element with `.setAttribute()`. `[..., [type, listener]]`
+ * @returns {Element} The newly created DOM element.
+ */
+function createElement(
+	tagName,
+	props,
+	attributes,
+	eventListeners,
+	innerHTML = null
+) {
+	try {
+		const element = document.createElement(tagName);
+
+		if (innerHTML) element.innerHTML = innerHTML;
+
+		if (props) for (const [prop, value] of props) element[prop] = value;
+		if (attributes)
+			for (const [attr, value] of attributes)
+				element.setAttribute(attr, value);
+		if (eventListeners)
+			for (const [type, listener] of eventListeners)
+				element.addEventListener(type, listener);
+
+		return element;
+	} catch (err) {
+		console.error("Failed to generate element:", err);
+	}
+}
+
+/**
+ * Append a series of elements to a parent element.
+ * @param {Element} parent - The parent to append the elements to.
+ * @param  {...Element} elements - The elements to append.
+ */
+function appendElements(parent, ...elements) {
+	try {
+		for (const element of elements) {
+			parent.appendChild(element);
+		}
+	} catch (err) {
+		console.error("Failed to append child elements:", err);
+	}
+}
+
+/**
  * Get the current color theme setting.
  * @returns {string} the current color theme.
  */
@@ -306,10 +355,16 @@ function updatePageContent(data) {
 
 /**
  * Update the content section of the search modal to new data.
- * @param {string} html - The html data to update to.
+ * @param {...Element} elements - An array of elements to append to the search modal.
  */
-function updateSearchContent(html) {
-	document.querySelector("div.search-content").innerHTML = html;
+function updateSearchContent(...elements) {
+	try {
+		const searchModalContent = document.querySelector("div.search-content");
+		searchModalContent.innerHTML = null;
+		for (const element of elements) searchModalContent.appendChild(element);
+	} catch (err) {
+		console.error("Failed to update search modal content:", err);
+	}
 }
 
 /**
@@ -335,81 +390,154 @@ function displayRecentSearches() {
 	if (recentSearches) recentSearches = JSON.parse(recentSearches);
 	else recentSearches = [];
 
-	if (recentSearches && recentSearches.length > 0)
-		updateSearchContent(`
-		<div class="recent-searches">
-			<h1>Recent</h1>
-			${recentSearches
-				.map(
-					(path) =>
-						`
-			<button class="file" onclick="handleCloseSearch(); handleRequestFile('${path}');">
-				<div>
-				<ion-icon size="large" name="time-outline"></ion-icon>
-					<span class="inner">
-						<p>${path.split("/")[path.split("/").length - 1].split(".")[0]}</p>
-						<h6>${path}</h6>
-					</span>
-				</div>
+	if (recentSearches && recentSearches.length > 0) {
+		const recentSearchesParent = createElement("div", [
+			["className", "recent-searches"],
+			["innerHTML", "<h1>Recent</h1>"],
+		]);
 
-				<ion-icon name="return-down-back-outline"></ion-icon>
-			</button>`
-				)
-				.join(" ")}
-		</div>
-	`);
-	else
-		updateSearchContent(`
-		<div class="no-results">
-			<h6>
+		recentSearches.forEach((path) => {
+			// Create a button.
+			const buttonElement = createElement(
+				"button",
+				[["className", "file"]],
+				null,
+				[
+					[
+						"click",
+						() => {
+							handleCloseSearch();
+							handleRequestFile(path);
+						},
+					],
+				]
+			);
+
+			// Create button content element.
+			const buttonContent = createElement(
+				"div",
+				null,
+				null,
+				null,
+				`<ion-icon size="large" name="time-outline"></ion-icon>
+			<span class="inner">
+				<p>
+					${path.split("/")[path.split("/").length - 1].split(".")[0]}
+				</p>
+				<h6>${path}</h6>
+			</span>`
+			);
+
+			// Add all button content.
+			appendElements(
+				buttonElement,
+				buttonContent,
+				createElement("ion-icon", [
+					["name", "return-down-back-outline"],
+				])
+			);
+
+			recentSearchesParent.appendChild(buttonElement);
+		});
+
+		updateSearchContent(recentSearchesParent);
+	} else {
+		const noRecentSearches = createElement(
+			"div",
+			[["className", "no-results"]],
+			null,
+			null,
+			`<h6>
 				No recent searches
-			</h6>
-		</div>
-	`);
+			</h6>`
+		);
+
+		updateSearchContent(noRecentSearches);
+	}
 }
 
+/**
+ * Display search results.
+ * @param {Object} data - The data from which to create the search results.
+ */
 function displaySearchResults(data) {
-	if (data && data.length > 0)
-		updateSearchContent(`
-		<div class="results">
-			<h1>Results</h1>
-			${data
-				.map(
-					(path) =>
-						`
-			<button class="file" onclick="handleCloseSearch(); saveRecentSearch('${path}'); handleRequestFile('${path}');">
-				<div>
-					<ion-icon name="document-outline" size="large"></ion-icon>
-					<span class="inner">
-						<p>${path.split("/")[path.split("/").length - 1].split(".")[0]}</p>
-						<h6>${path}</h6>
-					</span>
-				</div>
+	if (data && data.length > 0) {
+		const searchResultsParent = createElement(
+			"div",
+			[["className", "results"]],
+			null,
+			null,
+			`<h1>Results</h1>`
+		);
 
-				<ion-icon name="return-down-back-outline"></ion-icon>
-			</button>`
-				)
-				.join(" ")}
-		</div>
-	`);
-	else {
+		data.forEach((path) => {
+			// Create a button.
+			const buttonElement = createElement(
+				"button",
+				[["className", "file"]],
+				null,
+				[
+					[
+						"click",
+						() => {
+							handleCloseSearch();
+							saveRecentSearch(path);
+							handleRequestFile(path);
+						},
+					],
+				]
+			);
+
+			// Create button content element.
+			const buttonContent = createElement(
+				"div",
+				null,
+				null,
+				null,
+				`<ion-icon name="document-outline" size="large"></ion-icon>
+				<span class="inner">
+					<p>
+						${path.split("/")[path.split("/").length - 1].split(".")[0]}
+					</p>
+					<h6>${path}</h6>
+				</span>`
+			);
+
+			// Add all button content.
+			appendElements(
+				buttonElement,
+				buttonContent,
+				createElement("ion-icon", [
+					["name", "return-down-back-outline"],
+				])
+			);
+
+			searchResultsParent.appendChild(buttonElement);
+		});
+
+		updateSearchContent(searchResultsParent);
+	} else {
 		const query = document.querySelector(
 			"div.search-bar input#search"
 		).value;
 
-		updateSearchContent(`
-			<div class="no-results">
-				<ion-icon name="close-outline" size="64"></ion-icon>
+		const noResults = createElement(
+			"div",
+			[["className", "no-results"]],
+			null,
+			null,
+			`<ion-icon name="close-outline" size="64"></ion-icon>
 
-				<p class="query">
-					No results for "${query}"
-				</p>
+			<p class="query">
+				No results for "${query}"
+			</p>
 
-				<h6>
-					Believe this query should return results? Let us know.
-				</h6>
-			</div>
-		`);
+			<h6>
+				Believe this query should return results? Let us know.
+			</h6>`
+		);
+
+		updateSearchContent(noResults);
 	}
 }
 

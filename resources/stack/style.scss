@@ -1170,6 +1170,11 @@ body {
 
 				overflow-y: auto;
 
+				* {
+					max-width: 100vw;
+					word-wrap: break-word;
+				}
+
 				div.no-results {
 					display: flex;
 					flex-direction: column;
@@ -1249,7 +1254,8 @@ body {
 							}
 						}
 
-						&:hover {
+						&:hover,
+						&:focus {
 							background-color: var(--info);
 						}
 
