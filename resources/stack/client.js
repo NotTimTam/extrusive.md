@@ -361,7 +361,8 @@ function updateSearchContent(...elements) {
 	try {
 		const searchModalContent = document.querySelector("div.search-content");
 		searchModalContent.innerHTML = null;
-		for (const element of elements) searchModalContent.appendChild(element);
+
+		appendElements(searchModalContent, ...elements);
 	} catch (err) {
 		console.error("Failed to update search modal content:", err);
 	}
