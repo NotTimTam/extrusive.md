@@ -188,8 +188,8 @@ body div.search-bar div.button-inner div.shortcut {
   gap: 0.25rem;
   margin-left: auto;
 }
-body button.search-bar div.button-inner div.shortcut code,
-body div.search-bar div.button-inner div.shortcut code {
+body button.search-bar div.button-inner div.shortcut kbd,
+body div.search-bar div.button-inner div.shortcut kbd {
   background-color: var(--background-0);
   font-size: 11px;
   display: block;
@@ -235,6 +235,14 @@ body header.page-header section.main {
 body header.page-header section.main button.search-bar {
   max-width: 896px;
   margin: 1rem auto 1rem auto;
+}
+body header.page-header section.main button.search-bar kbd {
+  min-height: 20px;
+}
+body header.page-header section.main button.search-bar kbd#special-command-key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 @media (max-width: 768px) {
   body header.page-header section.main button.search-bar {
@@ -1002,9 +1010,12 @@ body div.search-modal-container div.search-modal div.search-content div.results 
   font-size: 0.85em;
   color: var(--background-3);
 }
-body div.search-modal-container div.search-modal div.search-content div.recent-searches button:hover, body div.search-modal-container div.search-modal div.search-content div.recent-searches button:focus,
-body div.search-modal-container div.search-modal div.search-content div.results button:hover,
-body div.search-modal-container div.search-modal div.search-content div.results button:focus {
+body div.search-modal-container div.search-modal div.search-content div.recent-searches button:hover,
+body div.search-modal-container div.search-modal div.search-content div.results button:hover {
+  background-color: unset;
+}
+body div.search-modal-container div.search-modal div.search-content div.recent-searches button[isFocused=true],
+body div.search-modal-container div.search-modal div.search-content div.results button[isFocused=true] {
   background-color: var(--info);
 }
 body div.search-modal-container div.search-modal div.search-content div.recent-searches button.active,

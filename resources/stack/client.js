@@ -384,6 +384,26 @@ function saveRecentSearch(path) {
 }
 
 /**
+ * Focus on a particular search result button.
+ * @param {Element} button - The button to focus on.
+ */
+function focusResultButton(button) {
+	try {
+		const allButtons = document.querySelectorAll(
+			"div.search-content button.file-result"
+		);
+
+		allButtons.forEach((button) =>
+			button.setAttribute("isFocused", "false")
+		);
+
+		button.setAttribute("isFocused", "true");
+	} catch (err) {
+		console.error("Failed to focus on a search result button:", err);
+	}
+}
+
+/**
  * Display previous search results.
  */
 function displayRecentSearches() {
@@ -401,7 +421,7 @@ function displayRecentSearches() {
 			// Create a button.
 			const buttonElement = createElement(
 				"button",
-				[["className", "file"]],
+				[["className", "file-result"]],
 				null,
 				[
 					[
@@ -409,6 +429,19 @@ function displayRecentSearches() {
 						() => {
 							handleCloseSearch();
 							handleRequestFile(path);
+						},
+					],
+					[
+						"mousemove",
+						(e) => {
+							focusResultButton(e.target);
+						},
+					],
+					[
+						"focus",
+						(e) => {
+							focusResultButton(e.target);
+							e.target.blur();
 						},
 					],
 				]
@@ -475,15 +508,27 @@ function displaySearchResults(data) {
 			// Create a button.
 			const buttonElement = createElement(
 				"button",
-				[["className", "file"]],
+				[["className", "file-result"]],
 				null,
 				[
 					[
 						"click",
 						() => {
 							handleCloseSearch();
-							saveRecentSearch(path);
 							handleRequestFile(path);
+						},
+					],
+					[
+						"mousemove",
+						(e) => {
+							focusResultButton(e.target);
+						},
+					],
+					[
+						"focus",
+						(e) => {
+							focusResultButton(e.target);
+							e.target.blur();
 						},
 					],
 				]
@@ -646,6 +691,25 @@ function indicateSelectedNav(path) {
 	}
 }
 
+/**
+ *
+ * @param {Boolean} isMac - Whether the platform is a mac or not.
+ */
+function configurePlatformSpecificContent(isMac = false) {
+	try {
+		if (isMac) {
+			document
+				.querySelectorAll("kbd#special-command-key")
+				.forEach(
+					(specialCommandKey) =>
+						(specialCommandKey.innerHTML = `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M3.5 2A1.5 1.5 0 0 1 5 3.5V5H3.5a1.5 1.5 0 1 1 0-3zM6 5V3.5A2.5 2.5 0 1 0 3.5 6H5v4H3.5A2.5 2.5 0 1 0 6 12.5V11h4v1.5a2.5 2.5 0 1 0 2.5-2.5H11V6h1.5A2.5 2.5 0 1 0 10 3.5V5H6zm4 1v4H6V6h4zm1-1V3.5A1.5 1.5 0 1 1 12.5 5H11zm0 6h1.5a1.5 1.5 0 1 1-1.5 1.5V11zm-6 0v1.5A1.5 1.5 0 1 1 3.5 11H5z"></path></svg>`)
+				);
+		}
+	} catch (err) {
+		console.error("Could not configure platform specific code.", err);
+	}
+}
+
 // Handlers
 
 /**
@@ -783,10 +847,17 @@ updateColorThemeButton();
 updateNavButton();
 getFolderTree();
 
+const platformIsMac = /Mac|iPod|iPhone|iPad/.test(navigator.userAgent);
+configurePlatformSpecificContent(platformIsMac);
+
 // Add event listeners.
 window.addEventListener("keydown", (e) => {
 	if (e.key === "Escape") handleCloseSearch();
-	if (e.ctrlKey) {
+
+	const isCtrlKey = platformIsMac ? e.metaKey : e.ctrlKey;
+
+	if (isCtrlKey) {
+		// When ctrl key is held.
 		switch (e.key) {
 			case "k":
 				handlePreventDefault(e);
@@ -794,6 +865,7 @@ window.addEventListener("keydown", (e) => {
 			default:
 				return;
 		}
+	} else {
 	}
 });
 

@@ -615,7 +615,7 @@ body {
 
 				margin-left: auto;
 
-				code {
+				kbd {
 					background-color: var(--background-0);
 
 					font-size: 11px;
@@ -682,6 +682,16 @@ body {
 				button.search-bar {
 					max-width: 896px;
 					margin: $margin auto $margin auto;
+
+					kbd {
+						min-height: 20px;
+
+						&#special-command-key {
+							display: flex;
+							align-items: center;
+							justify-content: center;
+						}
+					}
 
 					@media (max-width: 768px) {
 						width: max-content;
@@ -1254,8 +1264,11 @@ body {
 							}
 						}
 
-						&:hover,
-						&:focus {
+						&:hover {
+							background-color: unset;
+						}
+
+						&[isFocused="true"] {
 							background-color: var(--info);
 						}
 
