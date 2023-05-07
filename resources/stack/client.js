@@ -384,20 +384,30 @@ function saveRecentSearch(path) {
 }
 
 /**
+ * Unfocus all focused search result buttons.
+ */
+function clearFocusedResultButtons() {
+	try {
+		const allButtons = document.querySelectorAll(
+			"div.search-content button.file-result[isfocused='true']"
+		);
+		allButtons.forEach((button) =>
+			button.setAttribute("isfocused", "false")
+		);
+	} catch (err) {
+		console.error("Failed to clear search result button focus:", err);
+	}
+}
+
+/**
  * Focus on a particular search result button.
  * @param {Element} button - The button to focus on.
  */
 function focusResultButton(button) {
 	try {
-		const allButtons = document.querySelectorAll(
-			"div.search-content button.file-result"
-		);
+		clearFocusedResultButtons();
 
-		allButtons.forEach((button) =>
-			button.setAttribute("isFocused", "false")
-		);
-
-		button.setAttribute("isFocused", "true");
+		button.setAttribute("isfocused", "true");
 	} catch (err) {
 		console.error("Failed to focus on a search result button:", err);
 	}
@@ -865,6 +875,25 @@ window.addEventListener("keydown", (e) => {
 				return;
 		}
 	} else {
+		switch (e.key) {
+			case "Enter":
+				// If the search bar is open.
+				// handlePreventDefault(e);
+				if (
+					document
+						.querySelector("div.search-modal-container")
+						.getAttribute("open") === "true"
+				) {
+					const focusedButton = document.querySelector(
+						"div.search-content button.file-result[isfocused='true']"
+					);
+
+					if (focusedButton) focusedButton.click();
+				}
+				return;
+			default:
+				return;
+		}
 	}
 });
 
