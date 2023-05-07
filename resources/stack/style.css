@@ -237,14 +237,6 @@ body header.page-header section.main button.search-bar {
   max-width: 896px;
   margin: 1rem auto 1rem auto;
 }
-body header.page-header section.main button.search-bar kbd {
-  min-height: 20px;
-}
-body header.page-header section.main button.search-bar kbd#special-command-key {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 @media (max-width: 768px) {
   body header.page-header section.main button.search-bar {
     width: -moz-max-content;

@@ -684,16 +684,6 @@ body {
 					max-width: 896px;
 					margin: $margin auto $margin auto;
 
-					kbd {
-						min-height: 20px;
-
-						&#special-command-key {
-							display: flex;
-							align-items: center;
-							justify-content: center;
-						}
-					}
-
 					@media (max-width: 768px) {
 						width: max-content;
 						flex-grow: 0;
