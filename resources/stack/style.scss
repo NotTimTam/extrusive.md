@@ -626,7 +626,8 @@ body {
 		}
 	}
 
-	code {
+	code,
+	kbd {
 		transition: $transition;
 
 		background-color: var(--background-3);
