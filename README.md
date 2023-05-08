@@ -46,6 +46,7 @@ Client:
 -   Cleaner, more reliable client-side code.
 -   The ability to clear recent searches.
 -   Automatical removal of search results that link to paths that no longer exist.
+-   Print/send-to-pdf feature.
 
 Server:
 
