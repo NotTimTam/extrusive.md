@@ -150,6 +150,7 @@ body kbd {
 }
 body kbd svg,
 body kbd ion-icon {
+  color: var(--text);
   fill: var(--text);
   stroke: var(--text);
 }
@@ -667,6 +668,7 @@ body article.content div.article-inner kbd {
 }
 body article.content div.article-inner kbd svg,
 body article.content div.article-inner kbd ion-icon {
+  color: var(--text);
   fill: var(--text);
   stroke: var(--text);
 }
@@ -1055,6 +1057,7 @@ body div.search-modal-container div.search-modal > footer p kbd {
 }
 body div.search-modal-container div.search-modal > footer p kbd svg,
 body div.search-modal-container div.search-modal > footer p kbd ion-icon {
+  color: var(--background);
   fill: var(--background);
   stroke: var(--background);
 }

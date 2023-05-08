@@ -108,6 +108,7 @@ body {
 
 		svg,
 		ion-icon {
+			color: var(--text);
 			fill: var(--text);
 			stroke: var(--text);
 		}
@@ -849,6 +850,7 @@ body {
 
 						svg,
 						ion-icon {
+							color: var(--background);
 							fill: var(--background);
 							stroke: var(--background);
 						}
