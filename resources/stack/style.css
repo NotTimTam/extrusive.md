@@ -645,7 +645,7 @@ body article.content div.article-inner pre code {
 body article.content div.article-inner code,
 body article.content div.article-inner tt {
   padding: 0.2em 0.4em;
-  margin: 0;
+  margin: 2px 0;
   font-size: 85%;
   white-space: break-spaces;
   background-color: var(--background-2);
