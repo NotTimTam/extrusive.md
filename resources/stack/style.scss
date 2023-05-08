@@ -106,7 +106,8 @@ body {
 		border-radius: 6px;
 		box-shadow: inset 0 -1px 0 var(--background-0);
 
-		svg {
+		svg,
+		ion-icon {
 			fill: var(--text);
 			stroke: var(--text);
 		}
@@ -846,7 +847,8 @@ body {
 						border-radius: 6px;
 						box-shadow: inset 0 -1px 0 var(--background-3);
 
-						svg {
+						svg,
+						ion-icon {
 							fill: var(--background);
 							stroke: var(--background);
 						}

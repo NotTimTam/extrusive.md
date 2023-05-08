@@ -236,6 +236,7 @@
 	}
 
 	kbd {
+		transition: $transition;
 		display: inline-block;
 		padding: 3px 5px;
 		font-size: 11px;
@@ -245,10 +246,16 @@
 		line-height: 10px;
 		color: var(--text);
 		vertical-align: middle;
-		background-color: var(--background-2);
+		background-color: var(--background);
 		border: solid 1px var(--background-0);
 		border-radius: 6px;
 		box-shadow: inset 0 -1px 0 var(--background-0);
+
+		svg,
+		ion-icon {
+			fill: var(--text);
+			stroke: var(--text);
+		}
 	}
 
 	figure {
