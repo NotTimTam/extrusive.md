@@ -41,6 +41,8 @@ Client:
 -   Code highlighting.
 -   Functional keyboard interaction with search modal.
 -   Clean, reduced-footprint clientside code.
+-   The ability to clear recent searches.
+-   Automatical removal of search results that link to paths that no longer exist.
 
 Server/CLI:
 
