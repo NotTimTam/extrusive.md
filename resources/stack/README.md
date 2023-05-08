@@ -19,7 +19,7 @@ console.log("Happy hacking!");
 ## Tips
 
 -   You can use [ion-icons](https://ionic.io/ionicons) in your markdown!
-    -   Simply add `<ion-icon name="<name-of-icon>"/>` anywhere in your code!
+    -   Simply add `<ion-icon name="<name-of-icon>"/>` anywhere in your code! <ion-icon style="fill: orange;" name="wifi"></ion-icon>
 -   You can add custom CSS to your project (preferably in the `styles` directory) and point the builder to it in your `extrusive.config.json`.
     -   Just add any files you want to and then indicate an array of the locations of the files in the config:
 
@@ -37,9 +37,10 @@ console.log("Happy hacking!");
 
 ```json
 {
-    // ...
-    "copyright": "© 2023 Anonymous <script src='/public/test.js'></script>",
-    // ...
+	// ...
+	"copyright": "© 2023 Anonymous <script src='/public/test.js'></script>"
+	// ...
 }
 ```
+
 (a better supported script import system is on the way)
