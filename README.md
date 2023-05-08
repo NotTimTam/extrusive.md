@@ -53,6 +53,7 @@ CLI:
 
 -   **"start"** command with live server for development that does not rely on a build.
 -   Static, serverless build option.
+-   Better support for user script imports.
 
 General:
 
