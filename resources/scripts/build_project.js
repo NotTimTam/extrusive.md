@@ -11,7 +11,7 @@ const build_project = (directory, { force }) => {
 		console.log(
 			`\n${logInitializer}\n${"-".repeat(
 				logInitializer.length
-			)}\n\nStarting project build process.`
+			)}\n\nStarting project build process in "${directory}".`
 		);
 
 		// If the directory exists, we check whether it is empty or not.
