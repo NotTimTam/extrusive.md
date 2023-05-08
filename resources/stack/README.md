@@ -12,6 +12,8 @@ You can run `npx extrusive build` to build your app, or `npx extrusive start` to
 
 Remember, the "README.md" file in the root of the content directory is a special homepage document!
 
+Unfamiliar with markdown? [It's easy to learn!](https://www.markdownguide.org/)
+
 ```js
 console.log("Happy hacking!");
 ```
