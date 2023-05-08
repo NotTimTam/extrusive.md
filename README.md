@@ -62,3 +62,4 @@ General:
 
 -   Convert to NPM package.
 -   Decrease package/output footprint.
+-   Explore potential for headless CMS.
