@@ -402,9 +402,6 @@ body aside.nav section.folder button {
   padding: 0.5rem 1rem;
   width: 100%;
 }
-body aside.nav section.folder button:last-of-type {
-  margin-bottom: 0.5rem;
-}
 body aside.nav section.folder button.active {
   background-color: var(--background-3);
   color: var(--info);
