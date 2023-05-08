@@ -14,12 +14,15 @@ There are a lot of markdown interfaces out there. There are a lot of documentati
 
 `extrusive.md` fills the niche that none of these do.
 
-1. It is, and always will be, **100% free and open-source**.
-2. It hands you control, to self-host and self-deploy.
-3. It has a simple interface that requires almost no set-up work.
-4. It allows you to easily implement custom styles in your documentation. It builds lightning-fast using your folder structure and `.md` files. Meaning you can edit your docs in whatever environment you want.
-5. It has a built-in search bar, that works... That you don't have to pay for!
-6. It has a nice toggle for light/dark mode and was built mobile-first!
+1. **100% free and open-source** now, and forever!
+2. Hands you control and can be self-hosted and self-deployed.
+3. Designed with a simple interface that requires almost no set-up work.
+4. Allows easy implementation of custom styles in your documentation. 
+5. Builds lightning-fast using your folder structure and `.md` files. Meaning you can edit your docs in whatever environment you want.
+6. Includes a built-in search bar, that works... That you don't have to pay for!
+7. Simple toggle for light/dark mode
+8. Built with a mobile-first design model!
+9. O.O.T.B. support for [ion-icons](https://ionic.io/ionicons) directly in your markdown!
 
 `extrusive.md` may not have all the bells and whistles, but it makes up for these by being open-ended and ready for you to customize!
 
