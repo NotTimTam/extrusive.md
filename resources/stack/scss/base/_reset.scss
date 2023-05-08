@@ -1,0 +1,79 @@
+@use "../util/index" as *;
+
+// Determine root variables based on dark mode preference.
+:root {
+	--background: #ffffff;
+	--background-2: #dadada;
+	--background-3: #c4c4c4;
+	--background-0: #c4c4c4;
+	--text: #232724;
+	--border: 1px solid var(--background-3);
+	--info: #2891be;
+	--error: #f25f5c;
+	--warning: #ffe066;
+	--success: #70c1b3;
+
+	--content-font-size: 17px;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background-0: hsl(220, 15%, 10%);
+		--background: hsl(220, 15%, 16%);
+		--background-2: hsl(220, 15%, 23%);
+		--background-3: hsl(220, 15%, 33%);
+		--text: white;
+		--border: 1px solid var(--background-3);
+	}
+}
+
+// Reset all components.
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	outline: none;
+	border: none;
+	background: none;
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+		sans-serif;
+
+	transition: $transition;
+	transition-property: color;
+
+	color: var(--text);
+
+	scroll-behavior: smooth;
+}
+
+// Dictate the body's new colors based on the desired user theme, and its class.
+body {
+	&.light {
+		--background: #ffffff;
+		--background-2: #dadada;
+		--background-3: #c4c4c4;
+		--background-0: #c4c4c4;
+		--text: #232724;
+		--border: 1px solid var(--background-3);
+
+		color-scheme: light;
+	}
+
+	&.dark {
+		--background-0: hsl(220, 15%, 10%);
+		--background: hsl(220, 15%, 16%);
+		--background-2: hsl(220, 15%, 23%);
+		--background-3: hsl(220, 15%, 33%);
+		--text: white;
+		--border: 1px solid var(--background-3);
+
+		color-scheme: dark;
+	}
+}

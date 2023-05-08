@@ -1,3 +1,4 @@
+/* Custom markdown translator that handles the contents of an article display */
 :root {
   --background: #ffffff;
   --background-2: #dadada;
@@ -40,6 +41,25 @@
   scroll-behavior: smooth;
 }
 
+body.light {
+  --background: #ffffff;
+  --background-2: #dadada;
+  --background-3: #c4c4c4;
+  --background-0: #c4c4c4;
+  --text: #232724;
+  --border: 1px solid var(--background-3);
+  color-scheme: light;
+}
+body.dark {
+  --background-0: hsl(220, 15%, 10%);
+  --background: hsl(220, 15%, 16%);
+  --background-2: hsl(220, 15%, 23%);
+  --background-3: hsl(220, 15%, 33%);
+  --text: white;
+  --border: 1px solid var(--background-3);
+  color-scheme: dark;
+}
+
 .error {
   color: var(--error);
 }
@@ -60,24 +80,6 @@ body {
   background-color: var(--background);
   /* GENERAL ELEMENTS AND UNIVERSALS */
   /* SPECIFIC ELEMENTS AND PAGE CONTENT */
-}
-body.light {
-  --background: #ffffff;
-  --background-2: #dadada;
-  --background-3: #c4c4c4;
-  --background-0: #c4c4c4;
-  --text: #232724;
-  --border: 1px solid var(--background-3);
-  color-scheme: light;
-}
-body.dark {
-  --background-0: hsl(220, 15%, 10%);
-  --background: hsl(220, 15%, 16%);
-  --background-2: hsl(220, 15%, 23%);
-  --background-3: hsl(220, 15%, 33%);
-  --text: white;
-  --border: 1px solid var(--background-3);
-  color-scheme: dark;
 }
 @media (max-width: 1185px) {
   body {
@@ -471,6 +473,7 @@ body article.content div.article-inner {
   padding-bottom: 1rem;
   font-size: var(--content-font-size);
 }
+body article.content div.article-inner ion-icon,
 body article.content div.article-inner svg.ionicon {
   color: var(--text);
   fill: var(--text);
@@ -659,6 +662,19 @@ body article.content div.article-inner tt {
 body article.content div.article-inner code br,
 body article.content div.article-inner tt br {
   display: none;
+}
+body article.content div.article-inner kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  line-height: 10px;
+  color: var(--text);
+  vertical-align: middle;
+  background-color: var(--background-2);
+  border: solid 1px var(--background-0);
+  border-radius: 6px;
+  box-shadow: inset 0 -1px 0 var(--background-0);
 }
 body article.content div.article-inner figure {
   margin: 1em 40px;
