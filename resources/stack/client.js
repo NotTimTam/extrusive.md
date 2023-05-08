@@ -378,6 +378,8 @@ function saveRecentSearch(path) {
 
 	if (!recentSearches.includes(path)) recentSearches.push(path);
 
+	console.log(recentSearches);
+
 	while (recentSearches > 5) recentSearches.shift();
 
 	localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
@@ -524,6 +526,7 @@ function displaySearchResults(data) {
 					[
 						"click",
 						() => {
+							saveRecentSearch(path);
 							handleCloseSearch();
 							handleRequestFile(path);
 						},
