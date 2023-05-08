@@ -369,6 +369,10 @@ body {
 		user-select: none;
 
 		section.folder {
+			display: flex;
+			flex-direction: column;
+			gap: $gap;
+
 			> h1 {
 				padding: $padding $margin;
 

@@ -349,6 +349,11 @@ body aside.nav {
      -moz-user-select: none;
           user-select: none;
 }
+body aside.nav section.folder {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
 body aside.nav section.folder > h1 {
   padding: 0.5rem 1rem;
   text-transform: uppercase;
