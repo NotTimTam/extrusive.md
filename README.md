@@ -63,3 +63,4 @@ General:
 -   Convert to NPM package.
 -   Decrease package/output footprint.
 -   Explore potential for headless CMS.
+-   Support for more characters, particularly '.' in file/folder labels.
