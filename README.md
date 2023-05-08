@@ -40,13 +40,21 @@ Client:
 -   Better loading/error indicators.
 -   Code highlighting.
 -   Functional keyboard interaction with search modal.
--   Clean, reduced-footprint clientside code.
+-   Cleaner, more reliable client-side code.
 -   The ability to clear recent searches.
 -   Automatical removal of search results that link to paths that no longer exist.
 
-Server/CLI:
+Server:
 
--   Static, serverless build option.
--   **"start"** command with live server for development that does not rely on a build.
 -   Improved search functionality.
 -   More robust server defense firewall.
+
+CLI:
+
+-   **"start"** command with live server for development that does not rely on a build.
+-   Static, serverless build option.
+
+General:
+
+-   Convert to NPM package.
+-   Decrease package/output footprint.
