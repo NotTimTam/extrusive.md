@@ -18,6 +18,7 @@ const build_project = (directory, { force }) => {
 		if (fs.existsSync(directory)) {
 			const dir = fs.readdirSync(directory);
 
+			// If the user has not forced the overwriting of directory contents, we throw an error to prevent data erasure.
 			if (dir && dir.length && !force)
 				throw 'The provided build directory contains files. Use the "--force" option to overwrite its contents.';
 		} else {
