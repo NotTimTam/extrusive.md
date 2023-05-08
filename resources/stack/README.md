@@ -1,6 +1,6 @@
 <div style="margin-bottom: 2rem">
 <div style="width: 6rem; height: 6rem; margin: 0 auto; margin-top: 6rem;">
-    <ion-icon name="terminal"></ion-icon>
+    <ion-icon name="terminal" style="width: 100%; height: 100%;"></ion-icon>
 </div>
 
 <h1 style="text-align: center;">extrusive.md</h1>
