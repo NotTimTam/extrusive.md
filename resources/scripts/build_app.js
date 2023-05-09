@@ -20,9 +20,8 @@ marked.use(
 		highlight(code, lang) {
 			const language = hljs.getLanguage(lang) ? lang : "plaintext";
 			const newValue = hljs.highlight(code, { language }).value;
-			console.log(newValue);
 
-			return `<div id="${lang}">${newValue}</div>`;
+			return `<span id="${lang}">${newValue}</span>`;
 		},
 	})
 );
