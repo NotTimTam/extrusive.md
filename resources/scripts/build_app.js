@@ -33,7 +33,7 @@ marked.use(
  * @param {string} cwd - The current working directory.
  * @returns Newly generated search indices.
  */
-const compile_file_tree = (cwd, path, cwd) => {
+const compile_file_tree = (path, cwd) => {
 	const files = fs.readdirSync(path);
 
 	let search_indices = [];
@@ -102,7 +102,7 @@ const compile_static_content = (cwd, src, dest) => {
 			const {
 				content: additionalContent,
 				search_indices: additionalSearchIndices,
-			} = compile_static_content(filePath, cwd);
+			} = compile_static_content(cwd, filePath, dest);
 
 			content = { ...content, ...additionalContent };
 			search_indices = [...search_indices, ...additionalSearchIndices];
