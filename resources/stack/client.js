@@ -659,9 +659,7 @@ function renderArticle(data, path) {
 function triggerLoading() {
 	document.title = "Loading...";
 
-	updatePageContent(
-		`<p class="loading"><ion-icon name="cloud-download-outline"></ion-icon> Loading...</p>`
-	);
+	updatePageContent(`<div class="loading"></div>`);
 }
 
 /**
