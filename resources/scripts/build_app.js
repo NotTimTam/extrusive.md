@@ -81,8 +81,8 @@ const compile_file_tree = (path, cwd) => {
 };
 
 /**
- * Configure and copy the HTML file from the stack directory.
- * @param {string} buildResourcesDir - The stack directory to get the file from.
+ * Configure and copy the HTML file from the build resources directory.
+ * @param {string} buildResourcesDir - The build resources directory to get the file from.
  */
 const copy_html = async (buildResourcesDir, target, config, imports) => {
 	try {
@@ -163,7 +163,7 @@ const build_server = async (target, config, cwd) => {
 	console.log("Copying server.");
 	const buildResourcesDir = `${path.dirname(
 		require.main.filename
-	)}/resources/stack`;
+	)}/resources/stack/build`;
 	await copy_paths([
 		[`${buildResourcesDir}/server.js`, `${target}/server.js`, "file"],
 		[`${buildResourcesDir}/server`, `${target}/server`, "directory"],
