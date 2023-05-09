@@ -79,6 +79,9 @@ code.hljs {
   color: #ffffff;
   font-family: "Courier New", Courier, monospace;
 }
+code.hljs * {
+  font-family: inherit;
+}
 code.hljs .hljs-string {
   color: #67b26d;
 }

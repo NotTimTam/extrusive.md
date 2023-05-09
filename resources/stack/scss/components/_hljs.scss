@@ -43,6 +43,10 @@ code.hljs {
 	color: $text;
 	font-family: "Courier New", Courier, monospace;
 
+	* {
+		font-family: inherit;
+	}
+
 	.hljs-string {
 		color: $string;
 	}
