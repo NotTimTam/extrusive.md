@@ -47,9 +47,9 @@ const build_project = (directory, { force }) => {
 				: ""; // Grab the source data.
 
 			// Write the file.
-			fs.writeFileSync(`${directory}/${dest}`, data, {
-				flag: "w",
-				force: true,
+			fs.outputFileSync(`${directory}/${dest}`, data, {
+				encoding: "utf-8",
+				mode: "w",
 			});
 		}
 
