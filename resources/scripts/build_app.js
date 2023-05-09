@@ -21,7 +21,7 @@ marked.use(
 			const language = hljs.getLanguage(lang) ? lang : "plaintext";
 			const newValue = hljs.highlight(code, { language }).value;
 
-			return `<span id="${lang}">${newValue}</span>`;
+			return `<span class="label"></span>${newValue}`;
 		},
 	})
 );

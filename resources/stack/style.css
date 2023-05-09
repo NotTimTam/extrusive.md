@@ -67,7 +67,7 @@ code.hljs {
   color: #ffffff;
   position: relative;
 }
-code.hljs span::after {
+code.hljs span.label {
   content: attr(id);
   text-transform: capitalize;
   position: absolute;
@@ -80,7 +80,7 @@ code.hljs span::after {
   opacity: 0;
   transition-property: opacity;
 }
-code.hljs span:hover::after {
+code.hljs:hover span.label {
   display: block;
   opacity: 1;
 }

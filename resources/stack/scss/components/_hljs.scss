@@ -31,29 +31,27 @@ code.hljs {
 	color: $theme-text;
 	position: relative;
 
-	span {
-		&::after {
-			content: attr(id);
-			text-transform: capitalize;
-			position: absolute;
-			top: $gap;
-			right: $gap;
+	span.label {
+		content: attr(id);
+		text-transform: capitalize;
+		position: absolute;
+		top: $gap;
+		right: $gap;
 
-			border-radius: $gap;
-			padding: $gap;
+		border-radius: $gap;
+		padding: $gap;
 
-			display: none;
+		display: none;
 
-			transition: $transition;
-			opacity: 0;
-			transition-property: opacity;
-		}
+		transition: $transition;
+		opacity: 0;
+		transition-property: opacity;
+	}
 
-		&:hover {
-			&::after {
-				display: block;
-				opacity: 1;
-			}
+	&:hover {
+		span.label {
+			display: block;
+			opacity: 1;
 		}
 	}
 
