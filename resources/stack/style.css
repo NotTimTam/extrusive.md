@@ -1012,10 +1012,13 @@ body div.search-modal-container div.search-modal div.search-content div.results 
   font-size: 0.85em;
   color: var(--background-3);
 }
-body div.search-modal-container div.search-modal div.search-content div.recent-searches button[isFocused=true], body div.search-modal-container div.search-modal div.search-content div.recent-searches button:hover,
-body div.search-modal-container div.search-modal div.search-content div.results button[isFocused=true],
+body div.search-modal-container div.search-modal div.search-content div.recent-searches button[isfocused=true],
+body div.search-modal-container div.search-modal div.search-content div.results button[isfocused=true] {
+  background-color: var(--info) !important;
+}
+body div.search-modal-container div.search-modal div.search-content div.recent-searches button:hover,
 body div.search-modal-container div.search-modal div.search-content div.results button:hover {
-  background-color: var(--info);
+  background-color: transparent;
 }
 body div.search-modal-container div.search-modal div.search-content div.recent-searches button.active,
 body div.search-modal-container div.search-modal div.search-content div.results button.active {
@@ -1029,6 +1032,10 @@ body div.search-modal-container div.search-modal div.search-content div.results 
 body div.search-modal-container div.search-modal div.search-content div.recent-searches button:active,
 body div.search-modal-container div.search-modal div.search-content div.results button:active {
   transform: unset;
+}
+body div.search-modal-container div.search-modal div.search-content div.recent-searches:not(:has(button[isfocused=true])) button:hover,
+body div.search-modal-container div.search-modal div.search-content div.results:not(:has(button[isfocused=true])) button:hover {
+  background-color: var(--info);
 }
 body div.search-modal-container div.search-modal > footer {
   margin: 1rem;

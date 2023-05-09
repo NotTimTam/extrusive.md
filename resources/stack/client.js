@@ -467,7 +467,7 @@ function displayRecentSearches() {
 			const buttonElement = createElement(
 				"button",
 				[["className", "file-result"]],
-				null,
+				[["isfocused", false]],
 				[
 					[
 						"click",
@@ -554,7 +554,7 @@ function displaySearchResults(data) {
 			const buttonElement = createElement(
 				"button",
 				[["className", "file-result"]],
-				null,
+				[["isfocused", false]],
 				[
 					[
 						"click",
@@ -934,21 +934,35 @@ window.addEventListener("keydown", (e) => {
 					return;
 				case "ArrowUp":
 					if (focusedButton) focusNResultButton(focusedButton, -1);
-					else
-						focusResultButton(
-							searchModalContainer.querySelector(
-								"div.search-content button.file-result:last-of-type"
-							)
+					else {
+						const hoveredButton = document.querySelector(
+							"div.search-content button.file-result:hover"
 						);
+
+						if (hoveredButton)
+							focusNResultButton(hoveredButton, -1);
+						else
+							focusResultButton(
+								searchModalContainer.querySelector(
+									"div.search-content button.file-result:last-of-type"
+								)
+							);
+					}
 					return;
 				case "ArrowDown":
 					if (focusedButton) focusNResultButton(focusedButton, 1);
-					else
-						focusResultButton(
-							searchModalContainer.querySelector(
-								"div.search-content button.file-result:first-of-type"
-							)
+					else {
+						const hoveredButton = document.querySelector(
+							"div.search-content button.file-result:hover"
 						);
+						if (hoveredButton) focusNResultButton(hoveredButton, 1);
+						else
+							focusResultButton(
+								searchModalContainer.querySelector(
+									"div.search-content button.file-result:first-of-type"
+								)
+							);
+					}
 					return;
 				default:
 					return;
@@ -965,7 +979,7 @@ window.onload = () => {
 
 document
 	.querySelector("div.search-modal div.search-content")
-	.addEventListener("mousemove", () => {
+	.addEventListener("mousemove", (e) => {
 		clearFocusedResultButtons();
 	});
 

@@ -799,9 +799,12 @@ body {
 							}
 						}
 
-						&[isFocused="true"],
+						&[isfocused="true"] {
+							background-color: var(--info) !important;
+						}
+
 						&:hover {
-							background-color: var(--info);
+							background-color: transparent;
 						}
 
 						&.active {
@@ -815,6 +818,14 @@ body {
 
 						&:active {
 							transform: unset;
+						}
+					}
+
+					&:not(:has(button[isfocused="true"])) {
+						button {
+							&:hover {
+								background-color: var(--info);
+							}
 						}
 					}
 				}
