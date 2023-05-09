@@ -1,4 +1,30 @@
 /**
+ * Render a new article.
+ * @param {string} data - The article content.
+ * @param {string} path - The original path to the content on the server.
+ */
+function renderArticle(data, path) {
+	const title = path.split("/")[path.split("/").length - 1].split(".")[0];
+
+	// Update the document title.
+	document.title = title;
+
+	// // Update the url.
+	// const hash = window.location.hash;
+	// const location = window.location.pathname;
+	// history.pushState(null, null, window.location.origin + path);
+
+	// Update the page content.
+	updatePageContent(data);
+
+	// Create side nav.
+	createInnerNavStructure(data);
+
+	// If there was an inter-page link, route to it.
+	triggerRescroll(hash, location);
+}
+
+/**
  * Normalize a route path.
  * @param {string} path - The path to normalize.
  * @returns A normalized path.
