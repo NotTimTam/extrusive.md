@@ -78,7 +78,7 @@ body.dark {
 code.hljs {
   overflow-x: auto;
   color: #ffffff;
-  font-family: "Source Code Pro", "Courier New", Courier, monospace;
+  font-family: "Source Code Pro", "Courier New", Courier, monospace !important;
 }
 code.hljs * {
   font-family: inherit;

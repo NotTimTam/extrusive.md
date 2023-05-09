@@ -38,11 +38,10 @@ $comment: #7f7f7f;
 // 	background: $selection !important;
 // }
 
-
 code.hljs {
 	overflow-x: auto;
 	color: $text;
-	font-family: "Source Code Pro", "Courier New", Courier, monospace;
+	font-family: "Source Code Pro", "Courier New", Courier, monospace !important;
 
 	* {
 		font-family: inherit;
