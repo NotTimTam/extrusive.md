@@ -6,7 +6,6 @@
 	"bin": {
 		"extrusive": "./index.js"
 	},
-	"scripts": {},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/NotTimTam/extrusive.md.git"
