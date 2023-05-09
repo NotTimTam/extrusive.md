@@ -9,6 +9,8 @@ const handleRequestFile = async (path) => {
 	try {
 		const data = content[path];
 
+		console.log(content);
+
 		renderArticle(data, path);
 		indicateSelectedNav(path);
 	} catch (err) {
