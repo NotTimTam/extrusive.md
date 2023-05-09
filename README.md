@@ -30,11 +30,14 @@ There are a lot of markdown interfaces out there. There are a lot of documentati
 
 Just run `npm install -g https://github.com/NotTimTam/extrusive.md.git` to install the `extrusive` CLI globally.
 
-Then, in your desired work directory, create your project by running:
+## Getting Started
+
+After you have installed the `extrusive` CLI, you can test it by running `npx extrusive test`.
+
+To create your project environment run this command in your desired work directory:
 `npx exstrusive create`
-or
+Or, if you would like to specify a directory, run:
 `npx exstrusive create --project-directory <project-directory>`
-to specify a project directory.
 
 ## Development Roadmap
 
@@ -58,7 +61,6 @@ Server:
 CLI:
 
 -   **"start"** command with live server for development that does not rely on a build.
--   Static, serverless build option.
 -   Better support for user script imports.
 -   Sanitize output html.
 

@@ -53,6 +53,13 @@ build_cli(program, [
 		description: "Run your app in developer mode.",
 		action: start_project,
 	},
+	{
+		name: "test",
+		description: "Ensure the app is running",
+		action: () => {
+			console.log("extrusive.md is up and running!");
+		},
+	},
 ]);
 
 // options: [
