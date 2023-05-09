@@ -9,7 +9,7 @@ function renderArticle(data, path) {
 	// Update the document title.
 	document.title = title;
 
-	// // Update the url.
+	// Update the url.
 	// const hash = window.location.hash;
 	// const location = window.location.pathname;
 	// history.pushState(null, null, window.location.origin + path);
@@ -21,7 +21,7 @@ function renderArticle(data, path) {
 	createInnerNavStructure(data);
 
 	// If there was an inter-page link, route to it.
-	triggerRescroll(hash, location);
+	// triggerRescroll(hash, location);
 }
 
 /**
@@ -30,7 +30,7 @@ function renderArticle(data, path) {
  * @returns A normalized path.
  */
 const normalizePath = (path) =>
-	path.includes("content") ? `content${path.split("content")[1]}` : "/";
+	path.includes("content") ? `/content${path.split("content")[1]}` : "/";
 
 /**
  * Request a file by path.
@@ -41,10 +41,16 @@ const handleRequestFile = async (path) => {
 	triggerLoadingArticleContent();
 
 	try {
-		const data = content[normalizePath(path)];
+		const normalizedPath = normalizePath(path);
+		const data = content[normalizedPath]
+			.replace(/&#39;/g, "'")
+			.replace(/&quot;/g, '"')
+			.replace(/&gt;/g, ">")
+			.replace(/&lt;/g, "<")
+			.replace(/&amp;/g, "&");
 
-		renderArticle(data, normalizePath(path));
-		indicateSelectedNav(normalizePath(path));
+		renderArticle(data, normalizedPath);
+		indicateSelectedNav(normalizedPath);
 	} catch (err) {
 		console.error(err);
 

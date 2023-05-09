@@ -319,6 +319,17 @@ const build_client = async (stackDir, target, config, cwd) => {
 
 	// Build app indeces.
 	console.log("Building file structure caches.");
+	console.log(
+		replace_all(
+			replace_all(
+				JSON.stringify(dirTree(contentTarget, { normalizePath: true })),
+				cwd,
+				""
+			),
+			"/build/server",
+			""
+		)
+	);
 	const caches = [
 		[
 			// The file tree is localized to not include the servers entire file structure in the path.

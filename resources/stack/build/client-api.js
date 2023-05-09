@@ -10,9 +10,9 @@ function renderArticle(data, path) {
 	document.title = title;
 
 	// Update the url.
-	// const hash = window.location.hash;
-	// const location = window.location.pathname;
-	// history.pushState(null, null, window.location.origin + path);
+	const hash = window.location.hash;
+	const location = window.location.pathname;
+	history.pushState(null, null, window.location.origin + path);
 
 	// Update the page content.
 	updatePageContent(data);
@@ -21,16 +21,8 @@ function renderArticle(data, path) {
 	createInnerNavStructure(data);
 
 	// If there was an inter-page link, route to it.
-	// triggerRescroll(hash, location);
+	triggerRescroll(hash, location);
 }
-
-/**
- * Normalize a route path.
- * @param {string} path - The path to normalize.
- * @returns A normalized path.
- */
-const normalizePath = (path) =>
-	path.includes("content") ? `/content${path.split("content")[1]}` : "/";
 
 /**
  * Request a file by path.
@@ -41,25 +33,22 @@ const handleRequestFile = async (path) => {
 	triggerLoadingArticleContent();
 
 	try {
-		const normalizedPath = normalizePath(path);
-		const data = content[normalizedPath]
-			.replace(/&#39;/g, "'")
-			.replace(/&quot;/g, '"')
-			.replace(/&gt;/g, ">")
-			.replace(/&lt;/g, "<")
-			.replace(/&amp;/g, "&");
+		const { data } = await axios.get("/api/v1/markdown", {
+			params: { path },
+		});
 
-		renderArticle(data, normalizedPath);
-		indicateSelectedNav(normalizedPath);
+		renderArticle(data, path);
+		indicateSelectedNav(path);
 	} catch (err) {
 		console.error(err);
 
 		updatePageContent(
-			`<p class="error"><ion-icon name="warning-outline"></ion-icon> Could not load that file.</p>`
+			`<p class="error"><ion-icon name="warning-outline"></ion-icon> ${err.response.data}</p>`
 		);
 	}
 };
 
+let cancelSearch;
 /**
  * Search files for info.
  * @param {Event} e - The input element's event for oninput.
@@ -68,13 +57,13 @@ const handleSearchFiles = async (e) => {
 	try {
 		const { value: query } = e.target;
 
-		const data = searchIndices
-			.filter(
-				({ path, data }) =>
-					path.toLowerCase().includes(query.toLowerCase()) ||
-					data.includes(query.toLowerCase())
-			)
-			.map(({ path }) => path);
+		cancelSearch && cancelSearch();
+		const { data } = await axios.get(`/api/v1/markdown/search`, {
+			params: { query },
+			cancelToken: new axios.CancelToken((canceler) => {
+				cancelSearch = canceler;
+			}),
+		});
 
 		displaySearchResults(data);
 	} catch (err) {
@@ -83,7 +72,7 @@ const handleSearchFiles = async (e) => {
 };
 
 window.onload = () => {
-	const normalizedPath = normalizePath(window.location.pathname);
-	if (normalizedPath === "/") handleRequestFile("/content/README.html");
-	else handleRequestFile(normalizedPath);
+	if (window.location.pathname === "/")
+		handleRequestFile("/content/README.html");
+	else handleRequestFile(window.location.pathname);
 };
