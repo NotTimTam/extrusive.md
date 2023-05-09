@@ -60,6 +60,51 @@ body.dark {
   color-scheme: dark;
 }
 
+/* Cyberpunk Theme */ /*
+  $selection: rgba(255, 100, 200, 0.35);
+  $background: #242424;
+  $text: #ffffff;
+  $string: #67fca8;
+  $number: #44ead9;
+  $title: #9e4ee8;
+  $built_in: #ea5452;
+  $keyword: #bc368b;
+  $function: #e552ea;
+  $params: #508be5;
+  $comment: #7f7f7f;
+*/
+/* Dark Orange Theme */
+code.hljs {
+  overflow-x: auto;
+  color: #ffffff;
+  font-family: "Courier New", Courier, monospace;
+}
+code.hljs .hljs-string {
+  color: #67b26d;
+}
+code.hljs .hljs-number {
+  color: #e8a04e !important;
+}
+code.hljs .hljs-title {
+  color: #9e4ee8 !important;
+}
+code.hljs .hljs-built_in {
+  color: #e25158 !important;
+}
+code.hljs .hljs-keyword {
+  color: #e5b742 !important;
+}
+code.hljs .hljs-function > .hljs-keyword {
+  color: #e0923a !important;
+  font-style: italic;
+}
+code.hljs .hljs-params {
+  color: #508be5;
+}
+code.hljs .hljs-comment {
+  color: #7f7f7f;
+}
+
 .error {
   color: var(--error);
 }
@@ -624,13 +669,13 @@ body article.content div.article-inner img {
 body article.content div.article-inner code,
 body article.content div.article-inner pre,
 body article.content div.article-inner samp {
-  font-family: monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: 1em;
 }
 body article.content div.article-inner tt,
 body article.content div.article-inner code,
 body article.content div.article-inner samp {
-  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: 12px;
 }
 body article.content div.article-inner samp {

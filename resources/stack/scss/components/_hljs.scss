@@ -1,5 +1,4 @@
 /* Cyberpunk Theme */ /*
-:root {
   $selection: rgba(255, 100, 200, 0.35);
   $background: #242424;
   $text: #ffffff;
@@ -11,22 +10,20 @@
   $function: #e552ea;
   $params: #508be5;
   $comment: #7f7f7f;
-}*/
+*/
 
 /* Dark Orange Theme */
-:root {
-	$selection: rgba(224, 146, 58, 0.35);
-	$background: #242424;
-	$text: #ffffff;
-	$string: #67b26d;
-	$number: #e8a04e;
-	$title: #9e4ee8;
-	$built_in: #e25158;
-	$keyword: #e5b742;
-	$function: #e0923a;
-	$params: #508be5;
-	$comment: #7f7f7f;
-}
+$selection: rgba(224, 146, 58, 0.35);
+$background: #242424;
+$text: #ffffff;
+$string: #67b26d;
+$number: #e8a04e;
+$title: #9e4ee8;
+$built_in: #e25158;
+$keyword: #e5b742;
+$function: #e0923a;
+$params: #508be5;
+$comment: #7f7f7f;
 
 // pre code {
 // 	display: block;
@@ -44,6 +41,7 @@
 code.hljs {
 	overflow-x: auto;
 	color: $text;
+	font-family: "Courier New", Courier, monospace;
 
 	.hljs-string {
 		color: $string;
