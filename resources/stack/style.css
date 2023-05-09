@@ -2,7 +2,7 @@
 /* Custom markdown translator that handles the contents of an article display */
 :root {
   --background: #ffffff;
-  --background-2: #dadada;
+  --background-2: #f0f0f0;
   --background-3: #c4c4c4;
   --background-0: #c4c4c4;
   --text: #232724;
@@ -44,7 +44,7 @@
 
 body.light {
   --background: #ffffff;
-  --background-2: #dadada;
+  --background-2: #f0f0f0;
   --background-3: #c4c4c4;
   --background-0: #c4c4c4;
   --text: #232724;
@@ -61,23 +61,28 @@ body.dark {
   color-scheme: dark;
 }
 
-/* Cyberpunk Theme */ /*
-  $selection: rgba(255, 100, 200, 0.35);
-  $background: #242424;
-  $text: #ffffff;
-  $string: #67fca8;
-  $number: #44ead9;
-  $title: #9e4ee8;
-  $built_in: #ea5452;
-  $keyword: #bc368b;
-  $function: #e552ea;
-  $params: #508be5;
-  $comment: #7f7f7f;
-*/
 /* Dark Orange Theme */
 code.hljs {
   overflow-x: auto;
   color: #ffffff;
+  position: relative;
+}
+code.hljs span::after {
+  content: attr(id);
+  text-transform: capitalize;
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  display: none;
+  transition: all 0.15s ease-in-out;
+  opacity: 0;
+  transition-property: opacity;
+}
+code.hljs span:hover::after {
+  display: block;
+  opacity: 1;
 }
 code.hljs * {
   font-family: inherit;

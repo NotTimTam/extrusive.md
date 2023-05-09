@@ -1,81 +1,96 @@
-/* Cyberpunk Theme */ /*
-  $selection: rgba(255, 100, 200, 0.35);
-  $background: #242424;
-  $text: #ffffff;
-  $string: #67fca8;
-  $number: #44ead9;
-  $title: #9e4ee8;
-  $built_in: #ea5452;
-  $keyword: #bc368b;
-  $function: #e552ea;
-  $params: #508be5;
-  $comment: #7f7f7f;
-*/
+@use "../util/index" as *;
 
 /* Dark Orange Theme */
-$selection: rgba(224, 146, 58, 0.35);
-$background: #242424;
-$text: #ffffff;
-$string: #67b26d;
-$number: #e8a04e;
-$title: #9e4ee8;
-$built_in: #e25158;
-$keyword: #e5b742;
-$function: #e0923a;
-$params: #508be5;
-$comment: #7f7f7f;
+$theme-selection: rgba(224, 146, 58, 0.35);
+$theme-background: #242424;
+$theme-text: #ffffff;
+$theme-string: #67b26d;
+$theme-number: #e8a04e;
+$theme-title: #9e4ee8;
+$theme-built_in: #e25158;
+$theme-keyword: #e5b742;
+$theme-function: #e0923a;
+$theme-params: #508be5;
+$theme-comment: #7f7f7f;
 
 // pre code {
 // 	display: block;
 // 	overflow-x: auto;
 // 	padding: 10px;
-// 	background: $background;
+// 	background: $theme-background;
 // 	-webkit-text-size-adjust: none;
 // }
 
 // pre code *::selection,
 // .hljs::selection {
-// 	background: $selection !important;
+// 	background: $theme-selection !important;
 // }
 
 code.hljs {
 	overflow-x: auto;
-	color: $text;
+	color: $theme-text;
+	position: relative;
+
+	span {
+		&::after {
+			content: attr(id);
+			text-transform: capitalize;
+			position: absolute;
+			top: $gap;
+			right: $gap;
+
+			border-radius: $gap;
+			padding: $gap;
+
+			display: none;
+
+			transition: $transition;
+			opacity: 0;
+			transition-property: opacity;
+		}
+
+		&:hover {
+			&::after {
+				display: block;
+				opacity: 1;
+			}
+		}
+	}
 
 	* {
 		font-family: inherit;
 	}
 
 	.hljs-string {
-		color: $string;
+		color: $theme-string;
 	}
 
 	.hljs-number {
-		color: $number !important;
+		color: $theme-number !important;
 	}
 
 	.hljs-title {
-		color: $title !important;
+		color: $theme-title !important;
 	}
 
 	.hljs-built_in {
-		color: $built_in !important;
+		color: $theme-built_in !important;
 	}
 
 	.hljs-keyword {
-		color: $keyword !important;
+		color: $theme-keyword !important;
 	}
 
 	.hljs-function > .hljs-keyword {
-		color: $function !important;
+		color: $theme-function !important;
 		font-style: italic;
 	}
 
 	.hljs-params {
-		color: $params;
+		color: $theme-params;
 	}
 
 	.hljs-comment {
-		color: $comment;
+		color: $theme-comment;
 	}
 }
