@@ -105,7 +105,7 @@ const compile_static_content = (cwd, src, dest) => {
 
 			content = { ...content, ...additionalContent };
 			search_indices = [...search_indices, ...additionalSearchIndices];
-		} else {
+		} else if (filePath.includes(".md")) {
 			const existingData = fs.readFileSync(filePath, "utf-8");
 
 			const convertedData = marked.parse(existingData);
@@ -136,6 +136,16 @@ const compile_static_content = (cwd, src, dest) => {
 						.toLowerCase(),
 				},
 			];
+		} else {
+			const data = fs.readFileSync(filePath, "utf-8");
+
+			content[
+				replace_all(
+					replace_all(normalize_path(filePath), cwd, ""),
+					"/build/server",
+					""
+				)
+			] = data;
 		}
 	});
 
