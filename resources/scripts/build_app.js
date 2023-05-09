@@ -154,16 +154,15 @@ const copy_html = async (buildResourcesDir, target, config, imports) => {
 
 /**
  * Build the server-side portion of the app.
+ * @param {string} stackDir - The directory for stack resources.
  * @param {string} target - The target build directory.
  * @param {*} config - The user's configuration object.
  * @param {string} cwd - The current working directory.
  */
-const build_server = async (target, config, cwd) => {
+const build_server = async (stackDir, target, config, cwd) => {
 	// Copy the build structure.
 	console.log("Copying server.");
-	const buildResourcesDir = `${path.dirname(
-		require.main.filename
-	)}/resources/stack/build`;
+	const buildResourcesDir = `${stackDir}/build`;
 	await copy_paths([
 		[`${buildResourcesDir}/server.js`, `${target}/server.js`, "file"],
 		[`${buildResourcesDir}/server`, `${target}/server`, "directory"],
@@ -213,11 +212,12 @@ const build_server = async (target, config, cwd) => {
 
 /**
  * Build the client-side portion of the app.
+ * @param {string} stackDir - The directory for stack resources.
  * @param {string} target - The target build directory.
  * @param {*} config - The user's configuration object.
  * @param {string} cwd - The current working directory.
  */
-const build_client = async (target, config, cwd) => {
+const build_client = async (stackDir, target, config, cwd) => {
 	// Add sub-directory to target.
 	const contentTarget = `${target}/server/content`;
 	target = target + "/client";
@@ -230,10 +230,7 @@ const build_client = async (target, config, cwd) => {
 
 	// Copy the build files.
 	console.log("Copying necessary client files.");
-	const stackDir = `${path.dirname(require.main.filename)}/resources/stack`;
-	const buildResourcesDir = `${path.dirname(
-		require.main.filename
-	)}/resources/stack/build`;
+	const buildResourcesDir = `${stackDir}/build`;
 	await copy_paths([
 		[`${cwd}/styles`, `${target}/styles`, "directory"],
 		[`${cwd}/public`, `${target}/public`, "directory"],
@@ -321,8 +318,15 @@ const build_app = async ({ outputDirectory, force, static }, commands) => {
 			await fs.mkdir(target, { recursive: true });
 		}
 
-		await build_server(target, config, cwd); // Build the server-side.
-		await build_client(target, config, cwd); // Build the client-side.
+		/**
+		 * The directory for build stack resources.
+		 */
+		const stackDir = `${path.dirname(
+			require.main.filename
+		)}/resources/stack`;
+
+		await build_server(stackDir, target, config, cwd); // Build the server-side.
+		await build_client(stackDir, target, config, cwd); // Build the client-side.
 
 		console.log(
 			"\nBuild complete. Your markdown is now ready to shine! ✨\n"
