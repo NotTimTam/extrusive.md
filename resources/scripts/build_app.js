@@ -49,7 +49,7 @@ const compile_file_tree = (path, cwd) => {
 		} else {
 			const existingData = fs.readFileSync(filePath, "utf-8");
 
-			if (file.includes(".md")) {
+			if (filePath.includes(".md")) {
 				const convertedData = marked.parse(existingData);
 				const newPath = replace_all(filePath, ".md", ".html"); // Replace any .md file extensions with .html.
 
