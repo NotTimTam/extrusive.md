@@ -799,11 +799,8 @@ body {
 							}
 						}
 
+						&[isFocused="true"],
 						&:hover {
-							background-color: unset;
-						}
-
-						&[isFocused="true"] {
 							background-color: var(--info);
 						}
 

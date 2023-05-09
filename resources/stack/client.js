@@ -405,11 +405,46 @@ function clearFocusedResultButtons() {
  */
 function focusResultButton(button) {
 	try {
-		clearFocusedResultButtons();
+		clearFocusedResultButtons(); // Clear any currently focused buttons.
 
 		button.setAttribute("isfocused", "true");
 	} catch (err) {
 		console.error("Failed to focus on a search result button:", err);
+	}
+}
+
+/**
+ * Focus on the result button that is 'n' adjacent to the current search button.
+ * @param {Element} button - The button to focus on.
+ * @param {number} n - The direction to move in. (loops)
+ */
+function focusNResultButton(button, n = 1) {
+	try {
+		const resultButtons = Array.from(
+			document.querySelectorAll("div.search-content button.file-result")
+		);
+
+		const index = resultButtons.indexOf(button);
+
+		clearFocusedResultButtons(); // Clear any currently focused buttons.
+
+		// If the button isn't focused, we return.
+		if (
+			!(typeof index === "number") ||
+			!Boolean(button.getAttribute("isfocused"))
+		)
+			return clearFocusedResultButtons();
+
+		// Calculate and focus on new index.
+		const newIndex =
+			index + n < 0
+				? resultButtons.length - 1
+				: index + n > resultButtons.length - 1
+				? 0
+				: index + n;
+		resultButtons[newIndex].setAttribute("isfocused", "true");
+	} catch (err) {
+		console.error("Couldn't focus on result button:", err);
 	}
 }
 
@@ -441,19 +476,19 @@ function displayRecentSearches() {
 							handleRequestFile(path);
 						},
 					],
-					[
-						"mousemove",
-						(e) => {
-							focusResultButton(e.target);
-						},
-					],
-					[
-						"focus",
-						(e) => {
-							focusResultButton(e.target);
-							e.target.blur();
-						},
-					],
+					// [
+					// 	"mousemove",
+					// 	(e) => {
+					// 		focusResultButton(e.target);
+					// 	},
+					// ],
+					// [
+					// 	"focus",
+					// 	(e) => {
+					// 		focusResultButton(e.target);
+					// 		e.target.blur();
+					// 	},
+					// ],
 				]
 			);
 
@@ -529,19 +564,19 @@ function displaySearchResults(data) {
 							handleRequestFile(path);
 						},
 					],
-					[
-						"mousemove",
-						(e) => {
-							focusResultButton(e.target);
-						},
-					],
-					[
-						"focus",
-						(e) => {
-							focusResultButton(e.target);
-							e.target.blur();
-						},
-					],
+					// [
+					// 	"mousemove",
+					// 	(e) => {
+					// 		focusResultButton(e.target);
+					// 	},
+					// ],
+					// [
+					// 	"focus",
+					// 	(e) => {
+					// 		focusResultButton(e.target);
+					// 		e.target.blur();
+					// 	},
+					// ],
 				]
 			);
 
@@ -876,24 +911,48 @@ window.addEventListener("keydown", (e) => {
 				return;
 		}
 	} else {
-		switch (e.key) {
-			case "Enter":
-				// If the search bar is open.
-				// handlePreventDefault(e);
-				if (
-					document
-						.querySelector("div.search-modal-container")
-						.getAttribute("open") === "true"
-				) {
-					const focusedButton = document.querySelector(
-						"div.search-content button.file-result[isfocused='true']"
-					);
+		const searchModalContainer = document.querySelector(
+			"div.search-modal-container"
+		);
 
+		// If the search modal is open.
+		if (searchModalContainer.getAttribute("open") === "true") {
+			const focusedButton = searchModalContainer.querySelector(
+				"div.search-content button.file-result[isfocused='true']"
+			);
+
+			switch (e.key) {
+				case "Enter":
+					// If the user hits "Enter" when a button is focused.
 					if (focusedButton) focusedButton.click();
-				}
-				return;
-			default:
-				return;
+					else
+						focusResultButton(
+							searchModalContainer.querySelector(
+								"div.search-content button.file-result:first-of-type"
+							)
+						);
+					return;
+				case "ArrowUp":
+					if (focusedButton) focusNResultButton(focusedButton, -1);
+					else
+						focusResultButton(
+							searchModalContainer.querySelector(
+								"div.search-content button.file-result:last-of-type"
+							)
+						);
+					return;
+				case "ArrowDown":
+					if (focusedButton) focusNResultButton(focusedButton, 1);
+					else
+						focusResultButton(
+							searchModalContainer.querySelector(
+								"div.search-content button.file-result:first-of-type"
+							)
+						);
+					return;
+				default:
+					return;
+			}
 		}
 	}
 });
@@ -903,6 +962,12 @@ window.onload = () => {
 		handleRequestFile("/content/README.html");
 	else handleRequestFile(window.location.pathname);
 };
+
+document
+	.querySelector("div.search-modal div.search-content")
+	.addEventListener("mousemove", () => {
+		clearFocusedResultButtons();
+	});
 
 document.body.addEventListener("scroll", () => {
 	determineInnerNavPos();

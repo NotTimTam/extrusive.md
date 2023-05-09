@@ -1012,12 +1012,9 @@ body div.search-modal-container div.search-modal div.search-content div.results 
   font-size: 0.85em;
   color: var(--background-3);
 }
-body div.search-modal-container div.search-modal div.search-content div.recent-searches button:hover,
+body div.search-modal-container div.search-modal div.search-content div.recent-searches button[isFocused=true], body div.search-modal-container div.search-modal div.search-content div.recent-searches button:hover,
+body div.search-modal-container div.search-modal div.search-content div.results button[isFocused=true],
 body div.search-modal-container div.search-modal div.search-content div.results button:hover {
-  background-color: unset;
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches button[isFocused=true],
-body div.search-modal-container div.search-modal div.search-content div.results button[isFocused=true] {
   background-color: var(--info);
 }
 body div.search-modal-container div.search-modal div.search-content div.recent-searches button.active,
