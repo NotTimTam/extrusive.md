@@ -366,7 +366,7 @@ const build_client = async (stackDir, target, config, cwd) => {
  */
 const build_static = async (stackDir, target, config, cwd) => {
 	// Add sub-directory to target.
-	const contentTarget = `${target}/server/content`;
+	const contentTarget = `${cwd}/content`;
 
 	// Create the build directories.
 	console.log("Copying necessary client directories.");
@@ -393,7 +393,6 @@ const build_static = async (stackDir, target, config, cwd) => {
 
 	// Build app indeces.
 	console.log("Building file structure caches.");
-	console.log(dirTree(contentTarget, { normalizePath: true }));
 	const caches = [
 		[
 			// The file tree is localized to not include the servers entire file structure in the path.
