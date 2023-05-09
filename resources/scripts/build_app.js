@@ -3,17 +3,17 @@ const packageJson = require("../../package.json");
 const fs = require("fs-extra");
 const dirTree = require("directory-tree");
 const { marked } = require("marked");
-// const { gfmHeadingId } = require("marked-gfm-heading-id");
+const { gfmHeadingId } = require("marked-gfm-heading-id");
 const { normalize_path, replace_all, copy_paths } = require("./util");
 
-// marked.use(
-// 	{
-// 		langPrefix: "",
-// 		mangle: false,
-// 		headerIds: false,
-// 	}
-// 	gfmHeadingId()
-// );
+marked.use(
+	{
+		langPrefix: "",
+		mangle: false,
+		headerIds: false,
+	},
+	gfmHeadingId()
+);
 
 /**
  * Recursively convert all markdown files to html and build search indices.
