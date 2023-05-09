@@ -46,20 +46,17 @@ const compile_file_tree = (path, cwd) => {
 			const additionalIndices = compile_file_tree(filePath, cwd);
 
 			search_indices = [...search_indices, ...additionalIndices];
-		} else {
+		} else if (filePath.includes(".md")) {
 			const existingData = fs.readFileSync(filePath, "utf-8");
 
-			if (filePath.includes(".md")) {
-				const convertedData = marked.parse(existingData);
-				const newPath = replace_all(filePath, ".md", ".html"); // Replace any .md file extensions with .html.
+			const convertedData = marked.parse(existingData);
+			const newPath = replace_all(filePath, ".md", ".html"); // Replace any .md file extensions with .html.
 
-				// Rename the file.
-				fs.renameSync(filePath, newPath);
+			// Rename the file.
+			fs.renameSync(filePath, newPath);
 
-				// Write the parsed contents.
-				fs.outputFileSync(newPath, convertedData);
-			}
-
+			// Write the parsed contents.
+			fs.outputFileSync(newPath, convertedData);
 			console.log(`Creating search directory for "${newPath}"`);
 
 			// Store page indeces.
