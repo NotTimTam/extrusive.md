@@ -32,7 +32,6 @@ code.hljs {
 	position: relative;
 
 	span.label {
-		content: attr(id);
 		text-transform: capitalize;
 		position: absolute;
 		top: $gap;

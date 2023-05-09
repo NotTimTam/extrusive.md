@@ -68,7 +68,6 @@ code.hljs {
   position: relative;
 }
 code.hljs span.label {
-  content: attr(id);
   text-transform: capitalize;
   position: absolute;
   top: 0.25rem;
@@ -429,10 +428,10 @@ body aside.nav section.folder > h1 div.title {
   gap: 0.25rem;
 }
 body aside.nav section.folder > h1:hover {
-  background-color: var(--background-3);
+  background-color: var(--background-2);
 }
 body aside.nav section.folder > h1.active {
-  background-color: var(--background-3);
+  background-color: var(--background-2);
 }
 body aside.nav section.folder > h1.active div.title {
   color: var(--info);
