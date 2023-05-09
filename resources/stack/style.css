@@ -78,7 +78,6 @@ body.dark {
 code.hljs {
   overflow-x: auto;
   color: #ffffff;
-  font-family: "Source Code Pro", "Courier New", Courier, monospace !important;
 }
 code.hljs * {
   font-family: inherit;
@@ -672,15 +671,14 @@ body article.content div.article-inner img {
 }
 body article.content div.article-inner code,
 body article.content div.article-inner pre,
-body article.content div.article-inner samp {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 1em;
+body article.content div.article-inner samp,
+body article.content div.article-inner tt {
+  font-family: "Source Code Pro", "Courier New", Courier, monospace;
 }
-body article.content div.article-inner tt,
 body article.content div.article-inner code,
-body article.content div.article-inner samp {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 12px;
+body article.content div.article-inner pre,
+body article.content div.article-inner tt {
+  font-size: 1em;
 }
 body article.content div.article-inner samp {
   font-size: 85%;
