@@ -425,8 +425,8 @@ const build_static = async (stackDir, target, config, cwd) => {
 		`const content=${JSON.stringify(content, (key, value) => {
 			if (typeof value === "string") {
 				return value
-					.replace(/"/g, '\\"') // replace double quotes with escaped double quotes
-					.replace(/'/g, "\\'"); // replace single quotes with escaped single quotes
+					.replace(/"/g, `\"`) // replace double quotes with escaped double quotes
+					.replace(/'/g, `\'`); // replace single quotes with escaped single quotes
 			}
 			return value;
 		})};`,
