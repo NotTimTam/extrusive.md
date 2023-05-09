@@ -82,9 +82,9 @@ const compile_file_tree = (path, cwd) => {
 
 /**
  * Configure and copy the HTML file from the stack directory.
- * @param {string} stackDir - The stack directory to get the file from.
+ * @param {string} buildResourcesDir - The stack directory to get the file from.
  */
-const copy_html = async (stackDir, target, config, imports) => {
+const copy_html = async (buildResourcesDir, target, config, imports) => {
 	try {
 		const { logo, title, author, description, favicon, styles, copyright } =
 			config;
@@ -136,7 +136,10 @@ const copy_html = async (stackDir, target, config, imports) => {
 		];
 
 		// Load the html data.
-		let HTMLData = await fs.readFile(`${stackDir}/index.html`, "utf-8");
+		let HTMLData = await fs.readFile(
+			`${buildResourcesDir}/index.html`,
+			"utf-8"
+		);
 
 		// Configure replacements.
 		for (const [target, data] of replacements)
@@ -158,13 +161,15 @@ const copy_html = async (stackDir, target, config, imports) => {
 const build_server = async (target, config, cwd) => {
 	// Copy the build structure.
 	console.log("Copying server.");
-	const stackDir = `${path.dirname(require.main.filename)}/resources/stack`;
+	const buildResourcesDir = `${path.dirname(
+		require.main.filename
+	)}/resources/stack`;
 	await copy_paths([
-		[`${stackDir}/server.js`, `${target}/server.js`, "file"],
-		[`${stackDir}/server`, `${target}/server`, "directory"],
+		[`${buildResourcesDir}/server.js`, `${target}/server.js`, "file"],
+		[`${buildResourcesDir}/server`, `${target}/server`, "directory"],
 		[`${cwd}/content`, `${target}/server/content`, "directory"],
-		[`${stackDir}/gitignore.txt`, `${target}/.gitignore`, "file"],
-		[`${stackDir}/env.txt`, `${target}/.env`, "file"],
+		[`${buildResourcesDir}/gitignore.txt`, `${target}/.gitignore`, "file"],
+		[`${buildResourcesDir}/env.txt`, `${target}/.env`, "file"],
 	]);
 
 	// Convert all markdown to pre-rendered html and get search indices.
@@ -180,13 +185,16 @@ const build_server = async (target, config, cwd) => {
 	);
 
 	// Save package.json.
-	if (await fs.exists(`${stackDir}/package.json.txt`)) {
+	if (await fs.exists(`${buildResourcesDir}/package.json.txt`)) {
 		console.log("Generating package.json.");
 		const { title, author, description, copyright } = config;
 
 		const newPackage = {
 			...JSON.parse(
-				await fs.readFile(`${stackDir}/package.json.txt`, "utf-8")
+				await fs.readFile(
+					`${buildResourcesDir}/package.json.txt`,
+					"utf-8"
+				)
 			),
 			name: title ? title : "",
 			author: author ? author : "",
@@ -222,14 +230,20 @@ const build_client = async (target, config, cwd) => {
 
 	// Copy the build files.
 	console.log("Copying necessary client files.");
-	const stackDir = `${path.dirname(require.main.filename)}/resources/stack`;
+	const buildResourcesDir = `${path.dirname(
+		require.main.filename
+	)}/resources/stack/build`;
 	await copy_paths([
 		[`${cwd}/styles`, `${target}/styles`, "directory"],
 		[`${cwd}/public`, `${target}/public`, "directory"],
-		[`${stackDir}/style.css`, `${target}/style.css`, "file"],
-		[`${stackDir}/style.css.map`, `${target}/style.css.map`, "file"],
-		[`${stackDir}/client.js`, `${target}/client.js`, "file"],
-		[`${stackDir}/404.html`, `${target}/404.html`, "file"],
+		[`${buildResourcesDir}/style.css`, `${target}/style.css`, "file"],
+		[
+			`${buildResourcesDir}/style.css.map`,
+			`${target}/style.css.map`,
+			"file",
+		],
+		[`${buildResourcesDir}/client.js`, `${target}/client.js`, "file"],
+		[`${buildResourcesDir}/404.html`, `${target}/404.html`, "file"],
 	]);
 
 	// Build app indeces.
@@ -256,7 +270,7 @@ const build_client = async (target, config, cwd) => {
 	}
 
 	// Configure and copy html.
-	await copy_html(stackDir, `${target}/index.html`, config, [
+	await copy_html(buildResourcesDir, `${target}/index.html`, config, [
 		{ path: "file-tree.js", type: "script" },
 	]);
 };
