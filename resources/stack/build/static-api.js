@@ -1,4 +1,12 @@
 /**
+ * Gets the current location.search and grabs the document field.
+ * @returns {string} A path to the requested document.
+ */
+function getDocumentQuery() {
+	return window.location.search.split("document=")[1].replace(/%20/g, " ");
+}
+
+/**
  * Render a new article.
  * @param {string} data - The article content.
  * @param {string} path - The original path to the content on the server.
@@ -10,9 +18,10 @@ function renderArticle(data, path) {
 	document.title = title;
 
 	// Update the url.
-	// const hash = window.location.hash;
-	// const location = window.location.pathname;
-	// history.pushState(null, null, window.location.origin + path);
+	const hash = window.location.hash;
+	window.location.search = `?document=${path}`;
+	const location = window.location.pathname;
+	// history.pushState(null, null, window.location.origin + `?document=${path}`);
 
 	// Update the page content.
 	updatePageContent(data);
@@ -21,7 +30,7 @@ function renderArticle(data, path) {
 	createInnerNavStructure(data);
 
 	// If there was an inter-page link, route to it.
-	// triggerRescroll(hash, location);
+	triggerRescroll(hash, location);
 }
 
 /**
@@ -83,7 +92,10 @@ const handleSearchFiles = async (e) => {
 };
 
 window.onload = () => {
+	const query = getDocumentQuery();
+
+	if (query) return handleRequestFile(query);
+
 	const normalizedPath = normalizePath(window.location.pathname);
 	if (normalizedPath === "/") handleRequestFile("/content/README.html");
-	else handleRequestFile(normalizedPath);
 };
