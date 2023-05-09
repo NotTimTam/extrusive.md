@@ -344,7 +344,7 @@ const build_client = async (stackDir, target, config, cwd) => {
 	await copy_html(
 		buildResourcesDir,
 		`${target}/index.html`,
-		{ ...config, styles: [...config.styles, "/style.css"] },
+		{ ...config, styles: ["/style.css", ...config.styles] },
 		[
 			{
 				path: "https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js",
@@ -452,7 +452,7 @@ const build_static = async (stackDir, target, config, cwd) => {
 	await copy_html(
 		buildResourcesDir,
 		`${target}/index.html`,
-		{ ...config, styles: [...config.styles, "./style.css"] },
+		{ ...config, styles: ["./style.css", ...config.styles] },
 		[
 			{
 				path: "https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js",
