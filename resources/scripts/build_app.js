@@ -353,7 +353,7 @@ const build_client = async (stackDir, target, config, cwd) => {
 	await copy_html(
 		buildResourcesDir,
 		`${target}/index.html`,
-		{ ...config, styles: ["/style.css", ...config.styles] },
+		{ ...config, styles: ["/style.css", ...(config.styles || [])] },
 		[
 			{
 				path: "https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js",
@@ -465,7 +465,7 @@ const build_static = async (stackDir, target, config, cwd) => {
 	await copy_html(
 		buildResourcesDir,
 		`${target}/index.html`,
-		{ ...config, styles: ["./style.css", ...config.styles] },
+		{ ...config, styles: ["./style.css", ...(config.styles || [])] },
 		[
 			{
 				path: "https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js",
@@ -509,7 +509,7 @@ const build_app = async ({ outputDirectory, force, static }, commands) => {
 		const cwd = normalize_path(process.cwd());
 		target = target || `${cwd}/build`;
 		console.log(
-			`Building${static ? " a static deployment " : " "}from "${cwd}".`
+			`Building${static ? " a static deployment " : " "}from "${cwd}".\n`
 		);
 
 		// Load configuration from user.

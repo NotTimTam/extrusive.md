@@ -34,9 +34,9 @@ const build_project = (directory, { force }) => {
 		// Create the initial project files.
 		console.log("Creating necessary files.");
 		const files = [
-			["resources/stack/README.md", "content/README.md"],
-			["resources/stack/config.json", "extrusive.config.json"],
-			["resources/stack/favicon.svg", "public/favicon.svg"],
+			["resources/stack/build/README.md", "content/README.md"],
+			["resources/stack/build/config.json", "extrusive.config.json"],
+			["resources/stack/build/favicon.svg", "public/favicon.svg"],
 			// ["resources/stack/gitignore.txt", ".gitignore"],
 			[null, "styles/custom.css"],
 		];
@@ -45,6 +45,8 @@ const build_project = (directory, { force }) => {
 			const data = fs.existsSync(srcPath)
 				? fs.readFileSync(srcPath, "utf-8")
 				: ""; // Grab the source data.
+
+			console.log("PATH", srcPath);
 
 			// Write the file.
 			fs.outputFileSync(`${directory}/${dest}`, data, {

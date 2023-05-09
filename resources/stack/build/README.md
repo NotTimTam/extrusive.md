@@ -14,7 +14,7 @@ Remember, the "README.md" file in the root of the content directory is a special
 
 Unfamiliar with markdown? [It's easy to learn!](https://www.markdownguide.org/)
 
-```js
+```javascript
 console.log("Happy hacking!");
 ```
 
