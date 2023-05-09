@@ -22,7 +22,7 @@ marked.use(
 			const newValue = hljs.highlight(code, { language }).value;
 			console.log(newValue);
 
-			return newValue;
+			return `<div id="${lang}">${newValue}</div>`;
 		},
 	})
 );
