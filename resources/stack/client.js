@@ -327,6 +327,7 @@ function createInnerNavStructure(data) {
 		if (!matches || matches.length < 1) return (innerNav.innerHTML = null);
 
 		for (const match of matches) {
+			if (!match.includes("id")) continue;
 			const id = match.split('"')[1];
 			const headingNum = +match.split("h")[1][0];
 			const element = `h${headingNum}`;
