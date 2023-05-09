@@ -23,7 +23,10 @@ function triggerRescroll(hash, search) {
  * @returns {string} A path to the requested document.
  */
 function getDocumentQuery() {
-	return window.location.search.split("document=")[1].replace(/%20/g, " ");
+	return (
+		window.location.search &&
+		window.location.search.split("document=")[1].replace(/%20/g, " ")
+	);
 }
 
 /**
