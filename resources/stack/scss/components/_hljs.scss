@@ -41,6 +41,8 @@ code.hljs {
 		top: $gap;
 		right: $gap;
 
+		user-select: none;
+
 		background-color: var(--background-0);
 
 		border-radius: $gap;

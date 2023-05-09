@@ -74,6 +74,9 @@ code.hljs span.label {
   position: absolute;
   top: 0.25rem;
   right: 0.25rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
   background-color: var(--background-0);
   border-radius: 0.25rem;
   padding: 0.25rem;
