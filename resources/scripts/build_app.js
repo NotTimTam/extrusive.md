@@ -12,7 +12,7 @@ marked.use(
 		mangle: false,
 		headerIds: false,
 	},
-	gfmHeadingId()
+	gfmHeadingId({ prefix: "" })
 );
 
 /**

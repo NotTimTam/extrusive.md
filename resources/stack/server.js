@@ -28,6 +28,7 @@ app.get("*", (req, res) => {
 	try {
 		res.status(200).sendFile(`${appDir}/index.html`);
 	} catch (err) {
+		console.error(err);
 		res.status(404).sendFile(`${appDir}/404.html`);
 	}
 });
