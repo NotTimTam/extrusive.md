@@ -458,6 +458,7 @@ body article.content {
   }
 }
 body article.content div.article-inner {
+  position: relative;
   flex-grow: 2;
   display: flex;
   flex-direction: column;

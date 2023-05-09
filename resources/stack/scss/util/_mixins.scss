@@ -2,6 +2,8 @@
 
 /* Custom markdown translator that handles the contents of an article display */
 @mixin markdown {
+	position: relative;
+
 	flex-grow: 2;
 	display: flex;
 	flex-direction: column;
