@@ -56,7 +56,7 @@ const compile_file_tree = (path, cwd) => {
 			fs.renameSync(filePath, newPath);
 
 			// Write the parsed contents.
-			fs.writeFileSync(newPath, convertedData);
+			fs.outputFileSync(newPath, convertedData);
 
 			console.log(`Creating search directory for "${newPath}"`);
 
@@ -218,7 +218,7 @@ const copy_html = async (buildResourcesDir, target, config, imports) => {
 			HTMLData = HTMLData.replace(target, data);
 
 		// Write the HTML file.
-		await fs.writeFile(target, HTMLData);
+		await fs.outputFile(target, HTMLData);
 	} catch (err) {
 		console.error("\nFailed to copy html:", err);
 	}
