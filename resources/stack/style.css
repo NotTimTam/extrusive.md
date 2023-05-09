@@ -546,6 +546,8 @@ body article.content div.article-inner p.error {
 }
 body article.content div.article-inner p.error ion-icon {
   color: var(--error);
+  stroke: var(--error);
+  fill: var(--error);
 }
 body article.content div.article-inner h1,
 body article.content div.article-inner h2,
@@ -1014,8 +1016,6 @@ body div.search-modal-container div.search-modal div.search-content div.no-resul
 body div.search-modal-container div.search-modal div.search-content div.no-results ion-icon {
   font-size: 4rem;
   color: var(--error);
-  stroke: var(--error);
-  fill: var(--error);
 }
 body div.search-modal-container div.search-modal div.search-content div.no-results p.query {
   font-weight: 600;

@@ -35,6 +35,9 @@
 	p.error {
 		ion-icon {
 			color: var(--error);
+
+			stroke: var(--error);
+			fill: var(--error);
 		}
 		color: var(--error);
 	}
