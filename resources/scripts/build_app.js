@@ -230,18 +230,15 @@ const build_client = async (target, config, cwd) => {
 
 	// Copy the build files.
 	console.log("Copying necessary client files.");
+	const stackDir = `${path.dirname(require.main.filename)}/resources/stack`;
 	const buildResourcesDir = `${path.dirname(
 		require.main.filename
 	)}/resources/stack/build`;
 	await copy_paths([
 		[`${cwd}/styles`, `${target}/styles`, "directory"],
 		[`${cwd}/public`, `${target}/public`, "directory"],
-		[`${buildResourcesDir}/style.css`, `${target}/style.css`, "file"],
-		[
-			`${buildResourcesDir}/style.css.map`,
-			`${target}/style.css.map`,
-			"file",
-		],
+		[`${stackDir}/style.css`, `${target}/style.css`, "file"],
+		[`${stackDir}/style.css.map`, `${target}/style.css.map`, "file"],
 		[`${buildResourcesDir}/client.js`, `${target}/client.js`, "file"],
 		[`${buildResourcesDir}/404.html`, `${target}/404.html`, "file"],
 	]);
