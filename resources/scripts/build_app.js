@@ -5,6 +5,7 @@ const dirTree = require("directory-tree");
 const { marked } = require("marked");
 const { gfmHeadingId } = require("marked-gfm-heading-id");
 const { markedHighlight } = require("marked-highlight");
+const hljs = require("highlight.js");
 const { normalize_path, replace_all, copy_paths } = require("./util");
 
 marked.use(
