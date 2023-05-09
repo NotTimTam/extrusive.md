@@ -112,7 +112,13 @@ const compile_static_content = (cwd, src, dest) => {
 			const convertedData = marked.parse(existingData);
 			const newPath = replace_all(filePath, ".md", ".html"); // Replace any .md file extensions with .html.
 
-			content[newPath] = convertedData;
+			content[
+				replace_all(
+					replace_all(normalize_path(newPath), cwd, ""),
+					"/build/server",
+					""
+				)
+			] = convertedData;
 
 			console.log(`Creating search directory for "${newPath}"`);
 
