@@ -688,6 +688,9 @@ body article.content div.article-inner pre code {
   width: 100%;
   padding: 1rem;
 }
+body article.content div.article-inner p code {
+  font-weight: 600;
+}
 body article.content div.article-inner code,
 body article.content div.article-inner tt {
   padding: 0.2em 0.4em;

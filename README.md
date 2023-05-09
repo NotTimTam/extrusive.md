@@ -41,7 +41,6 @@ to specify a project directory.
 Client:
 
 -   Better error indicators.
--   Code highlighting. (`marked-highlight` and `highlight.js`)
 -   Emoji support. (`[marked-emoji](https://www.npmjs.com/package/marked-emoji)`)
 -   Admonition support. (`[marked-admonition-extension](https://www.npmjs.com/package/marked-admonition-extension)`)
 -   Cleaner, more reliable client-side code.
