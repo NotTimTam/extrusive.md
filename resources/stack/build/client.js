@@ -895,11 +895,6 @@ window.addEventListener("keydown", (e) => {
 	}
 });
 
-window.onload = () => {
-	if (window.location.pathname === "/")
-		handleRequestFile("/content/README.html");
-	else handleRequestFile(window.location.pathname);
-};
 
 document
 	.querySelector("div.search-modal div.search-content")

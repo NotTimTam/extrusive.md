@@ -1,4 +1,12 @@
 /**
+ * Normalize a route path.
+ * @param {string} path - The path to normalize.
+ * @returns A normalized path.
+ */
+const normalizePath = (path) =>
+	path.includes("content") ? `content${path.split("content")[1]}` : "/";
+
+/**
  * Request a file by path.
  * @param {string} path - The path to the file that is being requested.
  */
@@ -7,12 +15,10 @@ const handleRequestFile = async (path) => {
 	triggerLoadingArticleContent();
 
 	try {
-		const data = content[path];
+		const data = content[normalizePath(path)];
 
-		console.log(content);
-
-		renderArticle(data, path);
-		indicateSelectedNav(path);
+		renderArticle(data, normalizePath(path));
+		indicateSelectedNav(normalizePath(path));
 	} catch (err) {
 		console.error(err);
 
@@ -42,4 +48,10 @@ const handleSearchFiles = async (e) => {
 	} catch (err) {
 		console.error(err);
 	}
+};
+
+window.onload = () => {
+	const normalizedPath = normalizePath(window.location.pathname);
+	if (normalizedPath === "/") handleRequestFile("/content/README.html");
+	else handleRequestFile(normalizedPath);
 };

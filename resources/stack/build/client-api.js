@@ -44,3 +44,9 @@ const handleSearchFiles = async (e) => {
 		console.error(err);
 	}
 };
+
+window.onload = () => {
+	if (window.location.pathname === "/")
+		handleRequestFile("/content/README.html");
+	else handleRequestFile(window.location.pathname);
+};
