@@ -38,10 +38,12 @@ $comment: #7f7f7f;
 // 	background: $selection !important;
 // }
 
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+
 code.hljs {
 	overflow-x: auto;
 	color: $text;
-	font-family: "Courier New", Courier, monospace;
+	font-family: "Source Code Pro", "Courier New", Courier, monospace;
 
 	* {
 		font-family: inherit;
