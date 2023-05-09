@@ -148,7 +148,7 @@ const copy_html = async (buildResourcesDir, target, config, imports) => {
 		// Write the HTML file.
 		await fs.writeFile(target, HTMLData);
 	} catch (err) {
-		console.error("\nERROR:", err);
+		console.error("\nFailed to copy html:", err);
 	}
 };
 
@@ -329,7 +329,7 @@ const build_app = async ({ outputDirectory, force }, commands) => {
 			"\nBuild complete. Your markdown is now ready to shine! ✨\n"
 		);
 	} catch (err) {
-		console.error("\nERROR:", err);
+		console.error("\nFailed to build app:", err);
 		process.exit(1);
 	}
 };
