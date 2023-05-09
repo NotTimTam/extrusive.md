@@ -40,8 +40,10 @@ to specify a project directory.
 
 Client:
 
--   Better loading/error indicators.
--   Code highlighting.
+-   Better error indicators.
+-   Code highlighting. (`marked-highlight` and `highlight.js`)
+-   Emoji support. (`[marked-emoji](https://www.npmjs.com/package/marked-emoji)`)
+-   Admonition support. (`[marked-admonition-extension](https://www.npmjs.com/package/marked-admonition-extension)`)
 -   Cleaner, more reliable client-side code.
 -   The ability to clear recent searches.
 -   Automatical removal of search results that link to paths that no longer exist.
@@ -57,6 +59,7 @@ CLI:
 -   **"start"** command with live server for development that does not rely on a build.
 -   Static, serverless build option.
 -   Better support for user script imports.
+-   Sanitize output html.
 
 General:
 

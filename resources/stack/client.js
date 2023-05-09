@@ -656,7 +656,7 @@ function renderArticle(data, path) {
 /**
  * Display that the content is loading.
  */
-function triggerLoading() {
+function triggerLoadingArticleContent() {
 	document.title = "Loading...";
 
 	updatePageContent(`<div class="loading"></div>`);
@@ -735,7 +735,7 @@ function configurePlatformSpecificContent(isMac = false) {
  */
 const handleRequestFile = async (path) => {
 	// Trigger loading element.
-	triggerLoading();
+	triggerLoadingArticleContent();
 
 	try {
 		const { data } = await axios.get("/api/v1/markdown", {
@@ -761,8 +761,6 @@ let cancelSearch;
 const handleSearchFiles = async (e) => {
 	try {
 		const { value: query } = e.target;
-
-		if (query < 3) return;
 
 		cancelSearch && cancelSearch();
 		const { data } = await axios.get(`/api/v1/markdown/search`, {
