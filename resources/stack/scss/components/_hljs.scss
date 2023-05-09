@@ -37,20 +37,22 @@ code.hljs {
 		top: $gap;
 		right: $gap;
 
+		background-color: var(--background-0);
+
 		border-radius: $gap;
 		padding: $gap;
-
-		display: none;
 
 		transition: $transition;
 		opacity: 0;
 		transition-property: opacity;
+		pointer-events: none;
+		cursor: copy;
 	}
 
 	&:hover {
 		span.label {
-			display: block;
 			opacity: 1;
+			pointer-events: unset;
 		}
 	}
 

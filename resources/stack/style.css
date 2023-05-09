@@ -72,16 +72,18 @@ code.hljs span.label {
   position: absolute;
   top: 0.25rem;
   right: 0.25rem;
+  background-color: var(--background-0);
   border-radius: 0.25rem;
   padding: 0.25rem;
-  display: none;
   transition: all 0.15s ease-in-out;
   opacity: 0;
   transition-property: opacity;
+  pointer-events: none;
+  cursor: copy;
 }
 code.hljs:hover span.label {
-  display: block;
   opacity: 1;
+  pointer-events: unset;
 }
 code.hljs * {
   font-family: inherit;
