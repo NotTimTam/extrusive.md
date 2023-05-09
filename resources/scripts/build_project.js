@@ -49,7 +49,7 @@ const build_project = (directory, { force }) => {
 			// Write the file.
 			fs.writeFileSync(`${directory}/${dest}`, data, {
 				flag: "w",
-				force,
+				force: true,
 			});
 		}
 
