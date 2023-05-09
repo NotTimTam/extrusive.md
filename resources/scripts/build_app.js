@@ -337,9 +337,9 @@ const build_client = async (stackDir, target, config, cwd) => {
 			path: "https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js",
 			type: "script",
 		},
-		{ path: "file-tree.js", type: "script" },
-		{ path: "client-api.js", type: "script" },
-		{ path: "client.js", type: "script" },
+		{ path: "/file-tree.js", type: "script" },
+		{ path: "/client-api.js", type: "script" },
+		{ path: "/client.js", type: "script" },
 	]);
 };
 
