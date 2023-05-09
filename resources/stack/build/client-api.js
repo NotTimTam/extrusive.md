@@ -1,4 +1,24 @@
 /**
+ * Trigger the page to scroll back to where it was.
+ * @param {string} hash - The portion of the page to scroll to.
+ * @param {string} location - The last location of the page before the route change.
+ */
+function triggerRescroll(hash, location) {
+	try {
+		if (hash && location === window.location.pathname) {
+			setTimeout(() => {
+				window.location.hash = hash;
+
+				const hashSrc = document.querySelector(hash);
+				if (hashSrc) handleScroll(hash);
+			}, 250);
+		}
+	} catch (err) {
+		console.error("Failed rescroll.", err);
+	}
+}
+
+/**
  * Render a new article.
  * @param {string} data - The article content.
  * @param {string} path - The original path to the content on the server.

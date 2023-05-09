@@ -1,4 +1,24 @@
 /**
+ * Trigger the page to scroll back to where it was.
+ * @param {string} hash - The portion of the page to scroll to.
+ * @param {string} location - The last location of the page before the route change.
+ */
+function triggerRescroll(hash, search) {
+	try {
+		if (hash && search === window.location.search) {
+			setTimeout(() => {
+				window.location.hash = hash;
+
+				const hashSrc = document.querySelector(hash);
+				if (hashSrc) handleScroll(hash);
+			}, 250);
+		}
+	} catch (err) {
+		console.error("Failed rescroll.", err);
+	}
+}
+
+/**
  * Gets the current location.search and grabs the document field.
  * @returns {string} A path to the requested document.
  */
@@ -19,9 +39,8 @@ function renderArticle(data, path) {
 
 	// Update the url.
 	const hash = window.location.hash;
-	window.location.search = `?document=${path}`;
-	const location = window.location.pathname;
-	// history.pushState(null, null, window.location.origin + `?document=${path}`);
+	const search = window.location.search;
+	history.pushState(null, null, `?document=${path}`);
 
 	// Update the page content.
 	updatePageContent(data);
@@ -30,7 +49,7 @@ function renderArticle(data, path) {
 	createInnerNavStructure(data);
 
 	// If there was an inter-page link, route to it.
-	triggerRescroll(hash, location);
+	triggerRescroll(hash, search);
 }
 
 /**
