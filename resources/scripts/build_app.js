@@ -49,14 +49,16 @@ const compile_file_tree = (path, cwd) => {
 		} else {
 			const existingData = fs.readFileSync(filePath, "utf-8");
 
-			const convertedData = marked.parse(existingData);
-			const newPath = replace_all(filePath, ".md", ".html"); // Replace any .md file extensions with .html.
+			if (file.includes(".md")) {
+				const convertedData = marked.parse(existingData);
+				const newPath = replace_all(filePath, ".md", ".html"); // Replace any .md file extensions with .html.
 
-			// Rename the file.
-			fs.renameSync(filePath, newPath);
+				// Rename the file.
+				fs.renameSync(filePath, newPath);
 
-			// Write the parsed contents.
-			fs.outputFileSync(newPath, convertedData);
+				// Write the parsed contents.
+				fs.outputFileSync(newPath, convertedData);
+			}
 
 			console.log(`Creating search directory for "${newPath}"`);
 
