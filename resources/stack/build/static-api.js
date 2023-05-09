@@ -7,9 +7,7 @@ const handleRequestFile = async (path) => {
 	triggerLoadingArticleContent();
 
 	try {
-		const { data } = await axios.get("/api/v1/markdown", {
-			params: { path },
-		});
+		const { data } = content[path];
 
 		renderArticle(data, path);
 		indicateSelectedNav(path);
@@ -22,7 +20,6 @@ const handleRequestFile = async (path) => {
 	}
 };
 
-let cancelSearch;
 /**
  * Search files for info.
  * @param {Event} e - The input element's event for oninput.
@@ -31,13 +28,13 @@ const handleSearchFiles = async (e) => {
 	try {
 		const { value: query } = e.target;
 
-		cancelSearch && cancelSearch();
-		const { data } = await axios.get(`/api/v1/markdown/search`, {
-			params: { query },
-			cancelToken: new axios.CancelToken((canceler) => {
-				cancelSearch = canceler;
-			}),
-		});
+		const data = searchIndices
+			.filter(
+				({ path, data }) =>
+					path.toLowerCase().includes(query.toLowerCase()) ||
+					data.includes(query.toLowerCase())
+			)
+			.map(({ path }) => path);
 
 		displaySearchResults(data);
 	} catch (err) {
