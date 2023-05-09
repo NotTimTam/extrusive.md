@@ -476,19 +476,6 @@ function displayRecentSearches() {
 							handleRequestFile(path);
 						},
 					],
-					// [
-					// 	"mousemove",
-					// 	(e) => {
-					// 		focusResultButton(e.target);
-					// 	},
-					// ],
-					// [
-					// 	"focus",
-					// 	(e) => {
-					// 		focusResultButton(e.target);
-					// 		e.target.blur();
-					// 	},
-					// ],
 				]
 			);
 
@@ -564,19 +551,6 @@ function displaySearchResults(data) {
 							handleRequestFile(path);
 						},
 					],
-					// [
-					// 	"mousemove",
-					// 	(e) => {
-					// 		focusResultButton(e.target);
-					// 	},
-					// ],
-					// [
-					// 	"focus",
-					// 	(e) => {
-					// 		focusResultButton(e.target);
-					// 		e.target.blur();
-					// 	},
-					// ],
 				]
 			);
 
