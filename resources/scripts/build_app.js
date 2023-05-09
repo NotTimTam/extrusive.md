@@ -181,7 +181,16 @@ const copy_html = async (buildResourcesDir, target, config, imports) => {
 			[
 				"{{STYLE}}",
 				`
-			${styles ? styles.map((src) => `<link rel="stylesheet" href="${src}" />`) : ""}
+			${
+				styles
+					? styles
+							.map(
+								(src) =>
+									`<link rel="stylesheet" href="${src}" />`
+							)
+							.join("\n")
+					: ""
+			}
 		`,
 			],
 			// Scripts
