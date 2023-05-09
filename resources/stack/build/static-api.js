@@ -7,7 +7,7 @@ const handleRequestFile = async (path) => {
 	triggerLoadingArticleContent();
 
 	try {
-		const { data } = content[path];
+		const data = content[path];
 
 		renderArticle(data, path);
 		indicateSelectedNav(path);
