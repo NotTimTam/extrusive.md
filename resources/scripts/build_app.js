@@ -237,6 +237,11 @@ const build_client = async (stackDir, target, config, cwd) => {
 		[`${cwd}/public`, `${target}/public`, "directory"],
 		[`${stackDir}/style.css`, `${target}/style.css`, "file"],
 		[`${stackDir}/style.css.map`, `${target}/style.css.map`, "file"],
+		[
+			`${buildResourcesDir}/client-api.js`,
+			`${target}/client-api.js`,
+			"file",
+		],
 		[`${buildResourcesDir}/client.js`, `${target}/client.js`, "file"],
 		[`${buildResourcesDir}/404.html`, `${target}/404.html`, "file"],
 	]);
