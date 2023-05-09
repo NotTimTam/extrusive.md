@@ -275,7 +275,7 @@ const build_client = async (target, config, cwd) => {
 /**
  * Build an extrusive app.
  */
-const build_app = async ({ outputDirectory, force }, commands) => {
+const build_app = async ({ outputDirectory, force, static }, commands) => {
 	try {
 		const logInitializer = `extrusive.md v${packageJson.version}`;
 		console.log(
@@ -300,7 +300,9 @@ const build_app = async ({ outputDirectory, force }, commands) => {
 		// Get the current working directory.
 		const cwd = normalize_path(process.cwd());
 		target = target || `${cwd}/build`;
-		console.log(`Building from "${cwd}".`);
+		console.log(
+			`Building${static ? " a static deployment " : " "}from "${cwd}".`
+		);
 
 		// Load configuration from user.
 		console.log("Loading user configuration.");

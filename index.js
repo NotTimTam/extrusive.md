@@ -40,6 +40,11 @@ build_cli(program, [
 				description:
 					"Force the directory to be created, even if it overrides existing files. (WARNING: This is destructive!)",
 			},
+			{
+				flags: "--static",
+				description:
+					"Create the app as a standalone static site. Note: without a server, the clientside footprint is much larger.",
+			},
 		],
 		action: build_app,
 	},
