@@ -167,7 +167,7 @@ const copy_html = async (buildResourcesDir, target, config, imports) => {
 					description ||
 					"Website built with extrusive.md! https://github.com/NotTimTam/extrusive.md"
 				}">
-<link rel="shortcut icon" href="/${favicon}" type="image/x-icon">
+<link rel="shortcut icon" href="${favicon}" type="image/x-icon">
 `,
 			],
 			// Logo
@@ -181,7 +181,7 @@ const copy_html = async (buildResourcesDir, target, config, imports) => {
 			[
 				"{{STYLE}}",
 				`
-			${styles ? styles.map((src) => `<link rel="stylesheet" href="/${src}" />`) : ""}
+			${styles ? styles.map((src) => `<link rel="stylesheet" href="${src}" />`) : ""}
 		`,
 			],
 			// Scripts
@@ -191,8 +191,6 @@ const copy_html = async (buildResourcesDir, target, config, imports) => {
 					? imports
 							.map(({ path, type }) => {
 								if (type === "script")
-									return `<script src="/${path}"></script>`;
-								if (type === "cdn")
 									return `<script src="${path}"></script>`;
 							})
 							.join("\n")
@@ -337,7 +335,7 @@ const build_client = async (stackDir, target, config, cwd) => {
 	await copy_html(buildResourcesDir, `${target}/index.html`, config, [
 		{
 			path: "https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js",
-			type: "cdn",
+			type: "script",
 		},
 		{ path: "file-tree.js", type: "script" },
 		{ path: "client-api.js", type: "script" },
