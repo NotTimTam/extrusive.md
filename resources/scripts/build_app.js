@@ -130,6 +130,8 @@ const copy_html = async (buildResourcesDir, target, config, imports) => {
 							.map(({ path, type }) => {
 								if (type === "script")
 									return `<script src="/${path}"></script>`;
+								if (type === "cdn")
+									return `<script src="${path}"></script>`;
 							})
 							.join("\n")
 					: "",
@@ -273,7 +275,7 @@ const build_client = async (stackDir, target, config, cwd) => {
 	await copy_html(buildResourcesDir, `${target}/index.html`, config, [
 		{
 			path: "https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js",
-			type: "script",
+			type: "cdn",
 		},
 		{ path: "file-tree.js", type: "script" },
 		{ path: "client-api.js", type: "script" },
