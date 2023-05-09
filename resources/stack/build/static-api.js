@@ -15,7 +15,7 @@ const handleRequestFile = async (path) => {
 		console.error(err);
 
 		updatePageContent(
-			`<p class="error"><ion-icon name="warning-outline"></ion-icon> ${err.response.data}</p>`
+			`<p class="error"><ion-icon name="warning-outline"></ion-icon> Could not load that file.</p>`
 		);
 	}
 };
