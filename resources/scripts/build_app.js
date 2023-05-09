@@ -400,7 +400,7 @@ const build_static = async (stackDir, target, config, cwd) => {
 	console.log("Building static client content.");
 
 	// Convert all markdown to pre-rendered html and get search indices.
-	const search_indices = compile_static_content(
+	const { content, search_indices } = compile_static_content(
 		cwd,
 		`${cwd}/content`,
 		`${target}/content.js`
@@ -410,6 +410,13 @@ const build_static = async (stackDir, target, config, cwd) => {
 	await fs.outputFile(
 		`${target}/search-indices.js`,
 		`const searchIndices=${JSON.stringify(search_indices)};`,
+		{ recursive: true }
+	);
+
+	// Save content.
+	await fs.outputFile(
+		`${target}/content.js`,
+		`const content=${JSON.stringify(content)};`,
 		{ recursive: true }
 	);
 
