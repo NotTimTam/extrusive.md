@@ -4,6 +4,7 @@ const fs = require("fs-extra");
 const dirTree = require("directory-tree");
 const { marked } = require("marked");
 const { gfmHeadingId } = require("marked-gfm-heading-id");
+const { markedHighlight } = require("marked-highlight");
 const { normalize_path, replace_all, copy_paths } = require("./util");
 
 marked.use(
@@ -12,7 +13,14 @@ marked.use(
 		mangle: false,
 		headerIds: false,
 	},
-	gfmHeadingId()
+	gfmHeadingId(),
+	markedHighlight({
+		langPrefix: "hljs language-",
+		highlight(code, lang) {
+			const language = hljs.getLanguage(lang) ? lang : "plaintext";
+			return hljs.highlight(code, { language }).value;
+		},
+	})
 );
 
 /**
