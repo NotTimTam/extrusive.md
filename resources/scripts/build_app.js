@@ -398,14 +398,18 @@ const build_static = async (stackDir, target, config, cwd) => {
 			// The file tree is localized to not include the servers entire file structure in the path.
 			`const fileTree = ${replace_all(
 				replace_all(
-					JSON.stringify(
-						dirTree(contentTarget, { normalizePath: true })
+					replace_all(
+						JSON.stringify(
+							dirTree(contentTarget, { normalizePath: true })
+						),
+						cwd,
+						""
 					),
-					cwd,
+					"/build/server",
 					""
 				),
-				"/build/server",
-				""
+				".md",
+				".html"
 			)}`,
 			"file-tree.js",
 		],
