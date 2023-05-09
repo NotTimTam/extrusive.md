@@ -1014,6 +1014,8 @@ body div.search-modal-container div.search-modal div.search-content div.no-resul
 body div.search-modal-container div.search-modal div.search-content div.no-results ion-icon {
   font-size: 4rem;
   color: var(--error);
+  stroke: var(--error);
+  fill: var(--error);
 }
 body div.search-modal-container div.search-modal div.search-content div.no-results p.query {
   font-weight: 600;
