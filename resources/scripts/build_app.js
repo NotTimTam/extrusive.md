@@ -8,6 +8,7 @@ const { markedHighlight } = require("marked-highlight");
 const hljs = require("highlight.js");
 const { normalize_path, replace_all, copy_paths } = require("./util");
 
+// Configure marked for file tree compiling.
 marked.use(
 	{
 		langPrefix: "",
@@ -266,8 +267,19 @@ const build_client = async (stackDir, target, config, cwd) => {
 	// Configure and copy html.
 	await copy_html(buildResourcesDir, `${target}/index.html`, config, [
 		{ path: "file-tree.js", type: "script" },
+		{ path: "client-api.js", type: "script" },
+		{ path: "client.js", type: "script" },
 	]);
 };
+
+/**
+ * Build the client-side portion of the app.
+ * @param {string} stackDir - The directory for stack resources.
+ * @param {string} target - The target build directory.
+ * @param {*} config - The user's configuration object.
+ * @param {string} cwd - The current working directory.
+ */
+const build_static = async (stackDir, target, config, cwd) => {};
 
 /**
  * Build an extrusive app.
@@ -325,8 +337,13 @@ const build_app = async ({ outputDirectory, force, static }, commands) => {
 			require.main.filename
 		)}/resources/stack`;
 
-		await build_server(stackDir, target, config, cwd); // Build the server-side.
-		await build_client(stackDir, target, config, cwd); // Build the client-side.
+		// Determine whether to build a static app or a server/client app.
+		if (static) {
+			await build_static(stackDir, target, config, cwd);
+		} else {
+			await build_server(stackDir, target, config, cwd); // Build the server-side.
+			await build_client(stackDir, target, config, cwd); // Build the client-side.
+		}
 
 		console.log(
 			"\nBuild complete. Your markdown is now ready to shine! ✨\n"
