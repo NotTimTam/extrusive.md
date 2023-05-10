@@ -368,8 +368,9 @@ function createInnerNavStructure(data) {
 		const innerNav = document.querySelector("aside.inner-nav");
 		innerNav.innerHTML = `
 		<p class="head">On This Page</p>`;
-
-		const headingRegex = /<h[1-6][^>]*>(.*?)<\/h[1-6]>/gi;
+		
+		const headingRegex =
+			/<h[1-6][^>]*?(?:id="([^"]*)")[^>]*?>(.*?)<\/h[1-6]>/gi;
 		const matches = data.match(headingRegex);
 
 		if (!matches || matches.length < 1) return (innerNav.innerHTML = null);
@@ -710,8 +711,6 @@ function triggerLoadingArticleContent() {
 
 	updatePageContent(`<div class="loading"></div>`);
 }
-
-
 
 /**
  *
