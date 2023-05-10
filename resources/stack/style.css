@@ -1051,13 +1051,22 @@ body article.content div.article-inner img {
 body article.content div.article-inner code,
 body article.content div.article-inner pre,
 body article.content div.article-inner samp,
-body article.content div.article-inner tt {
+body article.content div.article-inner tt,
+body article.content div.article-inner output {
   font-family: "Source Code Pro", "Courier New", Courier, monospace;
 }
 body article.content div.article-inner code,
 body article.content div.article-inner pre,
-body article.content div.article-inner tt {
+body article.content div.article-inner tt,
+body article.content div.article-inner output {
   font-size: 1em;
+}
+body article.content div.article-inner output {
+  display: block;
+  border-radius: 1rem;
+  padding: 1rem;
+  color: var(--info);
+  border: var(--border);
 }
 body article.content div.article-inner samp {
   font-size: 85%;

@@ -199,14 +199,24 @@
 	code,
 	pre,
 	samp,
-	tt {
+	tt,
+	output {
 		font-family: "Source Code Pro", "Courier New", Courier, monospace;
 	}
 
 	code,
 	pre,
-	tt {
+	tt,
+	output {
 		font-size: 1em;
+	}
+
+	output {
+		display: block;
+		border-radius: $border-radius;
+		padding: $margin;
+		color: var(--info);
+		border: var(--border);
 	}
 
 	samp {
