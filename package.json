@@ -1,6 +1,6 @@
 {
 	"name": "extrusive.md",
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"description": "An open-source tool for building self-hosted documentation websites.",
 	"main": "index.js",
 	"bin": {
@@ -14,7 +14,12 @@
 		"url": "git+https://github.com/NotTimTam/extrusive.md.git"
 	},
 	"keywords": [
-		"obsidian"
+		"obsidian",
+		"markdown",
+		"documentation",
+		"cli",
+		"compiler",
+		"self-hosted"
 	],
 	"author": "NotTimTam",
 	"license": "CC0-1.0",
