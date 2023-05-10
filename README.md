@@ -8,7 +8,7 @@
 
 ---
 
-#### Please note: this project is currently being developed and is not yet stable. Please report bugs and refer to the below roadmap for missing features.
+#### `extrusive.md` is now stable! Install version `1.2.0` today!
 
 There are a lot of markdown interfaces out there. There are a lot of documentation tools out there.
 
