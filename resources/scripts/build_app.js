@@ -168,7 +168,45 @@ const copy_html = async (buildResourcesDir, target, config, imports) => {
 			copyright,
 			appendBody,
 			appendHead,
+			disableFooter,
 		} = config;
+
+		const footer = `
+		<footer>
+				<section>
+					<h4>Info</h4>
+					<p class="copyright"><b>${copyright ? copyright : ""}</b></p>
+					<p>
+						Icons from
+						<a
+							href="https://ionic.io/ionicons/"
+							target="_blank"
+							rel="noopener noreferrer"
+							>Ionic Icons</a
+						>
+					</p>
+					<p class="credit">
+						Built with
+						<a
+							href="https://github.com/NotTimTam/extrusive.md/tree/main"
+							target="_blank"
+							rel="noopener noreferrer"
+							>extrusive.md</a
+						>
+					</p>
+				</section>
+
+				<section>
+					<h4>API Reference</h4>
+					<p>(more coming soon)</p>
+				</section>
+
+				<section>
+					<h4>More</h4>
+					<p>(more coming soon)</p>
+				</section>
+			</footer>
+			`;
 
 		/**
 		 * Everything that needs to be populated in the HTML file.
@@ -194,7 +232,7 @@ const copy_html = async (buildResourcesDir, target, config, imports) => {
 				logo ? logo.data : `<h1 class="no-title">my extrusive app</h1>`,
 			],
 			// Copyright
-			["{{COPYRIGHT}}", copyright ? copyright : ""],
+			["{{FOOTER}}", disableFooter === "true" ? "" : footer],
 			// Custom CSS Files
 			[
 				"{{STYLE}}",
