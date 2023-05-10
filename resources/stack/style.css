@@ -270,6 +270,221 @@ div.article-inner h6:hover div.anchor {
   pointer-events: auto;
 }
 
+div.search-modal-container {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(52, 58, 70, 0.8);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+div.search-modal-container[open=true] {
+  display: flex;
+}
+div.search-modal-container div.search-modal {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+  border-radius: 1rem;
+  height: 100%;
+  width: 100%;
+  max-width: 768px;
+}
+div.search-modal-container div.search-modal > header {
+  margin: 0.5rem 1rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+}
+div.search-modal-container div.search-modal > header div.search-bar {
+  margin: 0;
+  flex-grow: 2;
+}
+div.search-modal-container div.search-modal > header button.cancel-search {
+  display: none;
+  color: var(--info);
+  border-radius: 0.5rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+div.search-modal-container div.search-modal div.search-content {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+div.search-modal-container div.search-modal div.search-content * {
+  max-width: 100%;
+  word-wrap: break-word;
+}
+div.search-modal-container div.search-modal div.search-content div.no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+div.search-modal-container div.search-modal div.search-content div.no-results ion-icon {
+  font-size: 4rem;
+  color: var(--error);
+}
+div.search-modal-container div.search-modal div.search-content div.no-results p.query {
+  font-weight: 600;
+  text-align: center;
+}
+div.search-modal-container div.search-modal div.search-content div.no-results h6 {
+  font-weight: 600;
+  font-size: 0.85em;
+  color: var(--background-3);
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches,
+div.search-modal-container div.search-modal div.search-content div.results {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches > header,
+div.search-modal-container div.search-modal div.search-content div.results > header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: space-between;
+  padding-right: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches > header h1,
+div.search-modal-container div.search-modal div.search-content div.results > header h1 {
+  text-transform: uppercase;
+  padding-left: 1rem;
+  font-size: 1rem;
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches > header > button,
+div.search-modal-container div.search-modal div.search-content div.results > header > button {
+  border-radius: 0.5rem;
+  color: var(--info);
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches > header > button:hover,
+div.search-modal-container div.search-modal div.search-content div.results > header > button:hover {
+  background-color: var(--background-2) !important;
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches > button,
+div.search-modal-container div.search-modal div.search-content div.results > button {
+  justify-content: space-between;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  margin-bottom: 0.25rem;
+  width: 100%;
+  max-width: calc(100% - 1rem);
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches > button div,
+div.search-modal-container div.search-modal div.search-content div.results > button div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches > button div span,
+div.search-modal-container div.search-modal div.search-content div.results > button div span {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: left;
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches > button div span p,
+div.search-modal-container div.search-modal div.search-content div.results > button div span p {
+  font-weight: 600;
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches > button div span h6,
+div.search-modal-container div.search-modal div.search-content div.results > button div span h6 {
+  font-weight: 600;
+  font-size: 0.85em;
+  color: var(--background-3);
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches > button[isfocused=true],
+div.search-modal-container div.search-modal div.search-content div.results > button[isfocused=true] {
+  background-color: var(--info) !important;
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches > button:hover,
+div.search-modal-container div.search-modal div.search-content div.results > button:hover {
+  background-color: transparent;
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches > button.active,
+div.search-modal-container div.search-modal div.search-content div.results > button.active {
+  background-color: var(--background-3);
+  color: var(--info);
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches > button.active ion-icon,
+div.search-modal-container div.search-modal div.search-content div.results > button.active ion-icon {
+  color: var(--info);
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches > button:active,
+div.search-modal-container div.search-modal div.search-content div.results > button:active {
+  transform: unset;
+}
+div.search-modal-container div.search-modal div.search-content div.recent-searches:not(:has(button[isfocused=true])) button:hover,
+div.search-modal-container div.search-modal div.search-content div.results:not(:has(button[isfocused=true])) button:hover {
+  background-color: var(--info);
+}
+div.search-modal-container div.search-modal > footer {
+  margin: 1rem;
+  padding-top: 1rem;
+  border-top: var(--border);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+div.search-modal-container div.search-modal > footer p {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+div.search-modal-container div.search-modal > footer p kbd {
+  color: var(--background);
+  vertical-align: middle;
+  background-color: var(--text);
+  border: solid 1px var(--background-3);
+  border-radius: 6px;
+  box-shadow: inset 0 -1px 0 var(--background-3);
+}
+div.search-modal-container div.search-modal > footer p kbd svg,
+div.search-modal-container div.search-modal > footer p kbd ion-icon {
+  color: var(--background);
+  fill: var(--background);
+  stroke: var(--background);
+}
+@media (max-width: 1185px) {
+  div.search-modal-container {
+    padding: 0;
+  }
+  div.search-modal-container div.search-modal {
+    border-radius: 0;
+    max-width: unset;
+  }
+  div.search-modal-container div.search-modal > header button.cancel-search {
+    display: flex;
+  }
+  div.search-modal-container div.search-modal > footer {
+    display: none;
+  }
+}
+
 .error {
   color: var(--error);
 }
@@ -915,7 +1130,7 @@ body article.content div.article-inner a:not([href]) {
 body article.content div.article-inner table {
   border-spacing: 0;
   border-collapse: collapse;
-  display: block;
+  display: table;
   width: -moz-max-content;
   width: max-content;
   max-width: 100%;
@@ -1119,220 +1334,6 @@ body aside.inner-nav h5 {
 }
 body aside.inner-nav h6 {
   font-size: 0.75rem;
-}
-body div.search-modal-container {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 500;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(52, 58, 70, 0.8);
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-body div.search-modal-container[open=true] {
-  display: flex;
-}
-body div.search-modal-container div.search-modal {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--background);
-  border-radius: 1rem;
-  height: 100%;
-  width: 100%;
-  max-width: 768px;
-}
-body div.search-modal-container div.search-modal > header {
-  margin: 0.5rem 1rem;
-  display: flex;
-  flex-direction: row;
-  gap: 0.25rem;
-}
-body div.search-modal-container div.search-modal > header div.search-bar {
-  margin: 0;
-  flex-grow: 2;
-}
-body div.search-modal-container div.search-modal > header button.cancel-search {
-  display: none;
-  color: var(--info);
-  border-radius: 0.5rem;
-  padding-top: 0;
-  padding-bottom: 0;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-body div.search-modal-container div.search-modal div.search-content {
-  flex-grow: 2;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-}
-body div.search-modal-container div.search-modal div.search-content * {
-  max-width: 100%;
-  word-wrap: break-word;
-}
-body div.search-modal-container div.search-modal div.search-content div.no-results {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem;
-}
-body div.search-modal-container div.search-modal div.search-content div.no-results ion-icon {
-  font-size: 4rem;
-  color: var(--error);
-}
-body div.search-modal-container div.search-modal div.search-content div.no-results p.query {
-  font-weight: 600;
-  text-align: center;
-}
-body div.search-modal-container div.search-modal div.search-content div.no-results h6 {
-  font-weight: 600;
-  font-size: 0.85em;
-  color: var(--background-3);
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches,
-body div.search-modal-container div.search-modal div.search-content div.results {
-  flex-grow: 2;
-  display: flex;
-  flex-direction: column;
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches > header,
-body div.search-modal-container div.search-modal div.search-content div.results > header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem;
-  width: 100%;
-  justify-content: space-between;
-  padding-right: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches > header h1,
-body div.search-modal-container div.search-modal div.search-content div.results > header h1 {
-  text-transform: uppercase;
-  padding-left: 1rem;
-  font-size: 1rem;
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches > header > button,
-body div.search-modal-container div.search-modal div.search-content div.results > header > button {
-  border-radius: 0.5rem;
-  color: var(--info);
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches > header > button:hover,
-body div.search-modal-container div.search-modal div.search-content div.results > header > button:hover {
-  background-color: var(--background-2) !important;
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches > button,
-body div.search-modal-container div.search-modal div.search-content div.results > button {
-  justify-content: space-between;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  padding: 0.5rem 1rem;
-  margin-right: 1rem;
-  margin-bottom: 0.25rem;
-  width: 100%;
-  max-width: calc(100% - 1rem);
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches > button div,
-body div.search-modal-container div.search-modal div.search-content div.results > button div {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches > button div span,
-body div.search-modal-container div.search-modal div.search-content div.results > button div span {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  text-align: left;
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches > button div span p,
-body div.search-modal-container div.search-modal div.search-content div.results > button div span p {
-  font-weight: 600;
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches > button div span h6,
-body div.search-modal-container div.search-modal div.search-content div.results > button div span h6 {
-  font-weight: 600;
-  font-size: 0.85em;
-  color: var(--background-3);
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches > button[isfocused=true],
-body div.search-modal-container div.search-modal div.search-content div.results > button[isfocused=true] {
-  background-color: var(--info) !important;
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches > button:hover,
-body div.search-modal-container div.search-modal div.search-content div.results > button:hover {
-  background-color: transparent;
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches > button.active,
-body div.search-modal-container div.search-modal div.search-content div.results > button.active {
-  background-color: var(--background-3);
-  color: var(--info);
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches > button.active ion-icon,
-body div.search-modal-container div.search-modal div.search-content div.results > button.active ion-icon {
-  color: var(--info);
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches > button:active,
-body div.search-modal-container div.search-modal div.search-content div.results > button:active {
-  transform: unset;
-}
-body div.search-modal-container div.search-modal div.search-content div.recent-searches:not(:has(button[isfocused=true])) button:hover,
-body div.search-modal-container div.search-modal div.search-content div.results:not(:has(button[isfocused=true])) button:hover {
-  background-color: var(--info);
-}
-body div.search-modal-container div.search-modal > footer {
-  margin: 1rem;
-  padding-top: 1rem;
-  border-top: var(--border);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.25rem;
-}
-body div.search-modal-container div.search-modal > footer p {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-body div.search-modal-container div.search-modal > footer p kbd {
-  color: var(--background);
-  vertical-align: middle;
-  background-color: var(--text);
-  border: solid 1px var(--background-3);
-  border-radius: 6px;
-  box-shadow: inset 0 -1px 0 var(--background-3);
-}
-body div.search-modal-container div.search-modal > footer p kbd svg,
-body div.search-modal-container div.search-modal > footer p kbd ion-icon {
-  color: var(--background);
-  fill: var(--background);
-  stroke: var(--background);
-}
-@media (max-width: 1185px) {
-  body div.search-modal-container {
-    padding: 0;
-  }
-  body div.search-modal-container div.search-modal {
-    border-radius: 0;
-    max-width: unset;
-  }
-  body div.search-modal-container div.search-modal > header button.cancel-search {
-    display: flex;
-  }
-  body div.search-modal-container div.search-modal > footer {
-    display: none;
-  }
 }
 body div.loading {
   position: absolute;

@@ -1,0 +1,264 @@
+@use "../util/index" as *;
+div.search-modal-container {
+	display: none;
+
+	&[open="true"] {
+		display: flex;
+	}
+
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	z-index: 500;
+
+	width: 100vw;
+	height: 100vh;
+
+	background-color: #343a46cc;
+
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	padding: $margin;
+
+	div.search-modal {
+		display: flex;
+		flex-direction: column;
+
+		background-color: var(--background);
+		border-radius: $border-radius;
+
+		height: 100%;
+		width: 100%;
+
+		max-width: 768px;
+
+		> header {
+			margin: $padding $margin;
+			display: flex;
+			flex-direction: row;
+			gap: $gap;
+
+			div.search-bar {
+				margin: 0;
+				flex-grow: 2;
+			}
+
+			button.cancel-search {
+				display: none;
+				color: var(--info);
+
+				border-radius: calc($border-radius / 2);
+
+				padding-top: 0;
+				padding-bottom: 0;
+				margin-top: $padding;
+				margin-bottom: $padding;
+			}
+		}
+
+		div.search-content {
+			flex-grow: 2;
+			display: flex;
+			flex-direction: column;
+
+			overflow-y: auto;
+
+			* {
+				max-width: 100%;
+				word-wrap: break-word;
+			}
+
+			div.no-results {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: $padding;
+				padding: $margin;
+
+				ion-icon {
+					font-size: 4rem;
+
+					color: var(--error);
+				}
+
+				p.query {
+					font-weight: 600;
+
+					text-align: center;
+				}
+
+				h6 {
+					font-weight: 600;
+					font-size: 0.85em;
+					color: var(--background-3);
+				}
+			}
+
+			div.recent-searches,
+			div.results {
+				flex-grow: 2;
+				display: flex;
+				flex-direction: column;
+
+				> header {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					gap: $padding;
+
+					width: 100%;
+					justify-content: space-between;
+
+					padding-right: $padding;
+					padding-bottom: $padding;
+
+					h1 {
+						text-transform: uppercase;
+
+						padding-left: $margin;
+
+						font-size: 1rem;
+					}
+
+					> button {
+						border-radius: calc($border-radius / 2);
+						color: var(--info);
+
+						&:hover {
+							background-color: var(--background-2) !important;
+						}
+					}
+				}
+
+				> button {
+					justify-content: space-between;
+					border-bottom-left-radius: 0;
+					border-top-left-radius: 0;
+
+					padding: $padding $margin;
+					margin-right: $margin;
+					margin-bottom: $gap;
+
+					width: 100%;
+					max-width: calc(100% - $margin);
+
+					div {
+						display: flex;
+						flex-direction: row;
+						align-items: center;
+						gap: $margin;
+
+						span {
+							align-items: flex-start;
+							display: flex;
+							flex-direction: column;
+							gap: $gap;
+
+							text-align: left;
+
+							p {
+								font-weight: 600;
+							}
+
+							h6 {
+								font-weight: 600;
+								font-size: 0.85em;
+								color: var(--background-3);
+							}
+						}
+					}
+
+					&[isfocused="true"] {
+						background-color: var(--info) !important;
+					}
+
+					&:hover {
+						background-color: transparent;
+					}
+
+					&.active {
+						background-color: var(--background-3);
+						color: var(--info);
+
+						ion-icon {
+							color: var(--info);
+						}
+					}
+
+					&:active {
+						transform: unset;
+					}
+				}
+
+				&:not(:has(button[isfocused="true"])) {
+					button {
+						&:hover {
+							background-color: var(--info);
+						}
+					}
+				}
+			}
+		}
+
+		> footer {
+			margin: $margin;
+			padding-top: $margin;
+
+			border-top: var(--border);
+
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			gap: $gap;
+
+			p {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: $padding;
+				// color: var(--background-3);
+
+				kbd {
+					color: var(--background);
+					vertical-align: middle;
+					background-color: var(--text);
+					border: solid 1px var(--background-3);
+					border-radius: 6px;
+					box-shadow: inset 0 -1px 0 var(--background-3);
+
+					svg,
+					ion-icon {
+						color: var(--background);
+						fill: var(--background);
+						stroke: var(--background);
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: 1185px) {
+		padding: 0;
+
+		div.search-modal {
+			border-radius: 0;
+
+			max-width: unset;
+
+			> header {
+				button.cancel-search {
+					display: flex;
+				}
+			}
+
+			> footer {
+				display: none;
+			}
+		}
+	}
+}
