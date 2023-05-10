@@ -158,8 +158,17 @@ const compile_static_content = (cwd, src, dest) => {
  */
 const copy_html = async (buildResourcesDir, target, config, imports) => {
 	try {
-		const { logo, title, author, description, favicon, styles, copyright } =
-			config;
+		const {
+			logo,
+			title,
+			author,
+			description,
+			favicon,
+			styles,
+			copyright,
+			appendBody,
+			appendHead,
+		} = config;
 
 		/**
 		 * Everything that needs to be populated in the HTML file.
@@ -214,6 +223,8 @@ const copy_html = async (buildResourcesDir, target, config, imports) => {
 							.join("\n")
 					: "",
 			],
+			["{{APPEND_HEAD}}", appendHead ? appendHead : ""],
+			["{{APPEND_BODY}}", appendBody ? appendBody : ""],
 		];
 
 		// Load the html data.

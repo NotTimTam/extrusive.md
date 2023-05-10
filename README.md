@@ -55,12 +55,10 @@ Server:
 CLI:
 
 -   **"start"** command with live server for development that does not rely on a build.
--   Better support for user script imports.
 -   Sanitize output html.
 
 General:
 
 -   Convert to NPM package.
--   Decrease package/output footprint.
--   Explore potential for headless CMS.
+-   Explore the potential for headless CMS.
 -   Support for more characters, particularly '.' in file/folder labels.

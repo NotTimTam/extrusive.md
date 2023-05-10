@@ -33,16 +33,13 @@ console.log("Happy hacking!");
 }
 ```
 
--   With a little configuration, you can force the builder to include custom JavaScript imports in the HTML file.
-    -   Dump the files you want in your project's `public`directory.
-    -   Add the necessary script import tag to your project's `extrusive.config.json`:
+-   You can add custom content to the html file using `appendBody` and `appendHead`. This could be additional metadata, script imports, etc.
 
 ```json
 {
 	// ...
-	"copyright": "© 2023 Anonymous <script src='/public/test.js'></script>"
+	"appendHead": "<style>body { background-color: red !important; }</style>",
+	"appendBody": "<script src='myscript.js'></script>"
 	// ...
 }
 ```
-
-(a better supported script import system is on the way)
