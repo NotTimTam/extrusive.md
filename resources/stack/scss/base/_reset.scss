@@ -75,5 +75,9 @@ body {
 		--border: 1px solid var(--background-3);
 
 		color-scheme: dark;
+
+		@media print {
+			--text: black;
+		}
 	}
 }

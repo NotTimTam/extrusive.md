@@ -3,7 +3,6 @@
 /* Dark Orange Theme */
 $theme-selection: rgba(224, 146, 58, 0.35);
 $theme-background: #242424;
-$theme-text: #ffffff;
 $theme-string: #67b26d;
 $theme-number: #e8a04e;
 $theme-title: #9e4ee8;
@@ -28,8 +27,13 @@ $theme-comment: #7f7f7f;
 
 code.hljs {
 	white-space: break-spaces;
-	color: $theme-text;
+	color: var(--text);
 	position: relative;
+
+	@media print {
+		border: var(--border);
+		page-break-before: always;
+	}
 
 	span.label {
 		font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -53,6 +57,10 @@ code.hljs {
 		transition-property: opacity;
 		pointer-events: none;
 		cursor: copy;
+
+		@media print {
+			display: none;
+		}
 	}
 
 	&:hover {
