@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3000;
 const appDir = __dirname + "/client";
 
 // Middlewares.
+app.disable("x-powered-by");
 app.use(express.json());
 app.use(cors());
 app.use(express.static(__dirname + "/client", { recursive: true }));

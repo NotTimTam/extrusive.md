@@ -25,6 +25,7 @@ There are a lot of markdown interfaces out there. There are a lot of documentati
 7. Has a simple toggle for **light/dark mode**.
 8. Built with a **mobile-first design** model and styled with **inspiration from other modern documentation websites**.
 9. O.O.T.B. support for **[ion-icons](https://ionic.io/ionicons) + custom HTML** directly in your markdown!
+10. Built-in print/save as pdf support.
 
 `extrusive.md` may not have all the bells and whistles, but it makes up for these by being open-ended and ready for you to customize!
 
@@ -49,10 +50,6 @@ Client:
 -   Admonition support. (`[marked-admonition-extension](https://www.npmjs.com/package/marked-admonition-extension)`)
 -   Cleaner, more reliable client-side code.
 -   Automatical removal of search results that link to paths that no longer exist.
-
-Server:
-
--   More robust server defense firewall.
 
 CLI:
 
