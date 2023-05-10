@@ -6,6 +6,9 @@
 	"bin": {
 		"extrusive": "./index.js"
 	},
+	"scripts": {
+		"test": "npx nodemon extrusive test"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/NotTimTam/extrusive.md.git"
