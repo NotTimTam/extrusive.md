@@ -1,6 +1,54 @@
 // Functions
 
 /**
+ * Create a short pop-up message that stays on screen for a certain amount of time.
+ * @param {string} message - The message to display in the popup.
+ * @param {"info"||"warning"||"error"||"success"} type - The type of message it is.
+ */
+function createPopup(message, type = "info") {
+	try {
+		const popupContainer = document.querySelector("div.popup-container");
+
+		while (popupContainer.childNodes.length >= 5) {
+			try {
+				popupContainer.removeChild(popupContainer.childNodes[0]);
+			} catch (err) {}
+		}
+
+		const deletePopup = () => {
+			try {
+				if (popupContainer) popupContainer.removeChild(popup);
+			} catch (err) {}
+		};
+
+		const popup = createElement(
+			"div",
+			[["className", `pop-up ${type}`]],
+			null,
+			null,
+			message
+		);
+
+		popup.appendChild(
+			createElement(
+				"button",
+				null,
+				null,
+				[["click", deletePopup]],
+				`<ion-icon name="close-outline"></ion-icon>`
+			)
+		);
+
+		popupContainer.appendChild(popup);
+
+		// Remove the popup after five seconds.
+		setTimeout(deletePopup, 5000);
+	} catch (err) {
+		console.error("Failed to create popup:", err);
+	}
+}
+
+/**
  * Creates and returns an HTML element.
  * @param {string} tagName - The tag name for the element.
  * @param {Array<Array<string>>} props - An array of properties to directly set on the object. `[..., [propName, value]]`
@@ -683,6 +731,21 @@ function configurePlatformSpecificContent(isMac = false) {
 }
 
 // Handlers
+
+const handleCopyCode = (element) => {
+	try {
+		const data = element.parentNode.innerText.replace(
+			element.innerText,
+			""
+		);
+		navigator.clipboard.writeText(data);
+
+		// Create a pop-up message.
+		createPopup("Code copied to clipboard.", "success");
+	} catch (err) {
+		console.error("Failed to copy code:", err);
+	}
+};
 
 /**
  * Toggle the color theme and update the theme button element.

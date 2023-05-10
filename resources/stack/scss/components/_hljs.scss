@@ -27,7 +27,7 @@ $theme-comment: #7f7f7f;
 // }
 
 code.hljs {
-	overflow-x: auto;
+	white-space: break-spaces;
 	color: $theme-text;
 	position: relative;
 

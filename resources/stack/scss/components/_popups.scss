@@ -1,0 +1,99 @@
+@use "../util/index" as *;
+
+div.popup-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1000;
+
+	pointer-events: none;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+
+	padding: $padding;
+	gap: $padding;
+
+	overflow: hidden;
+
+	div.pop-up {
+		background-color: var(--info);
+		border-radius: calc($border-radius / 2);
+		padding: $gap 0 $gap $padding;
+
+		pointer-events: auto;
+
+		color: var(--text);
+
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		gap: $gap;
+
+		box-shadow: $box-shadow;
+
+		min-width: 30vw;
+		max-width: 95vw;
+
+		font-weight: 600;
+
+		animation: flow-up 5s;
+		animation-fill-mode: both;
+
+		@keyframes flow-up {
+			0% {
+				transform: translateY(1rem);
+				opacity: 0;
+			}
+
+			5% {
+				transform: translateY(0);
+				opacity: 1;
+			}
+
+			95% {
+				transform: translateY(0);
+				opacity: 1;
+			}
+
+			100% {
+				transform: translateY(-1rem);
+				opacity: 0;
+			}
+		}
+
+		&.error {
+			background-color: var(--error);
+		}
+		&.success {
+			background-color: var(--success);
+		}
+		&.warning {
+			color: black;
+			background-color: var(--warning);
+
+			button {
+				ion-icon {
+					color: black;
+				}
+			}
+		}
+
+		button {
+			&:hover {
+				background-color: unset;
+			}
+
+			color: inherit;
+
+			ion-icon {
+				font-size: $margin * 1.25;
+			}
+		}
+	}
+}

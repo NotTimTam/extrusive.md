@@ -51,7 +51,6 @@ Client:
 -   Automatical removal of search results that link to paths that no longer exist.
 -   Print/send-to-pdf feature.
 -   Heading anchor auto-copy links.
--   Code copying functionality.
 
 Server:
 
