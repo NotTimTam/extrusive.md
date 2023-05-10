@@ -7,7 +7,7 @@
 		"extrusive": "./index.js"
 	},
 	"scripts": {
-		"test": "npx nodemon extrusive test"
+		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
 		"type": "git",
