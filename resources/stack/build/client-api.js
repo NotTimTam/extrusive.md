@@ -1,4 +1,15 @@
 /**
+ * Normalize a route path.
+ * @param {string} path - The path to normalize.
+ * @returns A normalized path.
+ */
+const normalizePath = (path) =>
+	(path.includes("content")
+		? `/content${path.split("content")[1]}`
+		: "/"
+	).replace(/%20/g, " ");
+
+/**
  * Trigger the page to scroll back to where it was.
  * @param {string} hash - The portion of the page to scroll to.
  * @param {string} location - The last location of the page before the route change.
@@ -52,6 +63,8 @@ const handleRequestFile = async (path) => {
 	// Trigger loading element.
 	triggerLoadingArticleContent();
 
+	path = normalizePath(path);
+
 	try {
 		const { data } = await axios.get("/api/v1/markdown", {
 			params: { path },
@@ -93,7 +106,7 @@ function indicateSelectedNav(path) {
 						.join("/")
 						.replace("folder-", "")
 						.split("S20S")
-						.join("%20")
+						.join(" ")
 				)
 			) {
 				folder.classList.add("active");
