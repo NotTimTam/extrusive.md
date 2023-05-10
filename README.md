@@ -30,7 +30,7 @@ There are a lot of markdown interfaces out there. There are a lot of documentati
 
 ## Installation
 
-Just run `npm install -g https://github.com/NotTimTam/extrusive.md.git` to install the `extrusive` CLI globally.
+Just run `npm i -g extrusive.md` to install the `extrusive` CLI globally.
 
 ## Getting Started
 
@@ -61,6 +61,5 @@ CLI:
 
 General:
 
--   Convert to NPM package.
 -   Explore the potential for headless CMS.
 -   Support for more characters, particularly '.' in file/folder labels.
