@@ -31,18 +31,8 @@ There are a lot of markdown interfaces out there. There are a lot of documentati
 
 ## Installation
 
-Just run `npm i -g extrusive.md` to install the `extrusive` CLI globally.
+[Read the docs!](https://nottimtam.github.io/extrusive-docs/)
 
-## Getting Started
-
-After you have installed the `extrusive` CLI, you can test it by running `npx extrusive test`.
-
-To create your project environment run this command in your desired work directory:
-`npx exstrusive create`
-Or, if you would like to specify a directory, run:
-`npx exstrusive create --project-directory <project-directory>`
-
-## Development Roadmap
 
 Client:
 
