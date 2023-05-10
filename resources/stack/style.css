@@ -62,7 +62,13 @@ body.dark {
 }
 @media print {
   body.dark {
-    --text: black;
+    --background: #ffffff;
+    --background-2: #f0f0f0;
+    --background-3: #c4c4c4;
+    --background-0: #c4c4c4;
+    --text: #232724;
+    --border: 1px solid var(--background-3);
+    color-scheme: light;
   }
 }
 
