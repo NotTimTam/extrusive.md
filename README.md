@@ -2,7 +2,7 @@
 
 # extrusive.md
 
-[![NPM](https://github.com/NotTimTam/extrusive.md/actions/workflows/npm-publish.yml/badge.svg?event=deployment)](https://github.com/NotTimTam/extrusive.md/actions/workflows/npm-publish.yml)
+[![NPM](https://github.com/NotTimTam/extrusive.md/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/NotTimTam/extrusive.md/actions/workflows/npm-publish.yml)
 
 [Obsidian](https://obsidian.md/) is an **"extrusive”** rock, which means it is made from magma that erupted out of a volcano.
 <br/>
