@@ -48,11 +48,11 @@ build_cli(program, [
 		],
 		action: build_app,
 	},
-	{
-		name: "start",
-		description: "Run your app in developer mode.",
-		action: start_project,
-	},
+	// {
+	// 	name: "start",
+	// 	description: "Run your app in developer mode.",
+	// 	action: start_project,
+	// },
 	{
 		name: "test",
 		description: "Ensure the app is running",
