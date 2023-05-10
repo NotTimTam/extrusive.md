@@ -1,0 +1,45 @@
+@use "../util/index" as *;
+
+div.article-inner {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		div.anchor {
+			margin: auto 0 auto $padding;
+			display: inline-block;
+
+			vertical-align: middle;
+
+			transition: $transition;
+			transition-property: opacity;
+
+			ion-icon,
+			div.ionicon {
+				color: var(--background-3) !important;
+				font-size: inherit;
+			}
+
+			cursor: pointer;
+
+			opacity: 0;
+			pointer-events: none;
+
+			&:active {
+				ion-icon,
+				div.ionicon {
+					color: var(--success) !important;
+				}
+			}
+		}
+
+		&:hover {
+			div.anchor {
+				opacity: 1;
+				pointer-events: auto;
+			}
+		}
+	}
+}

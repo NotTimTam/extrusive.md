@@ -216,6 +216,60 @@ div.popup-container div.pop-up button ion-icon {
   font-size: 1.25rem;
 }
 
+div.article-inner h1 div.anchor,
+div.article-inner h2 div.anchor,
+div.article-inner h3 div.anchor,
+div.article-inner h4 div.anchor,
+div.article-inner h5 div.anchor,
+div.article-inner h6 div.anchor {
+  margin: auto 0 auto 0.5rem;
+  display: inline-block;
+  vertical-align: middle;
+  transition: all 0.15s ease-in-out;
+  transition-property: opacity;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+}
+div.article-inner h1 div.anchor ion-icon,
+div.article-inner h1 div.anchor div.ionicon,
+div.article-inner h2 div.anchor ion-icon,
+div.article-inner h2 div.anchor div.ionicon,
+div.article-inner h3 div.anchor ion-icon,
+div.article-inner h3 div.anchor div.ionicon,
+div.article-inner h4 div.anchor ion-icon,
+div.article-inner h4 div.anchor div.ionicon,
+div.article-inner h5 div.anchor ion-icon,
+div.article-inner h5 div.anchor div.ionicon,
+div.article-inner h6 div.anchor ion-icon,
+div.article-inner h6 div.anchor div.ionicon {
+  color: var(--background-3) !important;
+  font-size: inherit;
+}
+div.article-inner h1 div.anchor:active ion-icon,
+div.article-inner h1 div.anchor:active div.ionicon,
+div.article-inner h2 div.anchor:active ion-icon,
+div.article-inner h2 div.anchor:active div.ionicon,
+div.article-inner h3 div.anchor:active ion-icon,
+div.article-inner h3 div.anchor:active div.ionicon,
+div.article-inner h4 div.anchor:active ion-icon,
+div.article-inner h4 div.anchor:active div.ionicon,
+div.article-inner h5 div.anchor:active ion-icon,
+div.article-inner h5 div.anchor:active div.ionicon,
+div.article-inner h6 div.anchor:active ion-icon,
+div.article-inner h6 div.anchor:active div.ionicon {
+  color: var(--success) !important;
+}
+div.article-inner h1:hover div.anchor,
+div.article-inner h2:hover div.anchor,
+div.article-inner h3:hover div.anchor,
+div.article-inner h4:hover div.anchor,
+div.article-inner h5:hover div.anchor,
+div.article-inner h6:hover div.anchor {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .error {
   color: var(--error);
 }

@@ -360,7 +360,7 @@ async function determineInnerNavPos() {
 }
 
 /**
- * Create the link structure display for the inner nav.
+ * Create the link structure display for the inner nav and quick links.
  * @param {*} data - The folder structure data compiled with the app.
  */
 function createInnerNavStructure(data) {
@@ -381,9 +381,36 @@ function createInnerNavStructure(data) {
 			const element = `h${headingNum}`;
 			const content = match.split(">")[1];
 
+			const elementQuery = `${element}#${id}`;
+
+			const realElement = document.querySelector(
+				`div.article-inner ${elementQuery}`
+			);
+
+			// Create anchor hook.
+			if (realElement) {
+				const anchorTrigger = () => {
+					handleScroll(elementQuery);
+
+					navigator.clipboard.writeText(window.location.href);
+
+					// Create a pop-up message.
+					createPopup("URL copied to clipboard.", "success");
+				};
+				const anchor = createElement(
+					"div",
+					[["className", "anchor"]],
+					null,
+					[["click", anchorTrigger]],
+					`<ion-icon name="link-outline"></ion-icon>`
+				);
+
+				realElement.appendChild(anchor);
+			}
+
 			innerNav.innerHTML += `<${element} target="${element}#${id}" style="padding-left: ${
 				8 + 16 * (headingNum - 1)
-			}px;" onclick="handleScroll('${element}#${id}')">${content}`;
+			}px;" onclick="handleScroll('${elementQuery}')">${content}`;
 		}
 
 		determineInnerNavPos();
