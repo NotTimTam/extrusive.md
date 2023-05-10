@@ -88,7 +88,12 @@ function indicateSelectedNav(path) {
 		for (const folder of folders)
 			if (
 				path.includes(
-					folder.id.split("_").join("/").replace("folder-", "")
+					folder.id
+						.split("_")
+						.join("/")
+						.replace("folder-", "")
+						.split("S20S")
+						.join("%20")
 				)
 			) {
 				folder.classList.add("active");
