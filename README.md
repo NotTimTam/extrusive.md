@@ -43,11 +43,9 @@ Or, if you would like to specify a directory, run:
 
 Client:
 
--   Better error indicators.
 -   Emoji support. (`[marked-emoji](https://www.npmjs.com/package/marked-emoji)`)
 -   Admonition support. (`[marked-admonition-extension](https://www.npmjs.com/package/marked-admonition-extension)`)
 -   Cleaner, more reliable client-side code.
--   The ability to clear recent searches.
 -   Automatical removal of search results that link to paths that no longer exist.
 
 Server:

@@ -448,15 +448,31 @@ function updateSearchContent(...elements) {
  * Save a search.
  */
 function saveRecentSearch(path) {
-	let recentSearches = localStorage.getItem("recentSearches");
-	if (recentSearches) recentSearches = JSON.parse(recentSearches);
-	else recentSearches = [];
+	try {
+		let recentSearches = localStorage.getItem("recentSearches");
+		if (recentSearches) recentSearches = JSON.parse(recentSearches);
+		else recentSearches = [];
 
-	if (!recentSearches.includes(path)) recentSearches.push(path);
+		if (!recentSearches.includes(path)) recentSearches.push(path);
 
-	while (recentSearches > 5) recentSearches.shift();
+		while (recentSearches > 5) recentSearches.shift();
 
-	localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+		localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
+	} catch (err) {
+		console.error("Failed to save recent search:", err);
+	}
+}
+
+/**
+ * Clear all recent searches from storage.
+ */
+function clearRecentSearches() {
+	try {
+		localStorage.removeItem("recentSearches");
+		displayRecentSearches();
+	} catch (err) {
+		console.error("Failed to clear recent searches:", err);
+	}
 }
 
 /**
@@ -535,7 +551,10 @@ function displayRecentSearches() {
 	if (recentSearches && recentSearches.length > 0) {
 		const recentSearchesParent = createElement("div", [
 			["className", "recent-searches"],
-			["innerHTML", "<h1>Recent</h1>"],
+			[
+				"innerHTML",
+				`<header><h1>Recent</h1><button class="clear" onclick="clearRecentSearches()">Clear</button></header>`,
+			],
 		]);
 
 		recentSearches.forEach((path) => {
@@ -609,7 +628,7 @@ function displaySearchResults(data) {
 			[["className", "results"]],
 			null,
 			null,
-			`<h1>Results</h1>`
+			`<header><h1>Results</h1></header>`
 		);
 
 		data.forEach((path) => {

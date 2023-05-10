@@ -1146,19 +1146,24 @@ body div.search-modal-container div.search-modal {
   width: 100%;
   max-width: 768px;
 }
-body div.search-modal-container div.search-modal header {
+body div.search-modal-container div.search-modal > header {
   margin: 0.5rem 1rem;
   display: flex;
   flex-direction: row;
   gap: 0.25rem;
 }
-body div.search-modal-container div.search-modal header div.search-bar {
+body div.search-modal-container div.search-modal > header div.search-bar {
   margin: 0;
   flex-grow: 2;
 }
-body div.search-modal-container div.search-modal header button.cancel-search {
+body div.search-modal-container div.search-modal > header button.cancel-search {
   display: none;
   color: var(--info);
+  border-radius: 0.5rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 body div.search-modal-container div.search-modal div.search-content {
   flex-grow: 2;
@@ -1196,15 +1201,34 @@ body div.search-modal-container div.search-modal div.search-content div.results 
   display: flex;
   flex-direction: column;
 }
-body div.search-modal-container div.search-modal div.search-content div.recent-searches h1,
-body div.search-modal-container div.search-modal div.search-content div.results h1 {
-  padding-left: 1rem;
+body div.search-modal-container div.search-modal div.search-content div.recent-searches > header,
+body div.search-modal-container div.search-modal div.search-content div.results > header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: space-between;
+  padding-right: 0.5rem;
   padding-bottom: 0.5rem;
+}
+body div.search-modal-container div.search-modal div.search-content div.recent-searches > header h1,
+body div.search-modal-container div.search-modal div.search-content div.results > header h1 {
   text-transform: uppercase;
+  padding-left: 1rem;
   font-size: 1rem;
 }
-body div.search-modal-container div.search-modal div.search-content div.recent-searches button,
-body div.search-modal-container div.search-modal div.search-content div.results button {
+body div.search-modal-container div.search-modal div.search-content div.recent-searches > header > button,
+body div.search-modal-container div.search-modal div.search-content div.results > header > button {
+  border-radius: 0.5rem;
+  color: var(--info);
+}
+body div.search-modal-container div.search-modal div.search-content div.recent-searches > header > button:hover,
+body div.search-modal-container div.search-modal div.search-content div.results > header > button:hover {
+  background-color: var(--background-2) !important;
+}
+body div.search-modal-container div.search-modal div.search-content div.recent-searches > button,
+body div.search-modal-container div.search-modal div.search-content div.results > button {
   justify-content: space-between;
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
@@ -1214,50 +1238,50 @@ body div.search-modal-container div.search-modal div.search-content div.results 
   width: 100%;
   max-width: calc(100% - 1rem);
 }
-body div.search-modal-container div.search-modal div.search-content div.recent-searches button div,
-body div.search-modal-container div.search-modal div.search-content div.results button div {
+body div.search-modal-container div.search-modal div.search-content div.recent-searches > button div,
+body div.search-modal-container div.search-modal div.search-content div.results > button div {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 1rem;
 }
-body div.search-modal-container div.search-modal div.search-content div.recent-searches button div span,
-body div.search-modal-container div.search-modal div.search-content div.results button div span {
+body div.search-modal-container div.search-modal div.search-content div.recent-searches > button div span,
+body div.search-modal-container div.search-modal div.search-content div.results > button div span {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   text-align: left;
 }
-body div.search-modal-container div.search-modal div.search-content div.recent-searches button div span p,
-body div.search-modal-container div.search-modal div.search-content div.results button div span p {
+body div.search-modal-container div.search-modal div.search-content div.recent-searches > button div span p,
+body div.search-modal-container div.search-modal div.search-content div.results > button div span p {
   font-weight: 600;
 }
-body div.search-modal-container div.search-modal div.search-content div.recent-searches button div span h6,
-body div.search-modal-container div.search-modal div.search-content div.results button div span h6 {
+body div.search-modal-container div.search-modal div.search-content div.recent-searches > button div span h6,
+body div.search-modal-container div.search-modal div.search-content div.results > button div span h6 {
   font-weight: 600;
   font-size: 0.85em;
   color: var(--background-3);
 }
-body div.search-modal-container div.search-modal div.search-content div.recent-searches button[isfocused=true],
-body div.search-modal-container div.search-modal div.search-content div.results button[isfocused=true] {
+body div.search-modal-container div.search-modal div.search-content div.recent-searches > button[isfocused=true],
+body div.search-modal-container div.search-modal div.search-content div.results > button[isfocused=true] {
   background-color: var(--info) !important;
 }
-body div.search-modal-container div.search-modal div.search-content div.recent-searches button:hover,
-body div.search-modal-container div.search-modal div.search-content div.results button:hover {
+body div.search-modal-container div.search-modal div.search-content div.recent-searches > button:hover,
+body div.search-modal-container div.search-modal div.search-content div.results > button:hover {
   background-color: transparent;
 }
-body div.search-modal-container div.search-modal div.search-content div.recent-searches button.active,
-body div.search-modal-container div.search-modal div.search-content div.results button.active {
+body div.search-modal-container div.search-modal div.search-content div.recent-searches > button.active,
+body div.search-modal-container div.search-modal div.search-content div.results > button.active {
   background-color: var(--background-3);
   color: var(--info);
 }
-body div.search-modal-container div.search-modal div.search-content div.recent-searches button.active ion-icon,
-body div.search-modal-container div.search-modal div.search-content div.results button.active ion-icon {
+body div.search-modal-container div.search-modal div.search-content div.recent-searches > button.active ion-icon,
+body div.search-modal-container div.search-modal div.search-content div.results > button.active ion-icon {
   color: var(--info);
 }
-body div.search-modal-container div.search-modal div.search-content div.recent-searches button:active,
-body div.search-modal-container div.search-modal div.search-content div.results button:active {
+body div.search-modal-container div.search-modal div.search-content div.recent-searches > button:active,
+body div.search-modal-container div.search-modal div.search-content div.results > button:active {
   transform: unset;
 }
 body div.search-modal-container div.search-modal div.search-content div.recent-searches:not(:has(button[isfocused=true])) button:hover,

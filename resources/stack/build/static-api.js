@@ -85,9 +85,10 @@ const handleRequestFile = async (path) => {
 	} catch (err) {
 		console.error(err);
 
-		updatePageContent(
-			`<p class="error"><ion-icon name="warning-outline"></ion-icon> Could not load that file.</p>`
-		);
+		createPopup("Could not load that document.", "error");
+		if (path !== "/content/README.html") {
+			handleRequestFile("/content/README.html");
+		}
 	}
 };
 

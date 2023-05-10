@@ -20,7 +20,8 @@ const getFile = async (req, res) => {
 			.replace("/controllers", path.replace(new RegExp("%20", "g"), " "));
 		const fileExists = await fs.exists(absolutePath);
 
-		if (!fileExists) return res.status(404).send("File not found.");
+		if (!fileExists)
+			return res.status(404).send("Could not load that document.");
 
 		const fileData = await fs.readFile(absolutePath, "utf-8");
 

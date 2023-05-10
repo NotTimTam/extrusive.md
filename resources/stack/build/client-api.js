@@ -62,9 +62,10 @@ const handleRequestFile = async (path) => {
 	} catch (err) {
 		console.error(err);
 
-		updatePageContent(
-			`<p class="error"><ion-icon name="warning-outline"></ion-icon> ${err.response.data}</p>`
-		);
+		createPopup(err.response.data, "error");
+		if (path !== "/content/README.html") {
+			handleRequestFile("/content/README.html");
+		}
 	}
 };
 
