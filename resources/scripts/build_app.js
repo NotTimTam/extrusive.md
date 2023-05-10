@@ -395,7 +395,7 @@ const build_client = async (stackDir, target, config, cwd) => {
 			styles: [
 				"/style.css",
 				...(config.styles.map((stylePath) =>
-					stylePath[0] === "." ? stylePath : `.${stylePath}`
+					stylePath[0] === "." ? stylePath.slice(1) : stylePath
 				) || []),
 			],
 		},
@@ -515,7 +515,7 @@ const build_static = async (stackDir, target, config, cwd) => {
 			styles: [
 				"./style.css",
 				...(config.styles.map((stylePath) =>
-					stylePath[0] === "." ? stylePath.slice(1) : stylePath
+					stylePath[0] === "." ? stylePath : `.${stylePath}`
 				) || []),
 			],
 		},
