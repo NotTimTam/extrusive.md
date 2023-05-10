@@ -46,6 +46,20 @@ body {
 		-webkit-tap-highlight-color: transparent;
 	}
 
+	a {
+		color: var(--info);
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+
+		&:not([href]) {
+			color: inherit;
+			text-decoration: none;
+		}
+	}
+
 	input,
 	button {
 		transition: $transition;
@@ -549,23 +563,6 @@ body {
 			flex-direction: row;
 			justify-content: space-between;
 			gap: $gap;
-
-			section {
-				display: flex;
-				flex-direction: column;
-				align-items: flex-start;
-				gap: $gap;
-
-				p.credit {
-					a {
-						color: var(--info);
-					}
-				}
-
-				p.copyright b {
-					color: var(--info);
-				}
-			}
 		}
 	}
 

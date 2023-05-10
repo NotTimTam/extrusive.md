@@ -78,7 +78,8 @@ const handleRequestFile = async (path) => {
 			.replace(/&quot;/g, '"')
 			.replace(/&gt;/g, ">")
 			.replace(/&lt;/g, "<")
-			.replace(/&amp;/g, "&");
+			.replace(/&amp;/g, "&")
+			.replace(/%20/g, " ");
 
 		renderArticle(data, normalizedPath);
 		indicateSelectedNav(normalizedPath);

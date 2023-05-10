@@ -173,8 +173,7 @@ const copy_html = async (buildResourcesDir, target, config, imports) => {
 
 		const footer = `
 		<footer>
-				<section>
-					<h4>Info</h4>
+				
 					<p class="copyright"><b>${copyright ? copyright : ""}</b></p>
 					<p>
 						Icons from
@@ -184,27 +183,16 @@ const copy_html = async (buildResourcesDir, target, config, imports) => {
 							rel="noopener noreferrer"
 							>Ionic Icons</a
 						>
-					</p>
-					<p class="credit">
+						<br/>
 						Built with
 						<a
-							href="https://github.com/NotTimTam/extrusive.md/tree/main"
+							href="https://github.com/NotTimTam/extrusive.md"
 							target="_blank"
 							rel="noopener noreferrer"
 							>extrusive.md</a
 						>
 					</p>
-				</section>
-
-				<section>
-					<h4>API Reference</h4>
-					<p>(more coming soon)</p>
-				</section>
-
-				<section>
-					<h4>More</h4>
-					<p>(more coming soon)</p>
-				</section>
+			
 			</footer>
 			`;
 
