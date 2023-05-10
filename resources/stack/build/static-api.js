@@ -61,7 +61,62 @@ function renderArticle(data, path) {
  * @returns A normalized path.
  */
 const normalizePath = (path) =>
-	path.includes("content") ? `/content${path.split("content")[1]}` : "/";
+	(path.includes("content")
+		? `/content${path.split("content")[1]}`
+		: "/"
+	).replace(/%20/g, " ");
+
+/**
+ * indicate which nav elements are active.
+ * @param {string} path - The path to the file that is being requested.
+ */
+function indicateSelectedNav(path) {
+	try {
+		const folders = document.querySelectorAll("aside.nav h1");
+		const navElements = [
+			...document.querySelectorAll("aside.nav button"),
+			...folders,
+		];
+
+		for (const elem of navElements) {
+			elem.classList.remove("active");
+		}
+
+		for (const folder of folders)
+			if (
+				path.includes(
+					folder.id
+						.split("_")
+						.join("/")
+						.replace("folder-", "")
+						.split("S20S")
+						.join(" ")
+				)
+			) {
+				folder.classList.add("active");
+				folder.parentElement.classList.add("open");
+			}
+
+		const activeButton = document.querySelector(
+			`aside.nav button.file#file-${
+				path
+					.split("/")
+					.join("_")
+					.split("%20")
+					.join("S20S")
+					.split(" ")
+					.join("S20S")
+					.split(".")[0]
+			}`
+		);
+
+		if (activeButton) {
+			activeButton.classList.add("active");
+		}
+	} catch (err) {
+		console.error(err);
+	}
+}
 
 /**
  * Request a file by path.
@@ -78,8 +133,7 @@ const handleRequestFile = async (path) => {
 			.replace(/&quot;/g, '"')
 			.replace(/&gt;/g, ">")
 			.replace(/&lt;/g, "<")
-			.replace(/&amp;/g, "&")
-			.replace(/%20/g, " ");
+			.replace(/&amp;/g, "&");
 
 		renderArticle(data, normalizedPath);
 		indicateSelectedNav(normalizedPath);
