@@ -90,7 +90,7 @@ function indicateSelectedNav(path) {
 						.join("/")
 						.replace("folder-", "")
 						.split("S20S")
-						.join("%20")
+						.join(" ")
 				)
 			) {
 				folder.classList.add("active");
