@@ -213,7 +213,7 @@
 
 	output {
 		display: block;
-		border-radius: $border-radius;
+		border-radius: $border-radius-less;
 		padding: $margin;
 		color: var(--info);
 		border: var(--border);
@@ -246,7 +246,7 @@
 		margin: 2px 0;
 		font-size: 85%;
 		background-color: var(--background-2);
-		border-radius: 6px;
+		border-radius: $border-radius-less;
 
 		br {
 			display: none;

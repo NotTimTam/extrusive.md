@@ -1063,7 +1063,7 @@ body article.content div.article-inner output {
 }
 body article.content div.article-inner output {
   display: block;
-  border-radius: 1rem;
+  border-radius: 6px;
   padding: 1rem;
   color: var(--info);
   border: var(--border);
