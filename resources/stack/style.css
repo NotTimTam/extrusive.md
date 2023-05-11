@@ -683,11 +683,10 @@ body header.page-header section.main button.search-bar {
     width: -moz-max-content;
     width: max-content;
     flex-grow: 0;
-    height: unset;
     transition: all 0.15s ease-in-out;
     border: none;
     border-radius: 50%;
-    margin: 1rem 0 1rem auto !important;
+    margin: auto 0 auto auto !important;
   }
   body header.page-header section.main button.search-bar:hover {
     background-color: var(--background-2);
