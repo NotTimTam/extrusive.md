@@ -188,7 +188,7 @@ function createFileButton(name, path, nestLevel) {
 		path.split("/").join("_").split(" ").join("S20S").split(".")[0]
 	}">
 	<ion-icon name="document-outline"></ion-icon>
-	${name.split(".")[0]}
+	${name.split(".html")[0]}
 </button>
 `;
 }
@@ -368,7 +368,7 @@ function createInnerNavStructure(data) {
 		const innerNav = document.querySelector("aside.inner-nav");
 		innerNav.innerHTML = `
 		<p class="head">On This Page</p>`;
-		
+
 		const headingRegex =
 			/<h[1-6][^>]*?(?:id="([^"]*)")[^>]*?>(.*?)<\/h[1-6]>/gi;
 		const matches = data.match(headingRegex);

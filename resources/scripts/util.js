@@ -26,8 +26,7 @@ const normalize_path = (path) => {
  * @param {string} type - The type of source being copied. Should be either "file" or "directory"
  */
 const copy_path = async (src, dest, type = "file") => {
-	if (!(await fs.exists(src)))
-		throw `"${src.split("/")[1]}" ${type} does not exist.`;
+	if (!(await fs.exists(src))) throw `"${src}" ${type} does not exist.`;
 	await fs.copy(src, dest);
 };
 
