@@ -40,6 +40,7 @@ Client:
 -   Cleaner, more reliable client-side code.
 -   Automatical removal of search results that link to paths that no longer exist.
 -   Quick "print"/"save" button.
+-   Folder/file level of importance for sorting.
 
 CLI:
 
@@ -50,3 +51,4 @@ General:
 
 -   Explore the potential for headless CMS.
 -   Support for more characters, particularly '.' in file/folder labels.
+-   Create a linking system that works between files.
