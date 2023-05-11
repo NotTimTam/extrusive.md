@@ -30,6 +30,8 @@ code.hljs {
 	color: var(--text);
 	position: relative;
 
+	word-wrap: break-word;
+
 	@media print {
 		border: var(--border);
 		page-break-before: always;
