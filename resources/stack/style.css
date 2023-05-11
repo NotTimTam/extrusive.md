@@ -673,13 +673,17 @@ body header.page-header section.main {
 }
 body header.page-header section.main button.search-bar {
   max-width: 896px;
-  margin: 1rem auto 1rem auto;
+  height: -moz-min-content;
+  height: min-content;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 @media (max-width: 768px) {
   body header.page-header section.main button.search-bar {
     width: -moz-max-content;
     width: max-content;
     flex-grow: 0;
+    height: unset;
     transition: all 0.15s ease-in-out;
     border: none;
     border-radius: 50%;

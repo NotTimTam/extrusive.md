@@ -239,11 +239,16 @@ body {
 
 				button.search-bar {
 					max-width: 896px;
-					margin: $margin auto $margin auto;
+
+					height: min-content;
+					margin-top: auto;
+					margin-bottom: auto;
 
 					@media (max-width: 768px) {
 						width: max-content;
 						flex-grow: 0;
+
+						height: unset;
 
 						transition: $transition;
 
