@@ -30,7 +30,7 @@ code.hljs {
 	color: var(--text);
 	position: relative;
 
-	word-wrap: break-word;
+	overflow-x: auto;
 
 	@media print {
 		border: var(--border);

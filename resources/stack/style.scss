@@ -544,6 +544,10 @@ body {
 
 		margin: 0 auto;
 
+		@media (max-width: 768px) {
+			overflow-x: auto;
+		}
+
 		@media (max-width: 1535px) {
 			margin-right: 100%;
 		}
@@ -555,7 +559,6 @@ body {
 
 			margin: 0 auto;
 
-			overflow-x: auto;
 		}
 
 		div.article-inner {
