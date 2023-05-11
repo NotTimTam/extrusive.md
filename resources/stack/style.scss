@@ -206,6 +206,8 @@ body {
 		justify-content: space-between;
 		gap: $padding;
 
+		padding: 0 1rem;
+
 		transition: $transition;
 
 		background-color: var(--background);
@@ -286,8 +288,6 @@ body {
 			}
 
 			&.toggle-nav-parent {
-				padding-left: $margin;
-
 				@media (min-width: 1186px) {
 					display: none;
 				}
@@ -303,7 +303,6 @@ body {
 
 			&:last-child {
 				justify-content: flex-end;
-				padding-right: $padding;
 				min-width: 320px;
 
 				@media (max-width: 1535px) {

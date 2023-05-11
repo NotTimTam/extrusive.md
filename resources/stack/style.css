@@ -649,6 +649,7 @@ body header.page-header {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+  padding: 0 1rem;
   transition: all 0.15s ease-in-out;
   background-color: var(--background);
   position: sticky;
@@ -710,9 +711,6 @@ body header.page-header section.main button.search-bar {
     margin: 1rem 0;
   }
 }
-body header.page-header section.toggle-nav-parent {
-  padding-left: 1rem;
-}
 @media (min-width: 1186px) {
   body header.page-header section.toggle-nav-parent {
     display: none;
@@ -723,7 +721,6 @@ body header.page-header section.toggle-nav-parent button.toggle-nav[open=true] i
 }
 body header.page-header section:last-child {
   justify-content: flex-end;
-  padding-right: 0.5rem;
   min-width: 320px;
 }
 @media (max-width: 1535px) {
