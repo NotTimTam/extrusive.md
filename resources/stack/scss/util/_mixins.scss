@@ -338,6 +338,10 @@
 		thead tr,
 		tr:nth-child(2n) {
 			background-color: var(--background-2);
+
+			code {
+				background-color: var(--background-3);
+			}
 		}
 
 		tr {

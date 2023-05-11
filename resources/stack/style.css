@@ -1196,6 +1196,10 @@ body article.content div.article-inner table thead tr,
 body article.content div.article-inner table tr:nth-child(2n) {
   background-color: var(--background-2);
 }
+body article.content div.article-inner table thead tr code,
+body article.content div.article-inner table tr:nth-child(2n) code {
+  background-color: var(--background-3);
+}
 body article.content div.article-inner table tr {
   border-top: var(--border);
 }
