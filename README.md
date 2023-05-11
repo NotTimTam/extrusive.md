@@ -44,6 +44,7 @@ Client:
 -   Quick "print"/"save" button.
 -   Folder/file level of importance for sorting.
 -   Breadcrumbs.
+-   Mobile friendly complex headers.
 
 CLI:
 
