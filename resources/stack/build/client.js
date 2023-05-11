@@ -380,7 +380,6 @@ function createInnerNavStructure(data) {
 			const id = match.split('"')[1];
 			const headingNum = +match.split("h")[1][0];
 			const element = `h${headingNum}`;
-			const content = match.split(">")[1];
 
 			const elementQuery = `${element}#${id}`;
 
@@ -411,7 +410,9 @@ function createInnerNavStructure(data) {
 
 			innerNav.innerHTML += `<${element} target="${element}#${id}" style="padding-left: ${
 				8 + 16 * (headingNum - 1)
-			}px;" onclick="handleScroll('${elementQuery}')">${content}`;
+			}px;" onclick="handleScroll('${elementQuery}')">${
+				realElement.innerText
+			}</${element}>`;
 		}
 
 		determineInnerNavPos();
