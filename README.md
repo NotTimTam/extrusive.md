@@ -43,6 +43,7 @@ Client:
 -   Automatical removal of search results that link to paths that no longer exist.
 -   Quick "print"/"save" button.
 -   Folder/file level of importance for sorting.
+-   Breadcrumbs.
 
 CLI:
 
