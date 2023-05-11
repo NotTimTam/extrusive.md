@@ -54,5 +54,4 @@ CLI:
 General:
 
 -   Explore the potential for headless CMS.
--   Support for more characters, particularly '.' in file/folder labels.
 -   Create a linking system that works between files.
