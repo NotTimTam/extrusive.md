@@ -776,7 +776,7 @@ body aside.nav {
   height: max-content;
   max-height: calc(100vh - 5rem);
   overflow-y: auto;
-  min-width: 300px;
+  width: 300px;
   transition: all 0.15s ease-in-out;
   transition-property: background;
   display: flex;
@@ -811,6 +811,15 @@ body aside.nav section.folder > h1 div.title {
   flex-direction: row;
   align-items: center;
   gap: 0.25rem;
+  max-width: calc(100% - 1.5rem);
+}
+body aside.nav section.folder > h1 div.title span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+body aside.nav section.folder > h1 ion-icon {
+  min-width: 1rem;
 }
 body aside.nav section.folder > h1:hover {
   background-color: var(--background-2);
@@ -838,6 +847,15 @@ body aside.nav section.folder button {
   min-height: 46px;
   padding: 0.5rem 1rem;
   width: 100%;
+}
+body aside.nav section.folder button ion-icon {
+  min-width: 1rem;
+}
+body aside.nav section.folder button p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: left;
 }
 body aside.nav section.folder button.active {
   background-color: var(--background-3);

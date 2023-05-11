@@ -188,7 +188,7 @@ function createFileButton(name, path, nestLevel) {
 		path.split("/").join("_").split(" ").join("S20S").split(".")[0]
 	}">
 	<ion-icon name="document-outline"></ion-icon>
-	${name.split(".html")[0]}
+	<p>${name.split(".html")[0]}</p>
 </button>
 `;
 }
@@ -257,7 +257,7 @@ function recurseDisplayFolderTree(data, html = "", nestLevel = 0) {
 					  }px" onclick="toggleNavDropdown('${name}-${nestLevel}')">
 					<div class="title">
 						<ion-icon name="folder-outline"></ion-icon>
-						${name}
+						<span>${name}</span>
 					</div>
 
 					<ion-icon id="arrow" name="chevron-down-outline"></ion-icon>

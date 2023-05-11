@@ -368,7 +368,7 @@ body {
 		max-height: calc(100vh - 5rem);
 		overflow-y: auto;
 
-		min-width: 300px;
+		width: 300px;
 
 		transition: $transition;
 		transition-property: background;
@@ -413,6 +413,18 @@ body {
 					flex-direction: row;
 					align-items: center;
 					gap: $gap;
+
+					max-width: calc(100% - $margin * 1.5);
+
+					span {
+						overflow: hidden;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+					}
+				}
+
+				ion-icon {
+					min-width: $margin;
 				}
 
 				&:hover {
@@ -457,6 +469,18 @@ body {
 				min-height: 46px;
 
 				padding: $padding $margin;
+
+				ion-icon {
+					min-width: $margin;
+				}
+
+				p {
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+
+					text-align: left;
+				}
 
 				&.active {
 					background-color: var(--background-3);
