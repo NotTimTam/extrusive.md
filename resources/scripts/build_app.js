@@ -217,7 +217,7 @@ const copy_html = async (buildResourcesDir, target, config, imports) => {
 			// Logo
 			[
 				"{{LOGO}}",
-				logo ? logo.data : `<h1 class="no-title">my extrusive app</h1>`,
+				logo ? logo : `<h1 class="no-title">my extrusive app</h1>`,
 			],
 			// Copyright
 			["{{FOOTER}}", disableFooter === "true" ? "" : footer],
