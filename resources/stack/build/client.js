@@ -429,6 +429,11 @@ function updatePageContent(data) {
 	const page = document.querySelector("div.article-inner");
 
 	page.innerHTML = data.length > 0 ? data : "<p>Nothing to display.</p>";
+
+	document.body.scrollTo({
+		top: 0,
+		behavior: "auto",
+	});
 }
 
 /**
