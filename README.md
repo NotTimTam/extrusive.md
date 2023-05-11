@@ -33,13 +33,13 @@ There are a lot of markdown interfaces out there. There are a lot of documentati
 
 [Read the docs!](https://nottimtam.github.io/extrusive-docs/)
 
-
 Client:
 
 -   Emoji support. (`[marked-emoji](https://www.npmjs.com/package/marked-emoji)`)
 -   Admonition support. (`[marked-admonition-extension](https://www.npmjs.com/package/marked-admonition-extension)`)
 -   Cleaner, more reliable client-side code.
 -   Automatical removal of search results that link to paths that no longer exist.
+-   Quick "print"/"save" button.
 
 CLI:
 
