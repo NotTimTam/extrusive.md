@@ -1057,8 +1057,7 @@ body header.page-header section.main button.search-bar {
   max-width: 896px;
   height: -moz-min-content;
   height: min-content;
-  margin-top: auto;
-  margin-bottom: auto;
+  margin: auto;
 }
 @media (max-width: 768px) {
   body header.page-header section.main button.search-bar {
