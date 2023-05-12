@@ -19,6 +19,7 @@ marked.use(
 				if (href[0] === "!") {
 					href = href.slice(1);
 					if (!href.includes("/content")) href = `/content${href}`;
+					if (!href.includes(".html")) href = `${href}.html`;
 
 					return `<a href="" title="${title}" onclick="handleRequestFile('${href}')">${text}</a>`;
 				} else return false;
