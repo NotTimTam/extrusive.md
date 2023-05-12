@@ -50,6 +50,7 @@ CLI:
 
 -   **"start"** command with live server for development that does not rely on a build.
 -   Sanitize output html.
+-   Fix build command only sometimes needing the `--force` option to overwrite. (usually when not using the default "build" folder label)
 
 General:
 

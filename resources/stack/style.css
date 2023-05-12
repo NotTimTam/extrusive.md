@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
-/* Custom markdown translator that handles the contents of an article display */
 :root {
   --background: #ffffff;
   --background-2: #f0f0f0;
@@ -487,6 +486,389 @@ div.search-modal-container div.search-modal > footer p kbd ion-icon {
   }
 }
 
+div.article-inner {
+  position: relative;
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-bottom: 1rem;
+  font-size: var(--content-font-size);
+}
+@media print {
+  div.article-inner {
+    background-color: white;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+div.article-inner ion-icon,
+div.article-inner svg.ionicon {
+  color: var(--text);
+  fill: var(--text);
+  stroke: var(--text);
+}
+div.article-inner p.loading,
+div.article-inner p.error {
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+div.article-inner p.error {
+  color: var(--error);
+}
+div.article-inner p.error ion-icon {
+  color: var(--error);
+  stroke: var(--error);
+  fill: var(--error);
+}
+div.article-inner h1,
+div.article-inner h2,
+div.article-inner h3,
+div.article-inner h4,
+div.article-inner h5,
+div.article-inner h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+div.article-inner h1 tt,
+div.article-inner h1 code,
+div.article-inner h2 tt,
+div.article-inner h2 code,
+div.article-inner h3 tt,
+div.article-inner h3 code,
+div.article-inner h4 tt,
+div.article-inner h4 code,
+div.article-inner h5 tt,
+div.article-inner h5 code,
+div.article-inner h6 tt,
+div.article-inner h6 code {
+  padding: 0 0.2em;
+  font-size: inherit;
+}
+div.article-inner h1 {
+  font-weight: 700;
+  font-size: 40px;
+}
+div.article-inner h2 {
+  font-weight: 600;
+  padding-bottom: 0.3em;
+  font-size: 1.5em;
+  border-bottom: var(--border);
+}
+div.article-inner h3 {
+  font-weight: 600;
+  font-size: 1.25em;
+}
+div.article-inner h4 {
+  font-weight: 600;
+  font-size: 1em;
+}
+div.article-inner h5 {
+  font-weight: 600;
+  font-size: 0.875em;
+}
+div.article-inner h6 {
+  font-weight: 600;
+  font-size: 0.85em;
+  color: var(--background-3);
+}
+@media (max-width: 768px) {
+  div.article-inner h1,
+  div.article-inner h2,
+  div.article-inner h3,
+  div.article-inner h4,
+  div.article-inner h5,
+  div.article-inner h6 {
+    word-wrap: break-word;
+  }
+  div.article-inner h1 {
+    font-size: 30px;
+  }
+  div.article-inner h2 {
+    font-size: 1.125em;
+  }
+  div.article-inner h3 {
+    font-size: 0.9375em;
+  }
+  div.article-inner h4 {
+    font-size: 0.75em;
+  }
+  div.article-inner h5 {
+    font-size: 0.65625em;
+  }
+  div.article-inner h6 {
+    font-size: 0.6375em;
+  }
+}
+div.article-inner blockquote {
+  margin: 0;
+  padding: 0 1em;
+  color: var(--background-3);
+  border-left: var(--border);
+  border-width: 4px;
+}
+div.article-inner blockquote > :first-child {
+  margin-top: 0;
+}
+div.article-inner blockquote > :last-child {
+  margin-bottom: 0;
+}
+div.article-inner ol[type=a] {
+  list-style-type: lower-alpha;
+}
+div.article-inner ol[type=A] {
+  list-style-type: upper-alpha;
+}
+div.article-inner ol[type=i] {
+  list-style-type: lower-roman;
+}
+div.article-inner ol[type=I] {
+  list-style-type: upper-roman;
+}
+div.article-inner ol[type="1"] {
+  list-style-type: decimal;
+}
+div.article-inner ol:not([type]) {
+  list-style-type: decimal;
+}
+div.article-inner ul,
+div.article-inner ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 2rem;
+}
+div.article-inner ol ol,
+div.article-inner ul ol {
+  list-style-type: lower-roman;
+}
+div.article-inner ul ul,
+div.article-inner ul ol,
+div.article-inner ol ol,
+div.article-inner ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.article-inner ul ul ol,
+div.article-inner ul ol ol,
+div.article-inner ol ul ol,
+div.article-inner ol ol ol {
+  list-style-type: lower-alpha;
+}
+div.article-inner li + li {
+  margin-top: 0.25em;
+}
+div.article-inner li {
+  padding-left: 0.25rem;
+}
+div.article-inner li > p {
+  margin-top: 16px;
+}
+div.article-inner * {
+  max-width: 100%;
+}
+div.article-inner *:first-child {
+  margin-top: 0 !important;
+}
+div.article-inner *:last-child {
+  margin-bottom: 0 !important;
+}
+div.article-inner img {
+  max-width: 100%;
+  height: auto;
+  box-sizing: content-box;
+  border-radius: 1rem;
+  border: var(--border);
+  margin: 1rem auto;
+}
+div.article-inner code,
+div.article-inner pre,
+div.article-inner samp,
+div.article-inner tt,
+div.article-inner output {
+  font-family: "Source Code Pro", "Courier New", Courier, monospace;
+}
+div.article-inner code,
+div.article-inner pre,
+div.article-inner tt,
+div.article-inner output {
+  font-size: 1em;
+}
+div.article-inner output {
+  display: block;
+  border-radius: 6px;
+  padding: 1rem;
+  color: var(--info);
+  border: var(--border);
+}
+div.article-inner samp {
+  font-size: 85%;
+}
+div.article-inner del code {
+  text-decoration: inherit;
+}
+div.article-inner pre code {
+  width: 100%;
+  padding: 1rem;
+}
+div.article-inner p code {
+  font-weight: 600;
+}
+div.article-inner code,
+div.article-inner tt {
+  padding: 0.2em 0.4em;
+  margin: 2px 0;
+  font-size: 85%;
+  background-color: var(--background-2);
+  border-radius: 6px;
+}
+div.article-inner code br,
+div.article-inner tt br {
+  display: none;
+}
+div.article-inner kbd {
+  transition: all 0.15s ease-in-out;
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  line-height: 10px;
+  color: var(--text);
+  vertical-align: middle;
+  background-color: var(--background);
+  border: solid 1px var(--background-0);
+  border-radius: 6px;
+  box-shadow: inset 0 -1px 0 var(--background-0);
+}
+div.article-inner kbd svg,
+div.article-inner kbd ion-icon {
+  color: var(--text);
+  fill: var(--text);
+  stroke: var(--text);
+}
+div.article-inner figure {
+  margin: 1em 40px;
+}
+div.article-inner hr {
+  box-sizing: content-box;
+  overflow: hidden;
+  background: var(--background-3);
+  height: 1px;
+  padding: 0;
+  margin: 24px 0;
+  border: 0;
+}
+div.article-inner a {
+  color: var(--info);
+  text-decoration: none;
+}
+div.article-inner a:hover {
+  text-decoration: underline;
+}
+div.article-inner a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+div.article-inner table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  display: block;
+  width: -moz-max-content;
+  width: max-content;
+  max-width: 100%;
+  overflow: auto;
+}
+@media print {
+  div.article-inner table {
+    display: table;
+    overflow: visible;
+  }
+}
+div.article-inner table img {
+  background-color: transparent;
+}
+div.article-inner table img[align=right] {
+  padding-left: 20px;
+}
+div.article-inner table img[align=left] {
+  padding-right: 20px;
+}
+div.article-inner table th {
+  font-weight: 600;
+}
+div.article-inner table th,
+div.article-inner table td {
+  padding: 6px 13px;
+  border: var(--border);
+}
+div.article-inner table thead tr,
+div.article-inner table tr:nth-child(2n) {
+  background-color: var(--background-2);
+}
+div.article-inner table thead tr code,
+div.article-inner table tr:nth-child(2n) code {
+  background-color: var(--background-3);
+}
+div.article-inner table tr {
+  border-top: var(--border);
+}
+div.article-inner dl {
+  padding: 0;
+}
+div.article-inner dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 600;
+}
+div.article-inner dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+div.article-inner details summary {
+  cursor: pointer;
+}
+div.article-inner summary h1,
+div.article-inner summary h2,
+div.article-inner summary h3,
+div.article-inner summary h4,
+div.article-inner summary h5,
+div.article-inner summary h6 {
+  display: inline-block;
+}
+div.article-inner summary h1,
+div.article-inner summary h2 {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+div.article-inner p:has(> img) {
+  display: flex;
+}
+div.article-inner p,
+div.article-inner blockquote,
+div.article-inner ul,
+div.article-inner ol,
+div.article-inner dl,
+div.article-inner table,
+div.article-inner pre,
+div.article-inner details {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
 .error {
   color: var(--error);
 }
@@ -900,11 +1282,6 @@ body article.content {
   max-width: 896px;
   margin: 0 auto;
 }
-@media (max-width: 768px) {
-  body article.content {
-    overflow-x: auto;
-  }
-}
 @media (max-width: 1535px) {
   body article.content {
     margin-right: 100%;
@@ -916,354 +1293,6 @@ body article.content {
     grid-column: unset;
     max-width: 100vw;
     margin: 0 auto;
-  }
-}
-body article.content div.article-inner {
-  position: relative;
-  flex-grow: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  padding-bottom: 1rem;
-  font-size: var(--content-font-size);
-}
-body article.content div.article-inner ion-icon,
-body article.content div.article-inner svg.ionicon {
-  color: var(--text);
-  fill: var(--text);
-  stroke: var(--text);
-}
-body article.content div.article-inner p.loading,
-body article.content div.article-inner p.error {
-  align-self: center;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  flex-wrap: wrap;
-}
-body article.content div.article-inner p.error {
-  color: var(--error);
-}
-body article.content div.article-inner p.error ion-icon {
-  color: var(--error);
-  stroke: var(--error);
-  fill: var(--error);
-}
-body article.content div.article-inner h1,
-body article.content div.article-inner h2,
-body article.content div.article-inner h3,
-body article.content div.article-inner h4,
-body article.content div.article-inner h5,
-body article.content div.article-inner h6 {
-  margin-top: 24px;
-  margin-bottom: 16px;
-  font-weight: 600;
-  line-height: 1.25;
-}
-body article.content div.article-inner h1 tt,
-body article.content div.article-inner h1 code,
-body article.content div.article-inner h2 tt,
-body article.content div.article-inner h2 code,
-body article.content div.article-inner h3 tt,
-body article.content div.article-inner h3 code,
-body article.content div.article-inner h4 tt,
-body article.content div.article-inner h4 code,
-body article.content div.article-inner h5 tt,
-body article.content div.article-inner h5 code,
-body article.content div.article-inner h6 tt,
-body article.content div.article-inner h6 code {
-  padding: 0 0.2em;
-  font-size: inherit;
-}
-body article.content div.article-inner h1 {
-  font-weight: 700;
-  font-size: 40px;
-}
-body article.content div.article-inner h2 {
-  font-weight: 600;
-  padding-bottom: 0.3em;
-  font-size: 1.5em;
-  border-bottom: var(--border);
-}
-body article.content div.article-inner h3 {
-  font-weight: 600;
-  font-size: 1.25em;
-}
-body article.content div.article-inner h4 {
-  font-weight: 600;
-  font-size: 1em;
-}
-body article.content div.article-inner h5 {
-  font-weight: 600;
-  font-size: 0.875em;
-}
-body article.content div.article-inner h6 {
-  font-weight: 600;
-  font-size: 0.85em;
-  color: var(--background-3);
-}
-body article.content div.article-inner blockquote {
-  margin: 0;
-  padding: 0 1em;
-  color: var(--background-3);
-  border-left: var(--border);
-  border-width: 4px;
-}
-body article.content div.article-inner blockquote > :first-child {
-  margin-top: 0;
-}
-body article.content div.article-inner blockquote > :last-child {
-  margin-bottom: 0;
-}
-body article.content div.article-inner ol[type=a] {
-  list-style-type: lower-alpha;
-}
-body article.content div.article-inner ol[type=A] {
-  list-style-type: upper-alpha;
-}
-body article.content div.article-inner ol[type=i] {
-  list-style-type: lower-roman;
-}
-body article.content div.article-inner ol[type=I] {
-  list-style-type: upper-roman;
-}
-body article.content div.article-inner ol[type="1"] {
-  list-style-type: decimal;
-}
-body article.content div.article-inner ol:not([type]) {
-  list-style-type: decimal;
-}
-body article.content div.article-inner ul,
-body article.content div.article-inner ol {
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-left: 2rem;
-}
-body article.content div.article-inner ol ol,
-body article.content div.article-inner ul ol {
-  list-style-type: lower-roman;
-}
-body article.content div.article-inner ul ul,
-body article.content div.article-inner ul ol,
-body article.content div.article-inner ol ol,
-body article.content div.article-inner ol ul {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-body article.content div.article-inner ul ul ol,
-body article.content div.article-inner ul ol ol,
-body article.content div.article-inner ol ul ol,
-body article.content div.article-inner ol ol ol {
-  list-style-type: lower-alpha;
-}
-body article.content div.article-inner li + li {
-  margin-top: 0.25em;
-}
-body article.content div.article-inner li {
-  padding-left: 0.25rem;
-}
-body article.content div.article-inner li > p {
-  margin-top: 16px;
-}
-body article.content div.article-inner * {
-  max-width: 100%;
-}
-body article.content div.article-inner *:first-child {
-  margin-top: 0 !important;
-}
-body article.content div.article-inner *:last-child {
-  margin-bottom: 0 !important;
-}
-body article.content div.article-inner img {
-  max-width: 100%;
-  height: auto;
-  box-sizing: content-box;
-  border-radius: 1rem;
-  border: var(--border);
-  margin: 1rem auto;
-}
-body article.content div.article-inner code,
-body article.content div.article-inner pre,
-body article.content div.article-inner samp,
-body article.content div.article-inner tt,
-body article.content div.article-inner output {
-  font-family: "Source Code Pro", "Courier New", Courier, monospace;
-}
-body article.content div.article-inner code,
-body article.content div.article-inner pre,
-body article.content div.article-inner tt,
-body article.content div.article-inner output {
-  font-size: 1em;
-}
-body article.content div.article-inner output {
-  display: block;
-  border-radius: 6px;
-  padding: 1rem;
-  color: var(--info);
-  border: var(--border);
-}
-body article.content div.article-inner samp {
-  font-size: 85%;
-}
-body article.content div.article-inner del code {
-  text-decoration: inherit;
-}
-body article.content div.article-inner pre code {
-  width: 100%;
-  padding: 1rem;
-}
-body article.content div.article-inner p code {
-  font-weight: 600;
-}
-body article.content div.article-inner code,
-body article.content div.article-inner tt {
-  padding: 0.2em 0.4em;
-  margin: 2px 0;
-  font-size: 85%;
-  background-color: var(--background-2);
-  border-radius: 6px;
-}
-body article.content div.article-inner code br,
-body article.content div.article-inner tt br {
-  display: none;
-}
-body article.content div.article-inner kbd {
-  transition: all 0.15s ease-in-out;
-  display: inline-block;
-  padding: 3px 5px;
-  font-size: 11px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  line-height: 10px;
-  color: var(--text);
-  vertical-align: middle;
-  background-color: var(--background);
-  border: solid 1px var(--background-0);
-  border-radius: 6px;
-  box-shadow: inset 0 -1px 0 var(--background-0);
-}
-body article.content div.article-inner kbd svg,
-body article.content div.article-inner kbd ion-icon {
-  color: var(--text);
-  fill: var(--text);
-  stroke: var(--text);
-}
-body article.content div.article-inner figure {
-  margin: 1em 40px;
-}
-body article.content div.article-inner hr {
-  box-sizing: content-box;
-  overflow: hidden;
-  background: var(--background-3);
-  height: 1px;
-  padding: 0;
-  margin: 24px 0;
-  border: 0;
-}
-body article.content div.article-inner a {
-  color: var(--info);
-  text-decoration: none;
-}
-body article.content div.article-inner a:hover {
-  text-decoration: underline;
-}
-body article.content div.article-inner a:not([href]) {
-  color: inherit;
-  text-decoration: none;
-}
-body article.content div.article-inner table {
-  border-spacing: 0;
-  border-collapse: collapse;
-  display: table;
-  width: -moz-max-content;
-  width: max-content;
-  max-width: 100%;
-  overflow: auto;
-}
-body article.content div.article-inner table img {
-  background-color: transparent;
-}
-body article.content div.article-inner table img[align=right] {
-  padding-left: 20px;
-}
-body article.content div.article-inner table img[align=left] {
-  padding-right: 20px;
-}
-body article.content div.article-inner table th {
-  font-weight: 600;
-}
-body article.content div.article-inner table th,
-body article.content div.article-inner table td {
-  padding: 6px 13px;
-  border: var(--border);
-}
-body article.content div.article-inner table thead tr,
-body article.content div.article-inner table tr:nth-child(2n) {
-  background-color: var(--background-2);
-}
-body article.content div.article-inner table thead tr code,
-body article.content div.article-inner table tr:nth-child(2n) code {
-  background-color: var(--background-3);
-}
-body article.content div.article-inner table tr {
-  border-top: var(--border);
-}
-body article.content div.article-inner dl {
-  padding: 0;
-}
-body article.content div.article-inner dl dt {
-  padding: 0;
-  margin-top: 16px;
-  font-size: 1em;
-  font-style: italic;
-  font-weight: 600;
-}
-body article.content div.article-inner dl dd {
-  padding: 0 16px;
-  margin-bottom: 16px;
-}
-body article.content div.article-inner details summary {
-  cursor: pointer;
-}
-body article.content div.article-inner summary h1,
-body article.content div.article-inner summary h2,
-body article.content div.article-inner summary h3,
-body article.content div.article-inner summary h4,
-body article.content div.article-inner summary h5,
-body article.content div.article-inner summary h6 {
-  display: inline-block;
-}
-body article.content div.article-inner summary h1,
-body article.content div.article-inner summary h2 {
-  padding-bottom: 0;
-  border-bottom: 0;
-}
-body article.content div.article-inner p:has(> img) {
-  display: flex;
-}
-body article.content div.article-inner p,
-body article.content div.article-inner blockquote,
-body article.content div.article-inner ul,
-body article.content div.article-inner ol,
-body article.content div.article-inner dl,
-body article.content div.article-inner table,
-body article.content div.article-inner pre,
-body article.content div.article-inner details {
-  margin-top: 0;
-  margin-bottom: 16px;
-}
-@media print {
-  body article.content div.article-inner {
-    background-color: white;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
   }
 }
 body article.content > footer {

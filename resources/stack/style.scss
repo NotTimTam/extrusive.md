@@ -547,10 +547,6 @@ body {
 
 		margin: 0 auto;
 
-		@media (max-width: 768px) {
-			overflow-x: auto;
-		}
-
 		@media (max-width: 1535px) {
 			margin-right: 100%;
 		}
@@ -561,26 +557,6 @@ body {
 			max-width: 100vw;
 
 			margin: 0 auto;
-		}
-
-		div.article-inner {
-			@include markdown;
-
-			@media print {
-				background-color: white;
-
-				position: absolute;
-				width: 100%;
-				height: 100%;
-
-				z-index: 9999;
-
-				top: 0;
-				left: 0;
-
-				margin: 0;
-				padding: 0;
-			}
 		}
 
 		> footer {
