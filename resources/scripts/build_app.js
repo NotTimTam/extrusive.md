@@ -14,6 +14,16 @@ marked.use(
 		langPrefix: "",
 		mangle: false,
 		headerIds: false,
+		renderer: {
+			link(href, title, text) {
+				if (href[0] === "!") {
+					href = href.slice(1);
+					if (!href.includes("/content")) href = `/content${href}`;
+
+					return `<a href="" title="${title}" onclick="handleRequestFile('${href}')">${text}</a>`;
+				} else return false;
+			},
+		},
 	},
 	gfmHeadingId(),
 	markedHighlight({
@@ -50,6 +60,7 @@ const compile_file_tree = (path, cwd) => {
 			const existingData = fs.readFileSync(filePath, "utf-8");
 
 			const convertedData = marked.parse(existingData);
+
 			const newPath = replace_all(filePath, ".md", ".html"); // Replace any .md file extensions with .html.
 
 			// Rename the file.
