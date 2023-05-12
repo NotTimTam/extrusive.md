@@ -53,4 +53,3 @@ CLI:
 General:
 
 -   Explore the potential for headless CMS.
--   Create a linking system that works between files.
