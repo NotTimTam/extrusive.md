@@ -1358,6 +1358,7 @@ body article.content > footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 0.25rem;
 }
 body aside.inner-nav {
