@@ -1,3 +1,5 @@
+const storedTitle = document.title;
+
 /**
  * Normalize a route path.
  * @param {string} path - The path to normalize.
@@ -38,7 +40,7 @@ function renderArticle(data, path) {
 	const title = path.split("/")[path.split("/").length - 1].split(".")[0];
 
 	// Update the document title.
-	document.title = title;
+	document.title = path !== "/content/README.html" ? title : storedTitle;
 
 	// Update the url.
 	const hash = window.location.hash;
