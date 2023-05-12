@@ -1092,7 +1092,7 @@ body header.page-header section.main button.search-bar {
 }
 @media (max-width: 1535px) {
   body header.page-header section.main button.search-bar {
-    margin: 1rem 0;
+    margin: auto 0;
   }
 }
 @media (min-width: 1186px) {
