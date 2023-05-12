@@ -218,11 +218,17 @@ div.popup-container div.pop-up button ion-icon {
 }
 
 div.article-inner h1 div.anchor,
+div.article-inner h1 div.print,
 div.article-inner h2 div.anchor,
+div.article-inner h2 div.print,
 div.article-inner h3 div.anchor,
+div.article-inner h3 div.print,
 div.article-inner h4 div.anchor,
+div.article-inner h4 div.print,
 div.article-inner h5 div.anchor,
-div.article-inner h6 div.anchor {
+div.article-inner h5 div.print,
+div.article-inner h6 div.anchor,
+div.article-inner h6 div.print {
   margin: auto 0 auto 0.5rem;
   display: inline-block;
   vertical-align: middle;
@@ -231,6 +237,32 @@ div.article-inner h6 div.anchor {
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
+}
+div.article-inner h1 div.anchor ion-icon,
+div.article-inner h1 div.anchor div.ionicon,
+div.article-inner h1 div.print ion-icon,
+div.article-inner h1 div.print div.ionicon,
+div.article-inner h2 div.anchor ion-icon,
+div.article-inner h2 div.anchor div.ionicon,
+div.article-inner h2 div.print ion-icon,
+div.article-inner h2 div.print div.ionicon,
+div.article-inner h3 div.anchor ion-icon,
+div.article-inner h3 div.anchor div.ionicon,
+div.article-inner h3 div.print ion-icon,
+div.article-inner h3 div.print div.ionicon,
+div.article-inner h4 div.anchor ion-icon,
+div.article-inner h4 div.anchor div.ionicon,
+div.article-inner h4 div.print ion-icon,
+div.article-inner h4 div.print div.ionicon,
+div.article-inner h5 div.anchor ion-icon,
+div.article-inner h5 div.anchor div.ionicon,
+div.article-inner h5 div.print ion-icon,
+div.article-inner h5 div.print div.ionicon,
+div.article-inner h6 div.anchor ion-icon,
+div.article-inner h6 div.anchor div.ionicon,
+div.article-inner h6 div.print ion-icon,
+div.article-inner h6 div.print div.ionicon {
+  font-size: inherit;
 }
 div.article-inner h1 div.anchor ion-icon,
 div.article-inner h1 div.anchor div.ionicon,
@@ -245,7 +277,8 @@ div.article-inner h5 div.anchor div.ionicon,
 div.article-inner h6 div.anchor ion-icon,
 div.article-inner h6 div.anchor div.ionicon {
   color: var(--background-3) !important;
-  font-size: inherit;
+  fill: var(--background-3) !important;
+  stroke: var(--background-3) !important;
 }
 div.article-inner h1 div.anchor:active ion-icon,
 div.article-inner h1 div.anchor:active div.ionicon,
@@ -260,15 +293,39 @@ div.article-inner h5 div.anchor:active div.ionicon,
 div.article-inner h6 div.anchor:active ion-icon,
 div.article-inner h6 div.anchor:active div.ionicon {
   color: var(--success) !important;
+  fill: var(--success) !important;
+  stroke: var(--success) !important;
 }
 div.article-inner h1:hover div.anchor,
+div.article-inner h1:hover div.print,
 div.article-inner h2:hover div.anchor,
+div.article-inner h2:hover div.print,
 div.article-inner h3:hover div.anchor,
+div.article-inner h3:hover div.print,
 div.article-inner h4:hover div.anchor,
+div.article-inner h4:hover div.print,
 div.article-inner h5:hover div.anchor,
-div.article-inner h6:hover div.anchor {
+div.article-inner h5:hover div.print,
+div.article-inner h6:hover div.anchor,
+div.article-inner h6:hover div.print {
   opacity: 1;
   pointer-events: auto;
+}
+@media print {
+  div.article-inner h1 div.anchor,
+  div.article-inner h1 div.print,
+  div.article-inner h2 div.anchor,
+  div.article-inner h2 div.print,
+  div.article-inner h3 div.anchor,
+  div.article-inner h3 div.print,
+  div.article-inner h4 div.anchor,
+  div.article-inner h4 div.print,
+  div.article-inner h5 div.anchor,
+  div.article-inner h5 div.print,
+  div.article-inner h6 div.anchor,
+  div.article-inner h6 div.print {
+    display: none;
+  }
 }
 
 div.search-modal-container {

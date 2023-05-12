@@ -387,25 +387,51 @@ function createInnerNavStructure(data) {
 				`div.article-inner ${elementQuery}`
 			);
 
-			// Create anchor hook.
+			// Create anchor hooks. The first H1 gets a print button instead.
 			if (realElement) {
-				const anchorTrigger = () => {
-					handleScroll(elementQuery);
+				if (
+					matches.indexOf(match) === 0 &&
+					realElement.tagName === "H1"
+				) {
+					const anchorTrigger = () => {
+						try {
+							window.print();
+						} catch (err) {
+							console.error("Failed to print document:", err);
+							createPopup(
+								"Could not open print dialogue.",
+								"error"
+							);
+						}
+					};
+					const anchor = createElement(
+						"div",
+						[["className", "print"]],
+						null,
+						[["click", anchorTrigger]],
+						`<ion-icon name="print-outline"></ion-icon>`
+					);
 
-					navigator.clipboard.writeText(window.location.href);
+					realElement.appendChild(anchor);
+				} else {
+					const anchorTrigger = () => {
+						handleScroll(elementQuery);
 
-					// Create a pop-up message.
-					createPopup("URL copied to clipboard.", "success");
-				};
-				const anchor = createElement(
-					"div",
-					[["className", "anchor"]],
-					null,
-					[["click", anchorTrigger]],
-					`<ion-icon name="link-outline"></ion-icon>`
-				);
+						navigator.clipboard.writeText(window.location.href);
 
-				realElement.appendChild(anchor);
+						// Create a pop-up message.
+						createPopup("URL copied to clipboard.", "success");
+					};
+					const anchor = createElement(
+						"div",
+						[["className", "anchor"]],
+						null,
+						[["click", anchorTrigger]],
+						`<ion-icon name="link-outline"></ion-icon>`
+					);
+
+					realElement.appendChild(anchor);
+				}
 			}
 
 			innerNav.innerHTML += `<${element} target="${element}#${id}" style="padding-left: ${

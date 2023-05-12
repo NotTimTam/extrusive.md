@@ -7,7 +7,8 @@ div.article-inner {
 	h4,
 	h5,
 	h6 {
-		div.anchor {
+		div.anchor,
+		div.print {
 			margin: auto 0 auto $padding;
 			display: inline-block;
 
@@ -18,7 +19,6 @@ div.article-inner {
 
 			ion-icon,
 			div.ionicon {
-				color: var(--background-3) !important;
 				font-size: inherit;
 			}
 
@@ -26,19 +26,38 @@ div.article-inner {
 
 			opacity: 0;
 			pointer-events: none;
+		}
+
+		div.anchor {
+			ion-icon,
+			div.ionicon {
+				color: var(--background-3) !important;
+				fill: var(--background-3) !important;
+				stroke: var(--background-3) !important;
+			}
 
 			&:active {
 				ion-icon,
 				div.ionicon {
 					color: var(--success) !important;
+					fill: var(--success) !important;
+					stroke: var(--success) !important;
 				}
 			}
 		}
 
 		&:hover {
-			div.anchor {
+			div.anchor,
+			div.print {
 				opacity: 1;
 				pointer-events: auto;
+			}
+		}
+
+		@media print {
+			div.anchor,
+			div.print {
+				display: none;
 			}
 		}
 	}

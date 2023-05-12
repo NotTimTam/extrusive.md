@@ -41,10 +41,8 @@ Client:
 -   Admonition support. (`[marked-admonition-extension](https://www.npmjs.com/package/marked-admonition-extension)`)
 -   Cleaner, more reliable client-side code.
 -   Automatical removal of search results that link to paths that no longer exist.
--   Quick "print"/"save" button.
 -   Folder/file level of importance for sorting.
 -   Breadcrumbs.
--   Mobile friendly complex headers.
 
 CLI:
 
