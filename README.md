@@ -44,7 +44,6 @@ Client:
 -   Folder/file level of importance for sorting.
 -   Breadcrumbs.
 -   Homepage readme should display title instead of README.
--   Stop heading link buttons from displaying on print.
 -   Search should use all unique words in query and compare against all unique words in document.
 
 CLI:
