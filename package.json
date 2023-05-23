@@ -1,6 +1,6 @@
 {
 	"name": "extrusive.md",
-	"version": "1.3.6",
+	"version": "1.3.7",
 	"description": "An open-source tool for building self-hosted documentation websites.",
 	"main": "index.js",
 	"bin": {
