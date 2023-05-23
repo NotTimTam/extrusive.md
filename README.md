@@ -10,8 +10,6 @@
 
 ---
 
-#### `extrusive.md` is now stable! Install version `^1.2.3` today!
-
 There are a lot of markdown interfaces out there. There are a lot of documentation tools out there.
 
 `extrusive.md` fills the niche that none of these do.
