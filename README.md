@@ -27,8 +27,6 @@ There are a lot of markdown interfaces out there. There are a lot of documentati
 9. O.O.T.B. support for **[ion-icons](https://ionic.io/ionicons) + custom HTML** directly in your markdown!
 10. Built-in print/save as pdf support.
 
-`extrusive.md` may not have all the bells and whistles, but it makes up for these by being open-ended and ready for you to customize!
-
 ## Installation
 
 [Read the docs!](https://nottimtam.github.io/extrusive-docs/)
