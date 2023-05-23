@@ -43,6 +43,7 @@ Client:
 -   Automatical removal of search results that link to paths that no longer exist.
 -   Folder/file level of importance for sorting.
 -   Search should use all unique words in query and compare against all unique words in document.
+-   Fix `<kbd/>` element styles on light mode within search modal.
 
 CLI:
 
